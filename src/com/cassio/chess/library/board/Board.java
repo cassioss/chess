@@ -19,28 +19,37 @@ public class Board {
     private void createTiles() {
         maze = new Square[ROW_COUNT][COLUMN_COUNT];
         for (int row = 0; row < ROW_COUNT; row++) {
-            for (int column = 0; column < COLUMN_COUNT; column++)
-                maze[row][column] = new Square(row, column);
+            for (int column = 0; column < COLUMN_COUNT; column++) {
+                putSquareAt(row, column);
+                chooseBlackOrWhite(row, column);
+            }
         }
     }
 
-    public Square getSquare(int row, int column) {
+    private void putSquareAt(int row, int column) {
+        maze[row][column] = new Square();
+    }
+
+    public Square getSquareAt(int row, int column) {
         return maze[row][column];
     }
 
-
-    private boolean checkParity(Square tile) {
-        int tileX = tile.getX();
-        int tileY = tile.getY();
-        return tileX % 2 == tileY % 2;
+    private boolean checkParity(int a, int b) {
+        return (a + b) % 2 == 0;
     }
 
-    private Color chooseBlackOrWhite(Square tile) {
-        return checkParity(tile) ? Color.black : Color.white;
+    private void chooseBlackOrWhite(int row, int column) {
+        if (checkParity(row, column))
+            paintBlack(row, column);
+        else paintWhite(row, column);
     }
 
-    public void setSquareColor(Square tile) {
-        tile.squareColor = chooseBlackOrWhite(tile);
+    private void paintBlack(int row, int column) {
+        maze[row][column].squareColor = Color.BLACK;
+    }
+
+    private void paintWhite(int row, int column) {
+        maze[row][column].squareColor = Color.WHITE;
     }
 
     public char getLetterCoordinate(int x) {

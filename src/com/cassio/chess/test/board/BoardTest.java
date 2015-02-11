@@ -18,16 +18,13 @@ public class BoardTest {
     
     @Test
     public void testSquareColorAssignment()  {
-        int x = 17, y = 14;
-        Square tile = new Square(x,y);
-        testBoard.setSquareColor(tile);
+        Square tile = testBoard.getSquareAt(3, 4);
         assert tile.getSquareColor() == Color.white;
     }
     
     @Test(expected = IndexOutOfBoundsException.class)
     public void testSquareOutOfBounds(){
-        int x = 8, y = 5;
-        Square tile = testBoard.getSquare(x, y);
+        Square tile = testBoard.getSquareAt(8, 5);
     }
     
     @Test

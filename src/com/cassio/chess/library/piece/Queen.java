@@ -1,7 +1,12 @@
 package com.cassio.chess.library.piece;
 
+import java.awt.*;
+
 /**
- * Created by Cassio on 07/02/2015.
+ * Created by Cassio on 11/02/2015.
  */
-public class Queen {
+public class Queen extends Piece {
+    public Queen(Color color) {
+        super(color);
+    }
 }
