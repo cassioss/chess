@@ -29,4 +29,5 @@ public class PieceTest {
     public void putPieceOutOfBoard() {
         testBoard.putPieceAt(whiteRook, 0, 8);
     }
+
 }

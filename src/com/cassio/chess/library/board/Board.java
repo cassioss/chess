@@ -1,6 +1,6 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.library.piece.Piece;
+import com.cassio.chess.library.piece.*;
 
 import java.awt.*;
 
@@ -17,7 +17,7 @@ public class Board {
     public Board() {
         createTiles();
     }
-    
+
     private void createTiles() {
         maze = new Square[ROW_COUNT][COLUMN_COUNT];
         for (int row = 0; row < ROW_COUNT; row++) {
@@ -29,10 +29,29 @@ public class Board {
     }
 
     public void setupPieces() {
-        //for(int column = 0; column < COLUMN_COUNT; column++)
-            
-    }
+        for (int column = 0; column < COLUMN_COUNT; column++) {
+            putPieceAt(new Rook(Color.WHITE), 1, column);
+            putPieceAt(new Rook(Color.BLACK), 6, column);
+        }
+        putPieceAt(new Pawn(Color.WHITE), 0, 0);
+        putPieceAt(new Knight(Color.WHITE), 0, 1);
+        putPieceAt(new Bishop(Color.WHITE), 0, 2);
+        putPieceAt(new Queen(Color.WHITE), 0, 3);
+        putPieceAt(new King(Color.WHITE), 0, 4);
+        putPieceAt(new Bishop(Color.WHITE), 0, 5);
+        putPieceAt(new Knight(Color.WHITE), 0, 6);
+        putPieceAt(new Pawn(Color.WHITE), 0, 7);
 
+        putPieceAt(new Pawn(Color.BLACK), 7, 0);
+        putPieceAt(new Knight(Color.BLACK), 7, 1);
+        putPieceAt(new Bishop(Color.BLACK), 7, 2);
+        putPieceAt(new Queen(Color.BLACK), 7, 3);
+        putPieceAt(new King(Color.BLACK), 7, 4);
+        putPieceAt(new Bishop(Color.BLACK), 7, 5);
+        putPieceAt(new Knight(Color.BLACK), 7, 6);
+        putPieceAt(new Pawn(Color.BLACK), 7, 7);
+
+    }
 
     private void putSquareAt(int row, int column) {
         maze[row][column] = new Square();
