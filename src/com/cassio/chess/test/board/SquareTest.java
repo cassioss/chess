@@ -1,27 +1,25 @@
 package com.cassio.chess.test.board;
 
-import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
-import org.junit.Before;
+import com.cassio.chess.library.piece.Piece;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.awt.*;
 
 public class SquareTest {
     
-    private Board squareBoard;
+    private static Piece whitePiece;
+    private Square simpleTile;
     
-    @Before
-    
-    @Test
-    public void zeroPositionToX(){
-        int xPos = 1;
-        int yPos = 9;
-        Square tile = new Square(xPos, yPos);
+    @BeforeClass
+    public static void setupPieces(){
+        whitePiece = new Piece(Color.white);
     }
     
-    @Test(expected = NullPointerException.class)
-    public void nullStringAssignment(){
-        int xPos = 0;
-        int yPos = 0;
+    @Test
+    public void testWhitePieceAddition(){
+        simpleTile = new Square(0,0);
         
     }
 }

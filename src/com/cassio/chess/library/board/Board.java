@@ -9,18 +9,17 @@ import java.awt.*;
 public class Board {
 
     private Square[][] maze;
-    private int rowCount = 8, columnCount = 8;
-
-    private boolean blackColorParity = true;
+    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
 
     public Board() {
-        setTiles();
+        createTiles();
     }
 
-    private void setTiles() {
-        maze = new Square[rowCount][columnCount];
-        for (int row = 0; row < rowCount; row++) {
-            for (int column = 0; column < columnCount; column++)
+    private void createTiles() {
+        maze = new Square[ROW_COUNT][COLUMN_COUNT];
+        for (int row = 0; row < ROW_COUNT; row++) {
+            for (int column = 0; column < COLUMN_COUNT; column++)
                 maze[row][column] = new Square(row, column);
         }
     }
@@ -37,10 +36,15 @@ public class Board {
     }
 
     private Color chooseBlackOrWhite(Square tile) {
-        return checkParity(tile) == blackColorParity ? Color.black : Color.white;
+        return checkParity(tile) ? Color.black : Color.white;
     }
 
     public void setSquareColor(Square tile) {
         tile.squareColor = chooseBlackOrWhite(tile);
     }
+
+    public char getLetterCoordinate(int x) {
+        return LETTER_COORDINATES[x];
+    }
+
 }
