@@ -1,5 +1,7 @@
 package com.cassio.chess.library.board;
 
+import com.cassio.chess.library.piece.Piece;
+
 import java.awt.*;
 
 /**
@@ -15,7 +17,7 @@ public class Board {
     public Board() {
         createTiles();
     }
-
+    
     private void createTiles() {
         maze = new Square[ROW_COUNT][COLUMN_COUNT];
         for (int row = 0; row < ROW_COUNT; row++) {
@@ -25,6 +27,12 @@ public class Board {
             }
         }
     }
+
+    public void setupPieces() {
+        //for(int column = 0; column < COLUMN_COUNT; column++)
+            
+    }
+
 
     private void putSquareAt(int row, int column) {
         maze[row][column] = new Square();
@@ -56,4 +64,11 @@ public class Board {
         return LETTER_COORDINATES[x];
     }
 
+    public void putPieceAt(Piece piece, int targetX, int targetY) {
+        maze[targetX][targetY].putPiece(piece);
+    }
+
+    public Piece getPieceAt(int posX, int posY) {
+        return maze[posX][posY].getPiece();
+    }
 }

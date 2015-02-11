@@ -9,4 +9,14 @@ public class Queen extends Piece {
     public Queen(Color color) {
         super(color);
     }
+
+    @Override
+    protected void moveTo(int targetX, int targetY) {
+
+    }
+
+    @Override
+    protected boolean validMovement(int targetX, int targetY) {
+        return false;
+    }
 }

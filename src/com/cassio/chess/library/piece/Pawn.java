@@ -9,4 +9,14 @@ public class Pawn extends Piece {
     public Pawn(Color color) {
         super(color);
     }
+
+    @Override
+    protected void moveTo(int targetX, int targetY) {
+
+    }
+
+    @Override
+    protected boolean validMovement(int targetX, int targetY) {
+        return false;
+    }
 }

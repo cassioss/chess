@@ -9,4 +9,14 @@ public class King extends Piece {
     public King(Color color) {
         super(color);
     }
+
+    @Override
+    protected void moveTo(int targetX, int targetY) {
+
+    }
+
+    @Override
+    protected boolean validMovement(int targetX, int targetY) {
+        return false;
+    }
 }

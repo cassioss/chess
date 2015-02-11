@@ -7,7 +7,7 @@ import com.cassio.chess.library.piece.Piece;
 import java.awt.*;
 
 /**
- * Created by Cassio on 07/02/2015.
+ * Created by Cassio dos Santos Sousa on 07/02/2015.
  */
 
 public class Square {
@@ -32,6 +32,18 @@ public class Square {
         return squarePiece;
     }
 
+    public Color getSquareColor() {
+        return squareColor;
+    }
+
+    public boolean hasPiece() {
+        return this.squarePiece != null;
+    }
+
+    public boolean hasSameColor(Piece firstPiece, Piece secondPiece) {
+        return firstPiece.getColor() == secondPiece.getColor();
+    }
+
     public void putPiece(Piece piece) {
         this.squarePiece = piece;
         if (piece.getColor() == Color.BLACK)
@@ -46,18 +58,6 @@ public class Square {
             putPiece(piece);
         } else
             throw new SamePieceColorException("You tried to capture a piece of the same color.");
-    }
-
-    public boolean hasPiece() {
-        return this.squarePiece != null;
-    }
-
-    public boolean hasSameColor(Piece firstPiece, Piece secondPiece) {
-        return firstPiece.getColor() == secondPiece.getColor();
-    }
-
-    public Color getSquareColor() {
-        return squareColor;
     }
 
     public void movePiece() {

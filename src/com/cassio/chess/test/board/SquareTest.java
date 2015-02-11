@@ -4,6 +4,7 @@ import com.cassio.chess.exception.NoPieceException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.piece.Piece;
+import com.cassio.chess.library.piece.Rook;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,9 +18,9 @@ public class SquareTest {
 
     @BeforeClass
     public static void setupPieces() {
-        whitePiece = new Piece(Color.white);
-        blackPiece = new Piece(Color.black);
-        secondWhite = new Piece(Color.white);
+        whitePiece = new Rook(Color.white);
+        blackPiece = new Rook(Color.black);
+        secondWhite = new Rook(Color.white);
     }
     
     @Before
