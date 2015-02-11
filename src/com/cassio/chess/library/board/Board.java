@@ -21,7 +21,7 @@ public class Board {
         for (int row = 0; row < ROW_COUNT; row++) {
             for (int column = 0; column < COLUMN_COUNT; column++) {
                 putSquareAt(row, column);
-                chooseBlackOrWhite(row, column);
+                paintBlackOrWhite(row, column);
             }
         }
     }
@@ -38,7 +38,7 @@ public class Board {
         return (a + b) % 2 == 0;
     }
 
-    private void chooseBlackOrWhite(int row, int column) {
+    private void paintBlackOrWhite(int row, int column) {
         if (checkParity(row, column))
             paintBlack(row, column);
         else paintWhite(row, column);
