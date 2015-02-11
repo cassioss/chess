@@ -1,4 +1,4 @@
-package com.cassio.chess.data.piece;
+package com.cassio.chess.library.piece;
 
 /**
  * Created by Cassio on 07/02/2015.
