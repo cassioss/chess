@@ -6,8 +6,23 @@ import java.awt.*;
  * Created by Cassio on 11/02/2015.
  */
 public class King extends Piece {
+
+    public boolean isInCheck, isInCheckMate;
+
     public King(Color color) {
         super(color);
+        check();
+        checkMate();
+    }
+
+    private void check() {
+
+    }
+
+    private void checkMate() {
+        if (isInCheck) {
+
+        }
     }
 
     @Override
