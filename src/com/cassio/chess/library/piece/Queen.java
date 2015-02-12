@@ -11,7 +11,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    protected void moveTo(int targetX, int targetY) {
+    public void moveTo(int targetX, int targetY) {
 
     }
 
