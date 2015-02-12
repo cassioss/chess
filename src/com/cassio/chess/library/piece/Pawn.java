@@ -1,9 +1,6 @@
 package com.cassio.chess.library.piece;
 
-import com.cassio.chess.exception.DiagonalMoveException;
-import com.cassio.chess.exception.IllegalChessMovementException;
-import com.cassio.chess.exception.SamePieceColorException;
-import com.cassio.chess.exception.SamePlaceMovementException;
+import com.cassio.chess.exception.*;
 
 import java.awt.*;
 
@@ -22,40 +19,33 @@ public class Pawn extends Piece {
                 chessBoard.maze[posX][posY].movePiece();
                 chessBoard.maze[targetX][targetY].putPiece(this);
             }
-        } catch (IllegalChessMovementException e) {
+        } catch (IllegalChessMoveException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     protected boolean validMovement(int targetX, int targetY) {
-        try {
-            super.moveSanityCheck(targetX, targetY);
-            checkDiagonalMove(targetX, targetY);
-            
-        } catch (IllegalChessMovementException e) {
-            e.printStackTrace();
-        } catch (SamePlaceMovementException e){
-            e.printStackTrace();
-        } catch (SamePieceColorException e){
-            e.printStackTrace();
-        }
+        super.moveSanityCheck(targetX, targetY);
+        checkDiagonalMoveException(targetX, targetY);
+        checkHorizontalMoveException(targetX, targetY);
+        checkVerticalMoveExceptions(targetX,targetY);
     }
     
-    private void checkDiagonalMove(int targetX, int targetY) throws DiagonalMoveException {
+    private void checkDiagonalMoveException(int targetX, int targetY) {
         if (targetX - posX == targetY - posY)
             throw new DiagonalMoveException("You tried to move your pawn diagonally.");
             
     }
 
-    private void checkHorizontalMove(int targetX, int targetY) throws IllegalChessMovementException {
+    private void checkHorizontalMoveException(int targetX, int targetY) {
         if (targetY == posY && targetX != posX)
-            throw new IllegalChessMovementException("You tried to move a pawn horizontally.");
+            throw new HorizontalMoveException("You tried to move a pawn horizontally.");
     }
     
-    private void checkRookVerticalMove(int targetX, int targetY) throws IllegalChessMovementException {
+    private void checkVerticalMoveExceptions(int targetX, int targetY) {
         if(targetX == posX && Math.abs(targetY - posY) > 1)
-            
+            throw new VerticalMoveException("You tried to move a pawn ");
         
     }
 

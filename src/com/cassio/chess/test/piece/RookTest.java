@@ -1,6 +1,6 @@
 package com.cassio.chess.test.piece;
 
-import com.cassio.chess.exception.IllegalChessMovementException;
+import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Rook;
@@ -42,14 +42,14 @@ public class RookTest {
         assert testBoard.getPieceAt(5, 0) == whiteRook;
     }
     
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testDiagonalMovement(){
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(5,5);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testKnightMovement(){
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whiteRook, 0, 0);
@@ -63,7 +63,7 @@ public class RookTest {
         whiteRook.moveTo(0, 8);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testPawnCapture(){
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whiteRook, 0, 0);

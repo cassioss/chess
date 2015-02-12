@@ -1,8 +1,8 @@
 package com.cassio.chess.library.piece;
 
-import com.cassio.chess.exception.IllegalChessMovementException;
+import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
-import com.cassio.chess.exception.SamePlaceMovementException;
+import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Board;
 
 import java.awt.*;
@@ -44,9 +44,9 @@ public abstract class Piece {
             throw new SamePieceColorException("You tried to capture a Piece of the same color.");
     }
 
-    protected void checkMovementToTheSamePlace(int targetX, int targetY) throws SamePlaceMovementException {
+    protected void checkMovementToTheSamePlace(int targetX, int targetY) throws SamePlaceMoveException {
         if (targetX == posX && targetY == posY)
-            throw new SamePlaceMovementException("You tried to move your piece to the same place.");
+            throw new SamePlaceMoveException("You tried to move your piece to the same place.");
     }
 
     protected void moveSanityCheck(int targetX, int targetY) {
@@ -55,7 +55,7 @@ public abstract class Piece {
             checkMovementToTheSamePlace(targetX, targetY);
         } catch (SamePieceColorException e) {
             e.printStackTrace();
-        } catch (SamePlaceMovementException e){
+        } catch (SamePlaceMoveException e){
             e.printStackTrace();
         }
     }
@@ -74,6 +74,6 @@ public abstract class Piece {
 
     public abstract void moveTo(int targetX, int targetY);
 
-    protected abstract boolean validMovement(int targetX, int targetY) throws IllegalChessMovementException;
+    protected abstract boolean validMovement(int targetX, int targetY) throws IllegalChessMoveException;
 
 }

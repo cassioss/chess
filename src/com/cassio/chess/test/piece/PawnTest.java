@@ -1,8 +1,8 @@
 package com.cassio.chess.test.piece;
 
-import com.cassio.chess.exception.IllegalChessMovementException;
+import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
-import com.cassio.chess.exception.SamePlaceMovementException;
+import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Pawn;
@@ -31,7 +31,7 @@ public class PawnTest {
      * Test movement to the same place 
      */
     
-    @Test(expected = SamePlaceMovementException.class)
+    @Test(expected = SamePlaceMoveException.class)
     public void testSamePlacesMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
@@ -60,49 +60,49 @@ public class PawnTest {
         assert testBoard.getPieceAt(0, 0) == blackPawn;
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testWhitePawnDownwardsMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 1, 0);
         whitePawn.moveTo(0, 0);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testBlackPawnUpwardsMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(blackPawn, 7, 0);
         blackPawn.moveTo(0, 1);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testHorizontalMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
         whitePawn.moveTo(0, 1);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testDiagonalMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
         whitePawn.moveTo(1, 1);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testRookHorizontalMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
         whitePawn.moveTo(0, 5);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testRookVerticalMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
         whitePawn.moveTo(5, 0);
     }
 
-    @Test(expected = IllegalChessMovementException.class)
+    @Test(expected = IllegalChessMoveException.class)
     public void testKnightMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whitePawn, 0, 0);
