@@ -7,7 +7,9 @@ import com.cassio.chess.library.piece.Piece;
 import java.awt.*;
 
 /**
- * Created by Cassio dos Santos Sousa on 07/02/2015.
+ * Square class - describes a chessboard square and its properties (color, score and piece).
+ *
+ * @author Cassio dos Santos Sousa
  */
 
 public class Square {
@@ -19,6 +21,8 @@ public class Square {
     private int score;
     private Piece squarePiece;
     protected Color squareColor;
+
+    // Simple getters and setters
 
     public int getScore() {
         return score;

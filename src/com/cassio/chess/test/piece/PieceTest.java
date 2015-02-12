@@ -2,7 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.exception.AlreadyHasPieceException;
 import com.cassio.chess.library.board.Board;
-import com.cassio.chess.library.board.ChessBoard;
+import com.cassio.chess.library.board.Chessboard;
 import com.cassio.chess.library.piece.Piece;
 import com.cassio.chess.library.piece.Rook;
 import org.junit.BeforeClass;
@@ -19,7 +19,7 @@ public class PieceTest {
 
     @BeforeClass
     public static void setBoardAndPieces() {
-        testBoard = new ChessBoard();
+        testBoard = new Chessboard();
         whiteRook = new Rook(Color.WHITE);
         secondWhiteRook = new Rook(Color.WHITE);
         blackRook = new Rook(Color.BLACK);
