@@ -28,17 +28,12 @@ public class BoardTest {
     public void testSquareOutOfBounds() {
         Square tile = testBoard.getSquareAt(8, 5);
     }
-
+    
     @Test
-    public void testLetterAssignment() {
-        assert testBoard.getLetterCoordinate(0) == 'a';
-        assert testBoard.getLetterCoordinate(1) == 'b';
-        assert testBoard.getLetterCoordinate(2) == 'c';
-        assert testBoard.getLetterCoordinate(3) == 'd';
-        assert testBoard.getLetterCoordinate(4) == 'e';
-        assert testBoard.getLetterCoordinate(5) == 'f';
-        assert testBoard.getLetterCoordinate(6) == 'g';
-        assert testBoard.getLetterCoordinate(7) == 'h';
+    public void testCleanBoard(){
+        testBoard.setupPieces();
+        testBoard.cleanBoard();
+        assert testBoard.hasNoPieces();
     }
 
     @Test

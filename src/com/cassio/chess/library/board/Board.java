@@ -1,5 +1,6 @@
 package com.cassio.chess.library.board;
 
+import com.cassio.chess.exception.AlreadyHasPieceException;
 import com.cassio.chess.library.piece.*;
 
 import java.awt.*;
@@ -11,7 +12,6 @@ import java.awt.*;
 public abstract class Board {
 
     public Square[][] maze;
-    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
 
     public Board() {
@@ -29,6 +29,7 @@ public abstract class Board {
     }
 
     public void setupPieces() {
+        cleanBoard();
         for (int column = 0; column < COLUMN_COUNT; column++) {
             putPieceAt(new Pawn(Color.WHITE), 1, column);
             putPieceAt(new Pawn(Color.BLACK), 6, column);
@@ -71,38 +72,48 @@ public abstract class Board {
         else paintWhite(row, column);
     }
 
-    private void paintBlack(int row, int column) {
-        maze[row][column].squareColor = Color.BLACK;
+    private void paintBlack(int posX, int posY) {
+        maze[posX][posY].squareColor = Color.BLACK;
     }
 
-    private void paintWhite(int row, int column) {
-        maze[row][column].squareColor = Color.WHITE;
+    private void paintWhite(int posX, int posY) {
+        maze[posX][posY].squareColor = Color.WHITE;
     }
-
-    public char getLetterCoordinate(int x) {
-        return LETTER_COORDINATES[x];
-    }
-
+    
     public void putPieceAt(Piece piece, int targetX, int targetY) {
+        if (targetX < 0 || targetX > COLUMN_COUNT)
+            throw new IndexOutOfBoundsException("You tried to put a piece out of the board.");
+        if (targetY < 0 || targetY > ROW_COUNT)
+            throw new IndexOutOfBoundsException("You tried to put a piece out of the board.");
+        if (maze[targetX][targetY].hasPiece())
+            throw new AlreadyHasPieceException("You tried to put a piece over another one.");
         maze[targetX][targetY].putPiece(piece);
-        piece.bePutOnBoard(this, maze[targetX][targetY]);
+        piece.bePutOnBoard(this, targetX, targetY);
     }
 
     public Piece getPieceAt(int posX, int posY) {
         return maze[posX][posY].getPiece();
     }
 
-    public boolean hasPieceAt(int posX, int posY) {
-        return maze[posX][posY].getPiece() != null;
-    }
-
     public boolean hasNoPieces() {
         for (int row = 0; row < ROW_COUNT; row++) {
             for (int column = 0; column < COLUMN_COUNT; column++) {
-                if (getPieceAt(row, column) != null)
+                if (maze[row][column].getPiece() != null) {
                     return false;
+                }
             }
         }
         return true;
     }
+
+    public void cleanBoard() {
+        for (int row = 0; row < ROW_COUNT; row++) {
+            for (int column = 0; column < COLUMN_COUNT; column++) {
+                if (maze[row][column].getPiece() != null)
+                    maze[row][column].movePiece();
+            }
+        }
+    }
+
+    public abstract char getLetterCoordinate(int posX);
 }

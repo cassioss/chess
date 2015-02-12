@@ -34,20 +34,22 @@ public class PieceTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testPutPieceOutOfBoard() {
-        assert testBoard.hasNoPieces();
+        testBoard.cleanBoard();
         testBoard.putPieceAt(whiteRook, 0, 8);
     }
 
+    // Tests to block putting new pieces without moves
+
     @Test(expected = AlreadyHasPieceException.class)
     public void testPutPieceOverPlayerPiece() {
-        assert testBoard.hasNoPieces();
+        testBoard.cleanBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         testBoard.putPieceAt(secondWhiteRook, 0, 0);
     }
 
     @Test(expected = AlreadyHasPieceException.class)
     public void testPutPieceOverOpponentPiece() {
-        assert testBoard.hasNoPieces();
+        testBoard.cleanBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         testBoard.putPieceAt(blackRook, 0, 0);
     }

@@ -1,6 +1,5 @@
 package com.cassio.chess.library.piece;
 
-import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Board;
@@ -18,7 +17,7 @@ public abstract class Piece {
     protected Board chessBoard;
 
     public Piece(Color color) {
-        setColor(color);
+        this.pieceColor = color;
     }
 
     public void bePutOnBoard(Board chessBoard, int initialX, int initialY) {
@@ -31,37 +30,31 @@ public abstract class Piece {
         return this.pieceColor;
     }
 
-    private void setColor(Color color) {
-        this.pieceColor = color;
+    /**
+     * As basic condition for moves, the player cannot capture his own piece.
+     *
+     * @param targetX - desired X-coordinate of the piece
+     * @param targetY - desired Y-coordinate of the piece
+     * @return <code>true</code> if the basic condition is met
+     */
+
+    protected boolean basicConditionToMoveTo(int targetX, int targetY) {
+        return noPieceAt(targetX, targetY) || opponentPieceAt(targetX, targetY);
     }
 
-    public Board getBoard() {
-        return chessBoard;
-    }
-
-    protected void checkPlayerPieceAt(int targetX, int targetY) throws SamePieceColorException {
-        if (!basicConditionsToMoveTo(targetX, targetY))
+    protected void checkPlayerPieceAt(int targetX, int targetY) {
+        if (!basicConditionToMoveTo(targetX, targetY))
             throw new SamePieceColorException("You tried to capture a Piece of the same color.");
     }
 
-    protected void checkMovementToTheSamePlace(int targetX, int targetY) throws SamePlaceMoveException {
+    protected void checkMovementToTheSamePlace(int targetX, int targetY) {
         if (targetX == posX && targetY == posY)
             throw new SamePlaceMoveException("You tried to move your piece to the same place.");
     }
 
     protected void moveSanityCheck(int targetX, int targetY) {
-        try {
-            checkPlayerPieceAt(targetX, targetY);
-            checkMovementToTheSamePlace(targetX, targetY);
-        } catch (SamePieceColorException e) {
-            e.printStackTrace();
-        } catch (SamePlaceMoveException e){
-            e.printStackTrace();
-        }
-    }
-
-    protected boolean basicConditionsToMoveTo(int targetX, int targetY) {
-        return noPieceAt(targetX, targetY) || opponentPieceAt(targetX, targetY);
+        checkMovementToTheSamePlace(targetX, targetY);
+        checkPlayerPieceAt(targetX, targetY);
     }
 
     protected boolean noPieceAt(int targetX, int targetY) {
@@ -69,11 +62,19 @@ public abstract class Piece {
     }
 
     protected boolean opponentPieceAt(int targetX, int targetY) {
-        return chessBoard.maze[targetX][targetY].getPiece().getColor() == this.pieceColor;
+        return chessBoard.maze[targetX][targetY].getPiece() != null &&
+                chessBoard.maze[targetX][targetY].getPiece().getColor() != this.pieceColor;
     }
 
-    public abstract void moveTo(int targetX, int targetY);
+    public void moveTo(int targetX, int targetY) {
+        if (validMovement(targetX, targetY)) {
+            chessBoard.maze[posX][posY].movePiece();
+            chessBoard.maze[targetX][targetY].putPiece(this);
+            posX = targetX;
+            posY = targetY;
+        }
+    }
 
-    protected abstract boolean validMovement(int targetX, int targetY) throws IllegalChessMoveException;
+    protected abstract boolean validMovement(int targetX, int targetY);
 
 }

@@ -53,17 +53,17 @@ public class SquareTest {
     }
     
     @Test
-    public void testCapturingAPiece() throws SamePieceColorException {
+    public void testCapturingAPiece() {
         simpleTile.putPiece(whitePiece);
-        simpleTile.captureAndPut(blackPiece);
+        simpleTile.putPiece(blackPiece);
         assert simpleTile.getPiece() == blackPiece;
         assert simpleTile.getScore() == -1;
     }
     
     @Test(expected = SamePieceColorException.class)
-    public void testCapturingOwnPiece() throws SamePieceColorException {
+    public void testCapturingOwnPiece() {
         simpleTile.putPiece(whitePiece);
-        simpleTile.captureAndPut(secondWhite);
+        simpleTile.putPiece(secondWhite);
     }
 
 }
