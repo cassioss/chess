@@ -28,52 +28,44 @@ public class RookTest {
     public void testHorizontalMovement() {
         assert testBoard.hasNoPieces();
         testBoard.putPieceAt(whiteRook, 0, 0);
-        whiteRook.moveTo(0, 5);
-        assert testBoard.getPieceAt(0, 0) == null;
-        assert testBoard.getPieceAt(0, 5) == whiteRook;
-    }
-
-    @Test
-    public void testVerticalMovement() {
-        assert testBoard.hasNoPieces();
-        testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(5, 0);
         assert testBoard.getPieceAt(0, 0) == null;
         assert testBoard.getPieceAt(5, 0) == whiteRook;
     }
+
+    @Test
+    public void testVerticalMovement() {
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteRook, 0, 0);
+        whiteRook.moveTo(0, 5);
+        assert testBoard.getPieceAt(0, 0) == null;
+        assert testBoard.getPieceAt(0, 5) == whiteRook;
+    }
     
     @Test(expected = IllegalChessMoveException.class)
     public void testDiagonalMovement(){
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(5,5);
     }
 
     @Test(expected = IllegalChessMoveException.class)
     public void testKnightMovement(){
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(2,1);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testMovementOutOfBoard(){
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(0, 8);
-    }
-
-    @Test(expected = IllegalChessMoveException.class)
-    public void testPawnCapture(){
-        assert testBoard.hasNoPieces();
-        testBoard.putPieceAt(whiteRook, 0, 0);
-        testBoard.putPieceAt(blackRook, 1, 1);
-        whiteRook.moveTo(1,1);
     }
     
     @Test(expected = SamePieceColorException.class)
     public void testSameColorCapture(){
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         testBoard.putPieceAt(secondWhiteRook, 0, 7);
         whiteRook.moveTo(0,7);
@@ -81,10 +73,28 @@ public class RookTest {
 
     @Test
     public void testOpponentCapture(){
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         testBoard.putPieceAt(blackRook, 0, 7);
         whiteRook.moveTo(0,7);
         assert testBoard.getPieceAt(0,7) == whiteRook;
+    }
+    
+    // A Rook cannot move if there is a piece in its way
+
+    @Test(expected = IllegalChessMoveException.class)
+    public void testHorizontalMoveWithPieceInTheWay(){
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteRook, 0, 0);
+        testBoard.putPieceAt(blackRook, 4, 0);
+        whiteRook.moveTo(7,0);
+    }
+    
+    @Test(expected = IllegalChessMoveException.class)
+    public void testVerticalMoveWithPieceInTheWay(){
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteRook, 0, 0);
+        testBoard.putPieceAt(blackRook, 0, 4);
+        whiteRook.moveTo(0,7);
     }
 }

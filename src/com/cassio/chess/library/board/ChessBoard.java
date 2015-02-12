@@ -27,7 +27,7 @@ public class Chessboard extends Board {
     }
 
     public void setupPieces() {
-        cleanBoard();
+        clearBoard();
         for (int posY = 0; posY < ROW_COUNT; posY++) {
             putPieceAt(new Pawn(Color.WHITE), 1, posY);
             putPieceAt(new Pawn(Color.BLACK), 6, posY);

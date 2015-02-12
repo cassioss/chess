@@ -47,7 +47,7 @@ public abstract class Board {
         return true;
     }
 
-    public void cleanBoard() {
+    public void clearBoard() {
         for (Square[] squareColumn : maze) {
             for (Square square : squareColumn) {
                 if (square.getPiece() != null)

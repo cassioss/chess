@@ -17,7 +17,7 @@ public class BoardTest {
     @Test
     public void testCleanBoard(){
         testBoard.setupPieces();
-        testBoard.cleanBoard();
+        testBoard.clearBoard();
         assert testBoard.hasNoPieces();
     }
 }
