@@ -6,8 +6,12 @@ import com.cassio.chess.library.piece.*;
 import java.awt.*;
 
 /**
- * Created by Cassio on 12/02/2015.
+ * <code>ChessBoard</code> class - the classic Chess board - 8x8 Squares, 16 Pieces for each player, alternate painting
+ * of Squares as black or white.
+ *
+ * @author Cassio dos Santos Sousa
  */
+
 public class Chessboard extends Board {
 
     private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;

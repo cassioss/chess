@@ -3,7 +3,11 @@ package com.cassio.chess.library.board;
 import com.cassio.chess.library.piece.Piece;
 
 /**
- * Created by Cassio on 07/02/2015.
+ * <code>Board</code> class - the Chess board, seen as a double array of Squares. Common methods are implemented and
+ * board-dependent methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as
+ * abstract.
+ *
+ * @author Cassio dos Santos Sousa
  */
 
 public abstract class Board {
@@ -52,7 +56,7 @@ public abstract class Board {
         }
     }
 
-    // Abstract (chessboard - dependent) methods
+    // Abstract (board-dependent) methods
 
     protected abstract void setupSquares();
 

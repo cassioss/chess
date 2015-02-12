@@ -7,12 +7,21 @@ import java.awt.*;
 /**
  * Created by Cassio on 11/02/2015.
  */
+
 public class Pawn extends Piece {
     public Pawn(Color color) {
         super(color);
     }
 
-    @Override
+    /**
+     * Checks if a Pawn movement is valid - a Pawn can only move one square to its front (which is different for black
+     * Pawns and white Pawns) or capture a piece in its diagonal front
+     *
+     * @param targetX - desired X-coordinate for movement
+     * @param targetY - desired Y-coordinate for movement
+     * @return <code>true</code> if there is no Exception (illegal Chess move)
+     */
+
     protected boolean validMovement(int targetX, int targetY) {
         moveSanityCheck(targetX, targetY);
         checkHorizontalMoveException(targetX, targetY);
@@ -26,6 +35,14 @@ public class Pawn extends Piece {
         if (targetY == posY && targetX != posX)
             throw new HorizontalMoveException("You tried to move your Pawn horizontally.");
     }
+
+    /**
+     * Checks exceptions for vertical movement of Pawns with different colors - white Pawns can only move upwards, and
+     * black Pawns only move downwards (given the orientation of the board)
+     *
+     * @param targetX - desired X-coordinate for movement
+     * @param targetY - desired Y-coordinate for movement
+     */
 
     private void checkVerticalMoveExceptions(int targetX, int targetY) {
         if (targetX == posX) {
@@ -53,9 +70,9 @@ public class Pawn extends Piece {
     private void checkDiagonalMoveExceptions(int targetX, int targetY) {
         if (Math.abs(targetX - posX) == Math.abs(targetY - posY)) {
             if (pieceColor == Color.WHITE)
-                checkWhitePawnDiagonalMoveExceptions(targetX,targetY);
+                checkWhitePawnDiagonalMoveExceptions(targetX, targetY);
             if (pieceColor == Color.BLACK)
-                checkBlackPawnDiagonalMoveExceptions(targetX,targetY);
+                checkBlackPawnDiagonalMoveExceptions(targetX, targetY);
         }
     }
 
@@ -78,7 +95,7 @@ public class Pawn extends Piece {
     }
 
     private void checkOtherMoveExceptions(int targetX, int targetY) {
-        if(Math.abs(targetX - posX) > 1 || Math.abs(targetY - posY) > 1)
+        if (Math.abs(targetX - posX) > 1 || Math.abs(targetY - posY) > 1)
             throw new IllegalChessMoveException("Illegal movement for Pawn piece.");
     }
 
