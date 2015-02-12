@@ -17,6 +17,7 @@ public abstract class Board {
     public Board() {
         setupSquares();
         paintSquares();
+        clearBoard();
     }
 
     public void paintSquares() {
@@ -35,6 +36,10 @@ public abstract class Board {
 
     protected void putSquareAt(int posX, int posY) {
         maze[posX][posY] = new Square();
+    }
+
+    public boolean hasPieceAt(int posX, int posY) {
+        return maze[posX][posY].hasPiece();
     }
 
     public boolean hasNoPieces() {

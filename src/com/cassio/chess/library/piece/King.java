@@ -1,5 +1,7 @@
 package com.cassio.chess.library.piece;
 
+import com.cassio.chess.exception.NonKingMoveException;
+
 import java.awt.*;
 
 /**
@@ -11,27 +13,23 @@ public class King extends Piece {
 
     public King(Color color) {
         super(color);
-        check();
-        checkMate();
+        isInCheck = false;
+        isInCheckMate = false;
     }
 
-    private void check() {
+    private void check() {}
 
-    }
+    private void checkMate() {}
 
-    private void checkMate() {
-        if (isInCheck) {
 
-        }
-    }
-
-    @Override
-    public void moveTo(int targetX, int targetY) {
-
-    }
-
-    @Override
     protected boolean validMovement(int targetX, int targetY) {
-        return false;
+        moveSanityCheck(targetX, targetY);
+        checkNonKingMoveException(targetX, targetY);
+        return !isInCheck;
+    }
+
+    private void checkNonKingMoveException(int targetX, int targetY) {
+        if(Math.abs(targetX - posX) > 1 || Math.abs(targetY - posY) > 1)
+            throw new NonKingMoveException("You tried to make an invalid move for the King.");
     }
 }

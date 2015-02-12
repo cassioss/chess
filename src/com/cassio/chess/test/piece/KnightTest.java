@@ -2,6 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
+import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Chessboard;
 import com.cassio.chess.library.piece.Knight;
 import org.junit.BeforeClass;
@@ -24,9 +25,16 @@ public class KnightTest {
         secondWhiteKnight = new Knight(Color.WHITE);
     }
 
+    @Test(expected = SamePlaceMoveException.class)
+    public void testSamePlacesMovement() {
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteKnight, 0, 0);
+        whiteKnight.moveTo(0, 0);
+    }
+
     @Test(expected = IllegalChessMoveException.class)
     public void testHorizontalMovement() {
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteKnight, 0, 0);
         whiteKnight.moveTo(5, 0);
     }
@@ -45,7 +53,7 @@ public class KnightTest {
         whiteKnight.moveTo(5, 5);
     }
 
-    @Test(expected = IllegalChessMoveException.class)
+    @Test
     public void testKnightMovement() {
         testBoard.clearBoard();
         testBoard.putPieceAt(whiteKnight, 0, 0);

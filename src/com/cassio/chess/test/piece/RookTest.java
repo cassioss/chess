@@ -2,6 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
+import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Chessboard;
 import com.cassio.chess.library.piece.Rook;
 import org.junit.BeforeClass;
@@ -22,11 +23,19 @@ public class RookTest {
         blackRook = new Rook(Color.BLACK);
         whiteRook = new Rook(Color.WHITE);
         secondWhiteRook = new Rook(Color.WHITE);
+        assert testBoard.hasNoPieces();
+    }
+
+    @Test(expected = SamePlaceMoveException.class)
+    public void testSamePlacesMovement() {
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteRook, 0, 0);
+        whiteRook.moveTo(0, 0);
     }
 
     @Test
     public void testHorizontalMovement() {
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteRook, 0, 0);
         whiteRook.moveTo(5, 0);
         assert testBoard.getPieceAt(0, 0) == null;

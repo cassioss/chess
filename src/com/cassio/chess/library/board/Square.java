@@ -16,6 +16,7 @@ public class Square {
 
     public Square() {
         setScore(0);
+        squarePiece = null;
     }
 
     private int score;

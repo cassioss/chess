@@ -2,6 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
+import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Chessboard;
 import com.cassio.chess.library.piece.Queen;
 import org.junit.BeforeClass;
@@ -24,16 +25,23 @@ public class QueenTest {
         secondWhiteQueen = new Queen(Color.WHITE);
     }
 
+    @Test(expected = SamePlaceMoveException.class)
+    public void testSamePlacesMovement() {
+        testBoard.clearBoard();
+        testBoard.putPieceAt(whiteQueen, 0, 0);
+        whiteQueen.moveTo(0, 0);
+    }
+
     @Test
     public void testHorizontalMovement() {
-        assert testBoard.hasNoPieces();
+        testBoard.clearBoard();
         testBoard.putPieceAt(whiteQueen, 0, 0);
         whiteQueen.moveTo(5, 0);
         assert testBoard.getPieceAt(0, 0) == null;
         assert testBoard.getPieceAt(5, 0) == whiteQueen;
     }
 
-    @Test(expected = IllegalChessMoveException.class)
+    @Test
     public void testVerticalMovement() {
         testBoard.clearBoard();
         testBoard.putPieceAt(whiteQueen, 0, 0);
