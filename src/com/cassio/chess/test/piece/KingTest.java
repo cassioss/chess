@@ -2,7 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePlaceMoveException;
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.King;
 import com.cassio.chess.library.piece.Queen;
 import org.junit.BeforeClass;
@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class KingTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
     private static King blackKing;
     private static King whiteKing;
     private static Queen whiteQueen;
@@ -20,7 +20,7 @@ public class KingTest {
 
     @BeforeClass
     public static void setupPieces() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
         whiteKing = new King(Color.WHITE);
         blackKing = new King(Color.BLACK);
         whiteQueen = new Queen(Color.WHITE);

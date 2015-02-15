@@ -1,6 +1,6 @@
 package com.cassio.chess.test.board;
 
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.piece.*;
 import org.junit.BeforeClass;
@@ -8,13 +8,13 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class ChessboardTest {
+public class ChessBoardTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
 
     @BeforeClass
     public static void setBoard() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
     }
 
     @Test

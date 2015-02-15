@@ -3,7 +3,7 @@ package com.cassio.chess.test.piece;
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Bishop;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,14 +12,14 @@ import java.awt.*;
 
 public class BishopTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
     private static Bishop blackBishop;
     private static Bishop whiteBishop;
     private static Bishop secondWhiteBishop;
 
     @BeforeClass
     public static void setupBoard() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
         blackBishop = new Bishop(Color.BLACK);
         whiteBishop = new Bishop(Color.WHITE);
         secondWhiteBishop = new Bishop(Color.WHITE);

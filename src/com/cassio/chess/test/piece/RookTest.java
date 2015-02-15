@@ -3,7 +3,7 @@ package com.cassio.chess.test.piece;
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Rook;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,14 +12,14 @@ import java.awt.*;
 
 public class RookTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
     private static Rook blackRook;
     private static Rook whiteRook;
     private static Rook secondWhiteRook;
 
     @BeforeClass
     public static void setupBoard() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
         blackRook = new Rook(Color.BLACK);
         whiteRook = new Rook(Color.WHITE);
         secondWhiteRook = new Rook(Color.WHITE);

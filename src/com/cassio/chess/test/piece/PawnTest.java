@@ -4,7 +4,7 @@ import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.PieceColorMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Pawn;
 import com.cassio.chess.library.piece.Piece;
 import org.junit.BeforeClass;
@@ -14,14 +14,14 @@ import java.awt.*;
 
 public class PawnTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
     private static Piece blackPawn;
     private static Piece whitePawn;
     private static Piece secondWhitePawn;
 
     @BeforeClass
     public static void setupPieces() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
         whitePawn = new Pawn(Color.WHITE);
         blackPawn = new Pawn(Color.BLACK);
         secondWhitePawn = new Pawn(Color.WHITE);

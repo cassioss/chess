@@ -12,11 +12,11 @@ import java.awt.*;
  * @author Cassio dos Santos Sousa
  */
 
-public class Chessboard extends Board {
+public class ChessBoard extends Board {
 
     private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
 
-    public Chessboard() {
+    public ChessBoard() {
         super();
     }
 

@@ -3,7 +3,7 @@ package com.cassio.chess.test.piece;
 import com.cassio.chess.exception.IllegalChessMoveException;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
-import com.cassio.chess.library.board.Chessboard;
+import com.cassio.chess.library.board.ChessBoard;
 import com.cassio.chess.library.piece.Knight;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,14 +12,14 @@ import java.awt.*;
 
 public class KnightTest {
 
-    private static Chessboard testBoard;
+    private static ChessBoard testBoard;
     private static Knight blackKnight;
     private static Knight whiteKnight;
     private static Knight secondWhiteKnight;
 
     @BeforeClass
     public static void setupBoard() {
-        testBoard = new Chessboard();
+        testBoard = new ChessBoard();
         blackKnight = new Knight(Color.BLACK);
         whiteKnight = new Knight(Color.WHITE);
         secondWhiteKnight = new Knight(Color.WHITE);
