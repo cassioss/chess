@@ -1,75 +1,84 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.exception.NoPieceException;
-import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.library.piece.Piece;
 
 import java.awt.*;
 
 /**
- * Square class - describes a chessboard square and its properties (color, score and piece).
+ * {@code Square} class - describes a chessboard square and its properties: color, piece over it (if any), chessboard *
+ * that contains it and a score determining the existence of a piece or not. Its existence is exclusively dependent on
+ * the existence of a chessboard, and the chessboard determines how the square is going to be painted.
  *
  * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
  */
 
 public class Square {
 
-    public Square() {
-        setScore(0);
-        squarePiece = null;
-    }
-
-    private int score;
     private Piece squarePiece;
     protected Color squareColor;
+    private Board parentBoard;
+    private int score;
 
-    // Simple getters and setters
+    /**
+     * Receives the parent chessboard as parameter, setting everything else to either {@code null} or zero.
+     *
+     * @param parent the chessboard that will create the board.
+     */
 
-    public int getScore() {
-        return score;
+    public Square(Board parent) {
+        score = 0;
+        squarePiece = null;
+        this.parentBoard = parent;
     }
 
-    private void setScore(int score) {
-        this.score = score;
-    }
-
+    /**
+     * Returns the piece on the square.
+     *
+     * @return the Piece on the square, ir any, or {@code null} otherwise.
+     */
     public Piece getPiece() {
         return squarePiece;
     }
 
+    /**
+     * Returns the color of the square, which is set by the chessboard.
+     *
+     * @return the square color.
+     */
     public Color getSquareColor() {
         return squareColor;
     }
 
+    /**
+     * Checks if there is a piece on the square.
+     *
+     * @return {@code true} if there is a piece on the square.
+     */
     public boolean hasPiece() {
         return this.squarePiece != null;
     }
 
-    public boolean hasSameColor(Piece firstPiece, Piece secondPiece) {
-        return firstPiece.getColor() == secondPiece.getColor();
+    /**
+     * Verifies whether the piece on the square has the same color as another piece, probably trying to
+     *
+     * @param otherPiece a piece to be compared.
+     * @return {@code true} if the colors (set by a boolean value) are equal.
+     */
+
+    public boolean pieceHasSameColorAs(Piece otherPiece) {
+        return this.squarePiece.getColor() == otherPiece.getColor();
     }
 
-    public void putPiece(Piece newPiece) {
-        if (hasPiece() && hasSameColor(this.squarePiece, newPiece))
-            throw new SamePieceColorException("You tried to capture your own piece.");
-        else {
-            if (hasPiece()) movePiece();
-            putNewPiece(newPiece);
-        }
-    }
+    /**
+     * Sets new piece in the square. Protected visibility is set to be visible by chessboards only.
+     *
+     * @param piece new piece to be set
+     */
 
-    public void movePiece() {
-        if (hasPiece()) {
-            this.squarePiece = null;
-            setScore(0);
-        } else throw new NoPieceException("You tried to move a piece that does not exist.");
-    }
-
-    private void putNewPiece(Piece piece) {
+    protected void putNewPiece(Piece piece) {
         this.squarePiece = piece;
-        if (piece.getColor() == Color.BLACK)
-            setScore(-1);
-        else if (piece.getColor() == Color.WHITE)
-            setScore(1);
     }
+
 }

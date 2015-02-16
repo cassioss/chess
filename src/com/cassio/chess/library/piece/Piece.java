@@ -16,12 +16,13 @@ import java.awt.*;
 
 public abstract class Piece {
 
-    protected Color pieceColor;
+    protected boolean isBlack;
+
     protected int posX, posY;
     protected Board chessBoard;
 
-    protected Piece(Color color) {
-        this.pieceColor = color;
+    protected Piece(boolean colorChoice) {
+        isBlack = colorChoice;
     }
 
     public void bePutOnBoard(Board chessBoard, int initialX, int initialY) {
@@ -30,8 +31,8 @@ public abstract class Piece {
         posY = initialY;
     }
 
-    public Color getColor() {
-        return this.pieceColor;
+    public boolean getColor() {
+        return isBlack;
     }
 
     /**

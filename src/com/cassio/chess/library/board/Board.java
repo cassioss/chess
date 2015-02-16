@@ -3,7 +3,7 @@ package com.cassio.chess.library.board;
 import com.cassio.chess.library.piece.Piece;
 
 /**
- * <code>Board</code> class - the Chess board, seen as a double array of Squares. Common methods are implemented and
+ * {@code Board} class - the Chess board, seen as a double array of Squares. Common methods are implemented and
  * board-dependent methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as
  * abstract.
  *
