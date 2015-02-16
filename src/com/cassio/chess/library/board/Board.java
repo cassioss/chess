@@ -3,17 +3,119 @@ package com.cassio.chess.library.board;
 import com.cassio.chess.library.piece.Piece;
 
 /**
- * {@code Board} class - the Chess board, seen as a double array of Squares. Common methods are implemented and
- * board-dependent methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as
- * abstract.
+ * {@code Board} class - abstract class for chessboards. Common methods are implemented, and board-dependent methods
+ * (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
  *
  * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
  */
 
 public abstract class Board {
 
+    /**
+     * The chess board, treated as a double array.
+     */
     public Square[][] maze;
 
+    /**
+     * Paints all the squares of the board. The loops treat the double array as jagged, so it goes through the entire
+     * board.
+     */
+    private void paintSquares() {
+        for (int posX = 0; posX < maze.length; posX++)
+            for (int posY = 0; posY < maze[posX].length; posY++)
+                paintSquare(posX, posY);
+    }
+
+    /**
+     * Paints a square based on its position on the board. The algorithm may differ for different types of boards, so it
+     * was kept as abstract.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     */
+    protected abstract void paintSquare(int posX, int posY);
+
+
+    /**
+     * Gets the square at a certain position of the board.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     * @return the square at (posX, posY).
+     */
+    public Square getSquareAt(int posX, int posY) {
+        return maze[posX][posY];
+    }
+
+    /**
+     * Gets the piece at a certain position of the board.
+     *
+     * @param posX desired X-coordinate of a piece.
+     * @param posY desired Y-coordinate of a piece.
+     * @return the piece at (posX, posY).
+     */
+    public Piece getPieceAt(int posX, int posY) {
+        return maze[posX][posY].getPiece();
+    }
+
+
+    /**
+     * Gets the color of the piece at a certain position of the board.
+     *
+     * @param posX desired X-coordinate of a piece.
+     * @param posY desired Y-coordinate of a piece.
+     * @return {@code true} if the color of the piece is black.
+     */
+    public boolean getPieceColorAt(int posX, int posY) {
+        return maze[posX][posY].getPiece().getColor();
+    }
+
+    /**
+     * Gets the maximum value for an X-coordinate on the board.
+     *
+     * @return the length of the maze.
+     */
+    public int getLimitX() {
+        return maze.length;
+    }
+
+    /**
+     * Gets the maximum value for an Y-coordinate on the board, given the respective X-coordinate.
+     *
+     * @return the height of the maze at a certain X-coordinate.
+     */
+    public int getLimitY(int posX) {
+        return maze[posX].length;
+    }
+
+    /**
+     * Says if there is a piece of any kind at a certain position of the board.
+     *
+     * @param posX desired X-coordinate of a piece.
+     * @param posY desired Y-coordinate of a piece.
+     * @return {@code true} if there is a piece at that coordinate of the board.
+     */
+    public boolean hasPieceAt(int posX, int posY) {
+        return maze[posX][posY].getPiece() != null;
+    }
+
+    /**
+     * Says if there is a square at a certain position of the cartesian plane containing the board.
+     *
+     * @param posX desired X-coordinate of a piece.
+     * @param posY desired Y-coordinate of a piece.
+     * @return {@code true} if there is a square at that location.
+     */
+    public boolean hasSquareAt(int posX, int posY) {
+        return maze[posX][posY] != null;
+    }
+    
+    
+    
+    
+/*
     public Board() {
         setupSquares();
         paintSquares();
@@ -26,16 +128,8 @@ public abstract class Board {
                 paintSquare(posX, posY);
     }
 
-    public Piece getPieceAt(int posX, int posY) {
-        return maze[posX][posY].getPiece();
-    }
-
-    public Square getSquareAt(int posX, int posY) {
-        return maze[posX][posY];
-    }
-
     protected void putSquareAt(int posX, int posY) {
-        maze[posX][posY] = new Square();
+        maze[posX][posY] = new Square(this);
     }
 
     public boolean hasPieceAt(int posX, int posY) {
@@ -56,7 +150,7 @@ public abstract class Board {
         for (Square[] squareColumn : maze) {
             for (Square square : squareColumn) {
                 if (square.getPiece() != null)
-                    square.movePiece();
+                    square.removePiece();
             }
         }
     }
@@ -72,4 +166,8 @@ public abstract class Board {
     public abstract void putPieceAt(Piece piece, int targetX, int targetY);
 
     public abstract char getLetterCoordinate(int posX);
+
+    public boolean hasSquareAt(int posX, int posY) {
+        return maze[posX][posY] != null;
+    }*/
 }

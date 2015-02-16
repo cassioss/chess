@@ -2,7 +2,7 @@ package com.cassio.chess.library.board;
 
 import com.cassio.chess.library.piece.Piece;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * {@code Square} class - describes a chessboard square and its properties: color, piece over it (if any), chessboard *
@@ -13,22 +13,19 @@ import java.awt.*;
  * @version 1.1
  * @since 1.0
  */
-
 public class Square {
 
     private Piece squarePiece;
     protected Color squareColor;
+    private int posX, posY;
     private Board parentBoard;
-    private int score;
 
     /**
      * Receives the parent chessboard as parameter, setting everything else to either {@code null} or zero.
      *
      * @param parent the chessboard that will create the board.
      */
-
     public Square(Board parent) {
-        score = 0;
         squarePiece = null;
         this.parentBoard = parent;
     }
@@ -66,7 +63,6 @@ public class Square {
      * @param otherPiece a piece to be compared.
      * @return {@code true} if the colors (set by a boolean value) are equal.
      */
-
     public boolean pieceHasSameColorAs(Piece otherPiece) {
         return this.squarePiece.getColor() == otherPiece.getColor();
     }
@@ -76,9 +72,16 @@ public class Square {
      *
      * @param piece new piece to be set
      */
-
     protected void putNewPiece(Piece piece) {
         this.squarePiece = piece;
+    }
+
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
     }
 
 }

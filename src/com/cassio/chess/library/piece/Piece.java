@@ -3,8 +3,9 @@ package com.cassio.chess.library.piece;
 import com.cassio.chess.exception.SamePieceColorException;
 import com.cassio.chess.exception.SamePlaceMoveException;
 import com.cassio.chess.library.board.Board;
+import com.cassio.chess.library.board.Square;
 
-import java.awt.*;
+import java.util.HashSet;
 
 /**
  * <code>Piece</code> class - defines basic attributes (position, piece color and board containing the Piece) and
@@ -20,6 +21,8 @@ public abstract class Piece {
 
     protected int posX, posY;
     protected Board chessBoard;
+    
+    protected HashSet<Square> possibleMoves;
 
     protected Piece(boolean colorChoice) {
         isBlack = colorChoice;

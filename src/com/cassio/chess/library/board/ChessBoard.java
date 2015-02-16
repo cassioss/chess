@@ -1,20 +1,65 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.exception.AlreadyHasPieceException;
-import com.cassio.chess.library.piece.*;
-
 import java.awt.*;
 
 /**
- * <code>ChessBoard</code> class - the classic Chess board - 8x8 Squares, 16 Pieces for each player, alternate painting
- * of Squares as black or white.
+ * {@code ChessBoard} class - the classic Chess board: 8x8 Squares, 16 Pieces for each player, alternate painting of
+ * Squares as either black or white.
  *
  * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
  */
 
 public class ChessBoard extends Board {
 
-    private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
+    /**
+     * Checks if the parity of two numbers is equal.
+     *
+     * @param a first integer number.
+     * @param b second integer number.
+     * @return true if a+b is even.
+     */
+    public boolean checkParity(int a, int b) {
+        return (a + b) % 2 == 0;
+    }
+
+    /**
+     * Paints a square with the color BLACK.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     */
+    private void paintBlack(int posX, int posY) {
+        maze[posX][posY].squareColor = Color.BLACK;
+    }
+
+    /**
+     * Paints a square with the color WHITE.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     */
+    private void paintWhite(int posX, int posY) {
+        maze[posX][posY].squareColor = Color.WHITE;
+    }
+
+    /**
+     * Paints a square either BLACK or WHITE, based on the parity of the coordinates. On the traditional chessboard, if
+     * the coordinates of a square have the same parity, the square is painted BLACK.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     */
+    protected void paintSquare(int posX, int posY) {
+        if (checkParity(posX, posY))
+            paintBlack(posX, posY);
+        else paintWhite(posX, posY);
+    }
+
+    
+    
+    /*private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
 
     public ChessBoard() {
         super();
@@ -85,5 +130,5 @@ public class ChessBoard extends Board {
             throw new AlreadyHasPieceException("You tried to put a piece over another one.");
         maze[targetX][targetY].putPiece(piece);
         piece.bePutOnBoard(this, targetX, targetY);
-    }
+    }*/
 }
