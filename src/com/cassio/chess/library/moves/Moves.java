@@ -3,23 +3,24 @@ package com.cassio.chess.library.moves;
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * {@code Moves} class - has a list of possible squares for a piece to move in a board. The main reasons for creating
  * this class is that (1) most pieces share the same moves (for example, the Queen can move the same way as a Rook or a
- * Bishop), and (2) having a list of possible moves eases the job to find whether a King piece is in check or
- * checkmate.
+ * Bishop), (2) sets do not accept copies, and (3) having a set of possible moves eases the job to find whether a King
+ * piece is in check or checkmate. It is abstract so it can be implemented differently for each piece.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
  */
 public abstract class Moves {
-    protected ArrayList<Square> possibleMoves;
+    protected HashSet<Square> possibleMoves;
     protected Square referenceSquare;
     protected Board referenceBoard;
+    protected boolean colorChoice;
 
-    protected void addMoves(ArrayList<Square> moveSet) {
+    protected void addMoves(HashSet<Square> moveSet) {
         possibleMoves.addAll(moveSet);
     }
 
@@ -27,11 +28,17 @@ public abstract class Moves {
         possibleMoves.add(move);
     }
 
-    public Moves() {
-        getMoves();
+    public Moves(Square referenceSquare, Board referenceBoard, boolean colorChoice) {
+        this.referenceSquare = referenceSquare;
+        this.referenceBoard = referenceBoard;
+        this.colorChoice = colorChoice;
     }
 
-    protected abstract void getMoves();
+    public abstract void learnMoves();
+
+    public HashSet<Square> getMoveSet() {
+        return new HashSet<Square>(possibleMoves);
+    }
 
     /**
      * Adds a square to the moveset having referenceBoard's origin as reference.
@@ -39,7 +46,7 @@ public abstract class Moves {
      * @param posX cartesian X-coordinate of the square.
      * @param posY cartesian Y-coordinate of the square.
      */
-/*    protected void addSquareAt(int posX, int posY) {
+    protected void addSquareAt(int posX, int posY) {
         if (referenceBoard.hasSquareAt(posX, posY) && !hasPlayerPieceAt(posX, posY))
             addMove(referenceBoard.getSquareAt(posX, posY));
     }
@@ -49,17 +56,17 @@ public abstract class Moves {
      *
      * @param distX horizontal distance from referenceSquare.
      * @param distY vertical distance from referenceSquare.
-     *//*
+     */
     protected void addSquareWithReference(int distX, int distY) {
         addSquareAt(getX() + distX, getY() + distY);
     }
 
     private int getX() {
-        return referenceSquare.getX();
+        return referenceSquare.getPosX();
     }
 
     private int getY() {
-        return referenceSquare.getY();
+        return referenceSquare.getPosY();
     }
 
     private int newPositionX(int displacement) {
@@ -147,5 +154,4 @@ public abstract class Moves {
         getSemiInfiniteSecondaryDiagonalPath(-1);
     }
 
-*/
 }

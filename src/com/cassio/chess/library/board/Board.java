@@ -115,6 +115,15 @@ public abstract class Board {
         return gameFlag;
     }
 
+    public int getLimitX() {
+        return squareBoard.length;
+    }
+
+
+    public int getLimitY(int posX) {
+        return squareBoard[posX].length;
+    }
+
 
 /*
     /**

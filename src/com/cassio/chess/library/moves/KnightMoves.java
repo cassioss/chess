@@ -12,7 +12,7 @@ public class KnightMoves extends Moves {
     /**
      * Adds all the possible moves for a Knight. His moves have an L-shape that counts for three squares of distance.
      */
-    protected void getMoves() {
+    protected void learnMoves() {
 
         // L-shape movement: one square for the lower displacement, two squares for the bigger displacement
 

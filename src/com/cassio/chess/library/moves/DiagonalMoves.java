@@ -6,7 +6,7 @@ package com.cassio.chess.library.moves;
 public class DiagonalMoves extends Moves {
 
     @Override
-    protected void getMoves() {
+    protected void learnMoves() {
         //getInfiniteDiagonalPaths();
     }
 }

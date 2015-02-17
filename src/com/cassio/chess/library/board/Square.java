@@ -19,6 +19,14 @@ public class Square {
     protected Color squareColor;
     private int posX, posY;
 
+
+    /**
+     * Creates a square in a certain position of a board. The coordinates are the only things the square knows about its
+     * board, as identifying a square on a board could take a lot of time.
+     *
+     * @param posX the X-coordinate chosen to create the square on a certain board.
+     * @param posY the Y-coordinate chosen to create the square on a certain board.
+     */
     public Square(int posX, int posY) {
         squarePiece = null;
         squareColor = null;

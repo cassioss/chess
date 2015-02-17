@@ -19,4 +19,7 @@ public class Pawn extends Piece {
     public Pawn(boolean colorChoice) {
         super(colorChoice);
     }
+    
+    
+
 }
