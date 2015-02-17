@@ -5,9 +5,9 @@ import com.cassio.chess.library.piece.Piece;
 import java.awt.Color;
 
 /**
- * {@code Square} class - describes a chessboard square and its properties: color, piece over it (if any), chessboard *
- * that contains it and a score determining the existence of a piece or not. Its existence is exclusively dependent on
- * the existence of a chessboard, and the chessboard determines how the square is going to be painted.
+ * {@code Square} class - describes a chessboard square and its basic properties: color, position and piece over it. The
+ * painting is done according to the chessboard that creates it, and the pieces are set depending on the game - which
+ * requires these properties to be protected.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -15,28 +15,15 @@ import java.awt.Color;
  */
 public class Square {
 
-    private Piece squarePiece;
+    protected Piece squarePiece;
     protected Color squareColor;
     private int posX, posY;
-    private Board parentBoard;
 
-    /**
-     * Receives the parent chessboard as parameter, setting everything else to either {@code null} or zero.
-     *
-     * @param parent the chessboard that will create the board.
-     */
-    public Square(Board parent) {
+    public Square(int posX, int posY) {
         squarePiece = null;
-        this.parentBoard = parent;
-    }
-
-    /**
-     * Returns the piece on the square.
-     *
-     * @return the Piece on the square, ir any, or {@code null} otherwise.
-     */
-    public Piece getPiece() {
-        return squarePiece;
+        squareColor = null;
+        this.posX = posX;
+        this.posY = posY;
     }
 
     /**
@@ -49,38 +36,30 @@ public class Square {
     }
 
     /**
-     * Checks if there is a piece on the square.
+     * Returns the piece on the square.
      *
-     * @return {@code true} if there is a piece on the square.
+     * @return the Piece on the square, if any.
      */
-    public boolean hasPiece() {
-        return this.squarePiece != null;
+    public Piece getSquarePiece() {
+        return squarePiece;
     }
+
 
     /**
-     * Verifies whether the piece on the square has the same color as another piece, probably trying to
+     * Returns the X-coordinate of the square in a chessboard.
      *
-     * @param otherPiece a piece to be compared.
-     * @return {@code true} if the colors (set by a boolean value) are equal.
+     * @return an integer containing the X-coordinate of a square.
      */
-    public boolean pieceHasSameColorAs(Piece otherPiece) {
-        return this.squarePiece.getColor() == otherPiece.getColor();
-    }
-
-    /**
-     * Sets new piece in the square. Protected visibility is set to be visible by chessboards only.
-     *
-     * @param piece new piece to be set
-     */
-    protected void putNewPiece(Piece piece) {
-        this.squarePiece = piece;
-    }
-
-    public int getX() {
+    public int getPosX() {
         return posX;
     }
 
-    public int getY() {
+    /**
+     * Returns the Y-coordinate of the square in a chessboard.
+     *
+     * @return an integer containing the Y-coordinate of a square.
+     */
+    public int getPosY() {
         return posY;
     }
 

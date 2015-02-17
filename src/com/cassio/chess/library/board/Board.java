@@ -1,7 +1,5 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.library.piece.Piece;
-
 /**
  * {@code Board} class - abstract class for chessboards. Common methods are implemented, and board-dependent methods
  * (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
@@ -13,16 +11,40 @@ import com.cassio.chess.library.piece.Piece;
 
 public abstract class Board {
 
-    /**
-     * The chess board, treated as a double array.
-     */
-    public Square[][] maze;
+    protected Square[][] squareBoard;
+
+    public Board() {
+        setupSquares();
+        setupPieces();
+        paintSquares();
+    }
+
+    protected abstract void setupSquares();
+
+    protected abstract void setupPieces();
+
+    protected abstract void paintSquares();
+
+
+    public boolean hasNoPieces() {
+        for (Square[] squareArray : squareBoard) {
+            for (Square square : squareArray) {
+                if(square.getSquarePiece() != null)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasSquareAt(int targetX, int targetY) {
+        return squareBoard[targetX][targetY] != null;
+    }
 
     /**
      * Paints all the squares of the board. The loops treat the double array as jagged, so it goes through the entire
      * board.
      */
-    private void paintSquares() {
+    /*private void paintSquares() {
         for (int posX = 0; posX < maze.length; posX++)
             for (int posY = 0; posY < maze[posX].length; posY++)
                 paintSquare(posX, posY);
@@ -35,8 +57,7 @@ public abstract class Board {
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      */
-    protected abstract void paintSquare(int posX, int posY);
-
+/*    protected abstract void paintSquare(int posX, int posY);
 
     /**
      * Gets the square at a certain position of the board.
@@ -45,31 +66,8 @@ public abstract class Board {
      * @param posY desired Y-coordinate of a square.
      * @return the square at (posX, posY).
      */
-    public Square getSquareAt(int posX, int posY) {
+  /*  public Square getSquareAt(int posX, int posY) {
         return maze[posX][posY];
-    }
-
-    /**
-     * Gets the piece at a certain position of the board.
-     *
-     * @param posX desired X-coordinate of a piece.
-     * @param posY desired Y-coordinate of a piece.
-     * @return the piece at (posX, posY).
-     */
-    public Piece getPieceAt(int posX, int posY) {
-        return maze[posX][posY].getPiece();
-    }
-
-
-    /**
-     * Gets the color of the piece at a certain position of the board.
-     *
-     * @param posX desired X-coordinate of a piece.
-     * @param posY desired Y-coordinate of a piece.
-     * @return {@code true} if the color of the piece is black.
-     */
-    public boolean getPieceColorAt(int posX, int posY) {
-        return maze[posX][posY].getPiece().getColor();
     }
 
     /**
@@ -77,7 +75,7 @@ public abstract class Board {
      *
      * @return the length of the maze.
      */
-    public int getLimitX() {
+    /*public int getLimitX() {
         return maze.length;
     }
 
@@ -86,7 +84,7 @@ public abstract class Board {
      *
      * @return the height of the maze at a certain X-coordinate.
      */
-    public int getLimitY(int posX) {
+    /*public int getLimitY(int posX) {
         return maze[posX].length;
     }
 
@@ -96,10 +94,10 @@ public abstract class Board {
      * @param posX desired X-coordinate of a piece.
      * @param posY desired Y-coordinate of a piece.
      * @return {@code true} if there is a piece at that coordinate of the board.
-     */
+     *//*
     public boolean hasPieceAt(int posX, int posY) {
         return maze[posX][posY].getPiece() != null;
-    }
+    }*/
 
     /**
      * Says if there is a square at a certain position of the cartesian plane containing the board.
@@ -108,7 +106,7 @@ public abstract class Board {
      * @param posY desired Y-coordinate of a piece.
      * @return {@code true} if there is a square at that location.
      */
-    public boolean hasSquareAt(int posX, int posY) {
+/*    public boolean hasSquareAt(int posX, int posY) {
         return maze[posX][posY] != null;
     }
     

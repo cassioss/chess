@@ -1,33 +1,41 @@
 package com.cassio.chess.test.board;
 
 import com.cassio.chess.library.board.ChessBoard;
-import com.cassio.chess.library.board.Square;
-import com.cassio.chess.library.piece.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.awt.*;
-
+/**
+ * {@code ChessBoardTest} class - tests the initial setup of a traditional chessboard.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
+ */
 public class ChessBoardTest {
 
-    private static ChessBoard testBoard;
+    private static ChessBoard testChessBoard;
 
+    /**
+     * Creates a static chessboard for testing purposes.
+     */
     @BeforeClass
     public static void setBoard() {
-        testBoard = new ChessBoard();
+        testChessBoard = new ChessBoard();
     }
 
+    /**
+     * Verifies the existence of a square on each position of the expected 8x8 matrix.
+     */
     @Test
-    public void testSquareColorAssignment() {
-        Square tile = testBoard.getSquareAt(3, 4);
-        assert tile.getSquareColor() == Color.white;
+    public void testSquareCreation() {
+        for (int posX = 0; posX <= 7; posX++) {
+            for (int posY = 0; posY <= 7; posY++) {
+                assert testChessBoard.hasSquareAt(posX, posY);
+            }
+        }
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testSquareOutOfBounds() {
-        Square tile = testBoard.getSquareAt(8, 5);
-    }
-
+/*
     @Test
     public void testLetterAssignment() {
         assert testBoard.getLetterCoordinate(0) == 'a';
@@ -77,5 +85,5 @@ public class ChessBoardTest {
             assert testBoard.getPieceAt(6, column).getColor() == Color.BLACK;
             assert testBoard.getPieceAt(7, column).getColor() == Color.BLACK;
         }
-    }
+    }*/
 }

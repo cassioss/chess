@@ -13,6 +13,35 @@ import java.awt.*;
 
 public class ChessBoard extends Board {
 
+    private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
+
+    /**
+     * Creates the chessboard as stated on the abstract parent Board.
+     */
+    public ChessBoard() {
+        super();
+    }
+
+    /**
+     * Sets up the board as a 8x8 matrix of squares.
+     */
+    protected void setupSquares() {
+        squareBoard = new Square[COLUMN_COUNT][ROW_COUNT];
+        for (int posX = 0; posX < squareBoard.length; posX++)
+            for (int posY = 0; posY < squareBoard[posX].length; posY++)
+                squareBoard[posX][posY] = new Square(posX, posY);
+    }
+
+    @Override
+    protected void setupPieces() {
+
+    }
+
+    @Override
+    protected void paintSquares() {
+
+    }
+
     /**
      * Checks if the parity of two numbers is equal.
      *
@@ -31,7 +60,7 @@ public class ChessBoard extends Board {
      * @param posY desired Y-coordinate of a square.
      */
     private void paintBlack(int posX, int posY) {
-        maze[posX][posY].squareColor = Color.BLACK;
+        squareBoard[posX][posY].squareColor = Color.BLACK;
     }
 
     /**
@@ -41,7 +70,7 @@ public class ChessBoard extends Board {
      * @param posY desired Y-coordinate of a square.
      */
     private void paintWhite(int posX, int posY) {
-        maze[posX][posY].squareColor = Color.WHITE;
+        squareBoard[posX][posY].squareColor = Color.WHITE;
     }
 
     /**
@@ -51,18 +80,10 @@ public class ChessBoard extends Board {
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      */
-    protected void paintSquare(int posX, int posY) {
+/*    protected void paintSquare(int posX, int posY) {
         if (checkParity(posX, posY))
             paintBlack(posX, posY);
         else paintWhite(posX, posY);
-    }
-
-    
-    
-    /*private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
-
-    public ChessBoard() {
-        super();
     }
 
     private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
@@ -103,23 +124,6 @@ public class ChessBoard extends Board {
                 putSquareAt(posX, posY);
     }
 
-    public boolean checkParity(int a, int b) {
-        return (a + b) % 2 == 0;
-    }
-
-    protected void paintSquare(int posX, int posY) {
-        if (checkParity(posX, posY))
-            paintBlack(posX, posY);
-        else paintWhite(posX, posY);
-    }
-
-    protected void paintBlack(int posX, int posY) {
-        maze[posX][posY].squareColor = Color.BLACK;
-    }
-
-    protected void paintWhite(int posX, int posY) {
-        maze[posX][posY].squareColor = Color.WHITE;
-    }
 
     public void putPieceAt(Piece piece, int targetX, int targetY) {
         if (targetX < 0 || targetX > COLUMN_COUNT)

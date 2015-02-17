@@ -16,12 +16,12 @@ public class KnightMoves extends Moves {
 
         // L-shape movement: one square for the lower displacement, two squares for the bigger displacement
 
-        for (int range = 1; range <= 2; range++) {
+ /*       for (int range = 1; range <= 2; range++) {
             addSquareWithReference(range, 3 - range);
             addSquareWithReference(range, range - 3);
             addSquareWithReference(-range, 3 - range);
             addSquareWithReference(-range, range - 3);
         }
-
+*/
     }
 }

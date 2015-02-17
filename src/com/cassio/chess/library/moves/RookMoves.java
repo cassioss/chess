@@ -5,7 +5,7 @@ package com.cassio.chess.library.moves;
  */
 public class RookMoves extends Moves {
     protected void getMoves() {
-        getInfiniteXPath();
-        getInfiniteYPath();
+    /*    getInfiniteXPath();
+        getInfiniteYPath();*/
     }
 }

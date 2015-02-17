@@ -7,6 +7,6 @@ public class DiagonalMoves extends Moves {
 
     @Override
     protected void getMoves() {
-        getInfiniteDiagonalPaths();
+        //getInfiniteDiagonalPaths();
     }
 }

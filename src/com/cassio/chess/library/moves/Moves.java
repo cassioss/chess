@@ -12,8 +12,7 @@ import java.util.ArrayList;
  * checkmate.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.1
- * @since 1.0
+ * @version 1.0
  */
 public abstract class Moves {
     protected ArrayList<Square> possibleMoves;
@@ -40,7 +39,7 @@ public abstract class Moves {
      * @param posX cartesian X-coordinate of the square.
      * @param posY cartesian Y-coordinate of the square.
      */
-    protected void addSquareAt(int posX, int posY) {
+/*    protected void addSquareAt(int posX, int posY) {
         if (referenceBoard.hasSquareAt(posX, posY) && !hasPlayerPieceAt(posX, posY))
             addMove(referenceBoard.getSquareAt(posX, posY));
     }
@@ -50,7 +49,7 @@ public abstract class Moves {
      *
      * @param distX horizontal distance from referenceSquare.
      * @param distY vertical distance from referenceSquare.
-     */
+     *//*
     protected void addSquareWithReference(int distX, int distY) {
         addSquareAt(getX() + distX, getY() + distY);
     }
@@ -72,11 +71,11 @@ public abstract class Moves {
     }
 
     private boolean hasPlayerPieceAt(int posX, int posY) {
-        return referenceSquare.pieceHasSameColorAs(referenceBoard.getPieceAt(posX, posY));
+        return false;
     }
 
     private boolean hasOpponentPieceAt(int posX, int posY) {
-        return !referenceSquare.pieceHasSameColorAs(referenceBoard.getPieceAt(posX, posY));
+        return false;
     }
 
     private boolean hasPieceAt(int posX, int posY) {
@@ -148,5 +147,5 @@ public abstract class Moves {
         getSemiInfiniteSecondaryDiagonalPath(-1);
     }
 
-
+*/
 }
