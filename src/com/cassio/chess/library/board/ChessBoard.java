@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * {@code ChessBoard} class - the classic Chess board: 8x8 Squares, 16 Pieces for each player, alternate painting of
- * Squares as either black or white.
+ * Squares as either gray (darker color) or white.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -46,13 +46,13 @@ public class ChessBoard extends Board {
     }
 
     /**
-     * Paints a square with the color BLACK.
+     * Paints a square with the color LIGHT_GRAY.
      *
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      */
-    private void paintBlack(int posX, int posY) {
-        squareBoard[posX][posY].squareColor = Color.BLACK;
+    private void paintGray(int posX, int posY) {
+        squareBoard[posX][posY].squareColor = Color.LIGHT_GRAY;
     }
 
     /**
@@ -66,15 +66,16 @@ public class ChessBoard extends Board {
     }
 
     /**
-     * Paints a square either BLACK or WHITE, based on the parity of the coordinates. On the traditional chessboard, if
-     * the coordinates of a square have the same parity, the square is painted BLACK.
+     * Paints a square either LIGHT_GRAY or WHITE, based on the parity of the coordinates. On the traditional
+     * chessboard, if the coordinates of a square have the same parity, the square is painted LIGHT_GRAY (or any dark
+     * color).
      *
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      */
     protected void paintSquareAt(int posX, int posY) {
         if (checkParity(posX, posY))
-            paintBlack(posX, posY);
+            paintGray(posX, posY);
         else paintWhite(posX, posY);
     }
 
@@ -122,7 +123,7 @@ public class ChessBoard extends Board {
         putPieceAt(new Rook(true), 7, 7);
 
         // Sets flag for game - if those pieces are in play, no other piece should be added
-        
+
         gameFlag = true;
     }
 

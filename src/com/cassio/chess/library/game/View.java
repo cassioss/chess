@@ -1,9 +1,13 @@
 package com.cassio.chess.library.game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class View implements ActionListener{
@@ -14,16 +18,24 @@ public class View implements ActionListener{
         } catch(Exception e) {
             //silently ignore
         }
-        JFrame window = new JFrame("Basic Application Example");
-        window.setSize(500, 500);
+        JFrame window = new JFrame("\u265A Chess Game \u2654");
+        window.setSize(800, 800);
         JPanel myPanel = initializePanel();
         initializeButton(myPanel);
         setUpMenu(window);
         window.setContentPane(myPanel);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        BufferedImage myPicture = null;
+        try {
+            myPicture = ImageIO.read(new File("src/com/cassio/chess/img/whitePawn.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+        window.add(picLabel);
     }
-
+    
     private void initializeButton(JPanel myPanel) {
         JButton button = new JButton("Click me");
         button.addActionListener(this);
