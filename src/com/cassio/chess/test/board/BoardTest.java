@@ -1,6 +1,6 @@
 package com.cassio.chess.test.board;
 
-import com.cassio.chess.exception.InGameException;
+import com.cassio.chess.exception.board.InGameException;
 import com.cassio.chess.exception.board.AlreadyHasPieceException;
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.ChessBoard;
@@ -32,8 +32,8 @@ public class BoardTest {
     }
 
     /**
-     * Tests the exception for trying to set a piece when a game is already being played. First case: a square with no
-     * pieces (does not trigger an AlreadyHasPieceException).
+     * Tests the exception for trying to set a piece in a square when a game is already being played. First case: the
+     * square has no pieces (does not trigger an AlreadyHasPieceException).
      *
      * @throws InGameException for trying to add a new piece when a game has already begun.
      */
@@ -44,8 +44,8 @@ public class BoardTest {
     }
 
     /**
-     * Tests the exception for trying to set a piece when a game is already being played. Second case: a square that
-     * already has a piece new position (should trigger an AlreadyHasPieceException).
+     * Tests the exception for trying to set a piece in a square when a game is already being played. Second case: the
+     * square already has a piece (should trigger an AlreadyHasPieceException).
      *
      * @throws InGameException for trying to add a new piece when a game has already begun.
      */

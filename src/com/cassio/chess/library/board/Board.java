@@ -1,6 +1,6 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.exception.InGameException;
+import com.cassio.chess.exception.board.InGameException;
 import com.cassio.chess.exception.board.AlreadyHasPieceException;
 import com.cassio.chess.library.piece.Piece;
 
@@ -21,7 +21,7 @@ public abstract class Board {
     /**
      * Creates a chess board with two abstract methods: one to set the positioning of the squares, and one to paint each
      * square accordingly (which is determined by the implementation of the board). As the board is only being created,
-     * the game flag is not set yet.
+     * the game flag is set to {@code false}.
      */
     public Board() {
         setupSquares();
@@ -87,7 +87,7 @@ public abstract class Board {
      */
     public void putPieceAt(Piece piece, int posX, int posY) {
         if (isInGame())
-            throw new InGameException("You tried to set a piece when a game is being played");
+            throw new InGameException("You tried to set a piece when a game is already being played");
         else {
             if (hasPieceAt(posX, posY))
                 throw new AlreadyHasPieceException("You tried to set a piece on the same place as another piece");
@@ -107,7 +107,7 @@ public abstract class Board {
     }
 
     /**
-     * Checks whether a board is being used in a game - if it is, no pieces can be added to the board.
+     * Checks whether a board is being used in a game. If it is, no pieces can be added to the board.
      *
      * @return {@code true} if the board is already being used in the game.
      */
@@ -116,27 +116,7 @@ public abstract class Board {
     }
 
 
-    /**
-     * Paints all the squares of the board. The loops treat the double array as jagged, so it goes through the entire
-     * board.
-     */
-    /*private void paintSquares() {
-        for (int posX = 0; posX < maze.length; posX++)
-            for (int posY = 0; posY < maze[posX].length; posY++)
-                paintSquare(posX, posY);
-    }
-
-    /**
-     * Paints a square based on its position on the board. The algorithm may differ for different types of boards, so it
-     * was kept as abstract.
-     *
-     * @param posX desired X-coordinate of a square.
-     * @param posY desired Y-coordinate of a square.
-     */
-/*    protected abstract void paintSquare(int posX, int posY);
-
-    
-
+/*
     /**
      * Gets the maximum value for an X-coordinate on the board.
      *
