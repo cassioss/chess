@@ -1,4 +1,4 @@
-package com.cassio.chess.library.game;
+package com.cassio.chess.game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class View implements ActionListener {
         } catch (Exception e) {
             //silently ignore
         }
-        String path = "src/com/cassio/chess/img/whitePawn.png";
+        String path = "src/com/cassio/chess/img/white_pawn_500_500_transparent.png";
         File file = new File(path);
         BufferedImage image = null;
         try {
