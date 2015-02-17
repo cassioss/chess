@@ -19,11 +19,11 @@ public class ChessBoardTest {
     private ChessBoard testChessBoard;
 
     /**
-     * Creates a chessboard for every test - using a static chessboard could be confusing, as its modification could be
-     * made in different ways by the tests.
+     * Creates a chessboard for every test - using a static chessboard could be confusing, as tests with different 
+     * modifications could affect each other.
      */
     @Before
-    public void setBoard() {
+    public void setUp() {
         testChessBoard = new ChessBoard();
     }
 

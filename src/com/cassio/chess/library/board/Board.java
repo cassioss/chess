@@ -1,5 +1,7 @@
 package com.cassio.chess.library.board;
 
+import com.cassio.chess.exception.InGameException;
+import com.cassio.chess.exception.board.AlreadyHasPieceException;
 import com.cassio.chess.library.piece.Piece;
 
 /**
@@ -14,15 +16,33 @@ import com.cassio.chess.library.piece.Piece;
 public abstract class Board {
 
     protected Square[][] squareBoard;
+    protected boolean gameFlag;
 
+    /**
+     * Creates a chess board with two abstract methods: one to set the positioning of the squares, and one to paint each
+     * square accordingly (which is determined by the implementation of the board). As the board is only being created,
+     * the game flag is not set yet.
+     */
     public Board() {
         setupSquares();
         paintSquares();
+        gameFlag = false;
     }
 
+    /**
+     * Abstract method to create squares at specific positions of the board.
+     */
     protected abstract void setupSquares();
 
+    /**
+     * Abstract method to paint (assign a awt.Color to) each square of the board accordingly.
+     */
     protected abstract void paintSquares();
+
+    /**
+     * Abstract method to set pieces for a board-specific game. No pieces can be added after a game has begun.
+     */
+    public abstract void setupPieces();
 
     /**
      * Checks the existence of a square on the board at a specific position of the cartesian plane.
@@ -46,19 +66,53 @@ public abstract class Board {
         return squareBoard[posX][posY];
     }
 
-    protected void putPieceAt(Piece piece, int posX, int posY) {
-        squareBoard[posX][posY].squarePiece = piece;
+    /**
+     * Checks if there is a piece in a certain position of the board.
+     *
+     * @param posX desired X-coordinate of a square to be inspected.
+     * @param posY desired Y-coordinate of a square to be inspected.
+     * @return {@code true} if there is a piece on that position.
+     */
+    public boolean hasPieceAt(int posX, int posY) {
+        return squareBoard[posX][posY].getSquarePiece() != null;
     }
 
     /**
-      * Gets the piece at a certain position of the board.
+     * Puts a piece on a square. As this function is specific for piece setup, if a person tries to put a piece on the
+     * square of another piece, an exception must be thrown.
+     *
+     * @param piece a piece to be put at a specific position.
+     * @param posX  desired Y-coordinate of the piece.
+     * @param posY  desired Y-coordinate of the piece.
+     */
+    public void putPieceAt(Piece piece, int posX, int posY) {
+        if (isInGame())
+            throw new InGameException("You tried to set a piece when a game is being played");
+        else {
+            if (hasPieceAt(posX, posY))
+                throw new AlreadyHasPieceException("You tried to set a piece on the same place as another piece");
+            else squareBoard[posX][posY].squarePiece = piece;
+        }
+    }
+
+    /**
+     * Gets the piece at a certain position of the board.
      *
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      * @return the piece at (posX, posY).
      */
-    public Piece getPieceAt(int posX, int posY){
+    public Piece getPieceAt(int posX, int posY) {
         return squareBoard[posX][posY].getSquarePiece();
+    }
+
+    /**
+     * Checks whether a board is being used in a game - if it is, no pieces can be added to the board.
+     *
+     * @return {@code true} if the board is already being used in the game.
+     */
+    public boolean isInGame() {
+        return gameFlag;
     }
 
 

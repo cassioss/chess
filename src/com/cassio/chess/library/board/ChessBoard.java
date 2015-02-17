@@ -120,6 +120,10 @@ public class ChessBoard extends Board {
         putPieceAt(new Bishop(true), 7, 5);
         putPieceAt(new Knight(true), 7, 6);
         putPieceAt(new Rook(true), 7, 7);
+
+        // Sets flag for game - if those pieces are in play, no other piece should be added
+        
+        gameFlag = true;
     }
 
 
