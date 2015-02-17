@@ -14,7 +14,7 @@ public class Pawn extends Piece {
     /**
      * Creates a pawn based on its color (black or white).
      *
-     * @param colorChoice a boolean value defining the color of the piece (black for {@code true}, white otherwise).
+     * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
      */
     public Pawn(boolean colorChoice) {
         super(colorChoice);

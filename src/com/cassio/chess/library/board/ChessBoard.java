@@ -1,5 +1,7 @@
 package com.cassio.chess.library.board;
 
+import com.cassio.chess.library.piece.*;
+
 import java.awt.*;
 
 /**
@@ -32,16 +34,6 @@ public class ChessBoard extends Board {
                 squareBoard[posX][posY] = new Square(posX, posY);
     }
 
-    @Override
-    protected void setupPieces() {
-
-    }
-
-    @Override
-    protected void paintSquares() {
-
-    }
-
     /**
      * Checks if the parity of two numbers is equal.
      *
@@ -49,7 +41,7 @@ public class ChessBoard extends Board {
      * @param b second integer number.
      * @return true if a+b is even.
      */
-    public boolean checkParity(int a, int b) {
+    private boolean checkParity(int a, int b) {
         return (a + b) % 2 == 0;
     }
 
@@ -80,41 +72,61 @@ public class ChessBoard extends Board {
      * @param posX desired X-coordinate of a square.
      * @param posY desired Y-coordinate of a square.
      */
-/*    protected void paintSquare(int posX, int posY) {
+    protected void paintSquareAt(int posX, int posY) {
         if (checkParity(posX, posY))
             paintBlack(posX, posY);
         else paintWhite(posX, posY);
     }
 
-    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+
+    /**
+     * Paints each square in the board according to the chessboard's specifications. Implementation of Board's abstract
+     * method.
+     */
+    protected void paintSquares() {
+        for (int posX = 0; posX < COLUMN_COUNT; posX++)
+            for (int posY = 0; posY < ROW_COUNT; posY++)
+                paintSquareAt(posX, posY);
+    }
+
+    /**
+     * Sets up the traditional chessboard, which has a row of pawns defending a row of specific pieces: Rook - Knight -
+     * Bishop - Queen - King - Bishop - Knight - Rook.
+     */
+    public void setupPieces() {
+        for (int posY = 0; posY < ROW_COUNT; posY++) {
+            putPieceAt(new Pawn(false), 1, posY);   // White pawns
+            putPieceAt(new Pawn(true), 6, posY);    // Black pawns
+        }
+
+        // White pieces
+
+        putPieceAt(new Rook(false), 0, 0);
+        putPieceAt(new Knight(false), 0, 1);
+        putPieceAt(new Bishop(false), 0, 2);
+        putPieceAt(new Queen(false), 0, 3);
+        putPieceAt(new King(false), 0, 4);
+        putPieceAt(new Bishop(false), 0, 5);
+        putPieceAt(new Knight(false), 0, 6);
+        putPieceAt(new Rook(false), 0, 7);
+
+        // Black pieces
+
+        putPieceAt(new Rook(true), 7, 0);
+        putPieceAt(new Knight(true), 7, 1);
+        putPieceAt(new Bishop(true), 7, 2);
+        putPieceAt(new Queen(true), 7, 3);
+        putPieceAt(new King(true), 7, 4);
+        putPieceAt(new Bishop(true), 7, 5);
+        putPieceAt(new Knight(true), 7, 6);
+        putPieceAt(new Rook(true), 7, 7);
+    }
+
+
+/*    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
     public char getLetterCoordinate(int posX) {
         return LETTER_COORDINATES[posX];
-    }
-
-    public void setupPieces() {
-        clearBoard();
-        for (int posY = 0; posY < ROW_COUNT; posY++) {
-            putPieceAt(new Pawn(Color.WHITE), 1, posY);
-            putPieceAt(new Pawn(Color.BLACK), 6, posY);
-        }
-        putPieceAt(new Rook(Color.WHITE), 0, 0);
-        putPieceAt(new Knight(Color.WHITE), 0, 1);
-        putPieceAt(new Bishop(Color.WHITE), 0, 2);
-        putPieceAt(new Queen(Color.WHITE), 0, 3);
-        putPieceAt(new King(Color.WHITE), 0, 4);
-        putPieceAt(new Bishop(Color.WHITE), 0, 5);
-        putPieceAt(new Knight(Color.WHITE), 0, 6);
-        putPieceAt(new Rook(Color.WHITE), 0, 7);
-
-        putPieceAt(new Rook(Color.BLACK), 7, 0);
-        putPieceAt(new Knight(Color.BLACK), 7, 1);
-        putPieceAt(new Bishop(Color.BLACK), 7, 2);
-        putPieceAt(new Queen(Color.BLACK), 7, 3);
-        putPieceAt(new King(Color.BLACK), 7, 4);
-        putPieceAt(new Bishop(Color.BLACK), 7, 5);
-        putPieceAt(new Knight(Color.BLACK), 7, 6);
-        putPieceAt(new Rook(Color.BLACK), 7, 7);
     }
 
     public void setupSquares() {

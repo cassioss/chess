@@ -1,11 +1,14 @@
 package com.cassio.chess.test.board;
 
 import com.cassio.chess.library.board.ChessBoard;
-import org.junit.BeforeClass;
+import com.cassio.chess.library.piece.*;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+
 /**
- * {@code ChessBoardTest} class - tests the initial setup of a traditional chessboard.
+ * {@code ChessBoardTest} class - tests the specific implementations of a traditional chessboard.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -13,13 +16,14 @@ import org.junit.Test;
  */
 public class ChessBoardTest {
 
-    private static ChessBoard testChessBoard;
+    private ChessBoard testChessBoard;
 
     /**
-     * Creates a static chessboard for testing purposes.
+     * Creates a chessboard for every test - using a static chessboard could be confusing, as its modification could be
+     * made in different ways by the tests.
      */
-    @BeforeClass
-    public static void setBoard() {
+    @Before
+    public void setBoard() {
         testChessBoard = new ChessBoard();
     }
 
@@ -28,12 +32,84 @@ public class ChessBoardTest {
      */
     @Test
     public void testSquareCreation() {
-        for (int posX = 0; posX <= 7; posX++) {
-            for (int posY = 0; posY <= 7; posY++) {
+        for (int posX = 0; posX < 8; posX++) {
+            for (int posY = 0; posY < 8; posY++)
                 assert testChessBoard.hasSquareAt(posX, posY);
+        }
+    }
+
+    /**
+     * Tests square painting for every square on the board. As there is an alternating pattern, it is necessary to use a
+     * for loop that verifies four squares per iteration.
+     */
+    @Test
+    public void testSquarePainting() {
+        for (int posX = 0; posX < 8; posX += 2) {
+            for (int posY = 0; posY < 8; posY += 2) {
+                assert testChessBoard.getSquareAt(posX, posY).getSquareColor() == Color.BLACK;
+                assert testChessBoard.getSquareAt(posX, posY + 1).getSquareColor() == Color.WHITE;
+                assert testChessBoard.getSquareAt(posX + 1, posY).getSquareColor() == Color.WHITE;
+                assert testChessBoard.getSquareAt(posX + 1, posY + 1).getSquareColor() == Color.BLACK;
             }
         }
     }
+
+    /**
+     * Tests class assignment for the pieces. The expected setup for the traditional chessboard, for each player, is a
+     * row of pawns defending a row of specific pieces: Rook - Knight - Bishop - Queen - King - Bishop - Knight - Rook.
+     */
+    @Test
+    public void testInitialPieceClassAssignment() {
+        testChessBoard.setupPieces();
+
+        // White pieces
+
+        assert testChessBoard.getPieceAt(0, 0).getClass() == Rook.class;
+        assert testChessBoard.getPieceAt(0, 1).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(0, 2).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(0, 3).getClass() == Queen.class;
+        assert testChessBoard.getPieceAt(0, 4).getClass() == King.class;
+        assert testChessBoard.getPieceAt(0, 5).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(0, 6).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(0, 7).getClass() == Rook.class;
+
+        // Black pieces
+
+        assert testChessBoard.getPieceAt(7, 0).getClass() == Rook.class;
+        assert testChessBoard.getPieceAt(7, 1).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(7, 2).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(7, 3).getClass() == Queen.class;
+        assert testChessBoard.getPieceAt(7, 4).getClass() == King.class;
+        assert testChessBoard.getPieceAt(7, 5).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(7, 6).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(7, 7).getClass() == Rook.class;
+
+        for (int i = 0; i < 7; i++) {
+            assert testChessBoard.getPieceAt(1, i).getClass() == Pawn.class;
+            assert testChessBoard.getPieceAt(6, i).getClass() == Pawn.class;
+        }
+    }
+
+    /**
+     * Tests color assignment of the pieces.
+     */
+    @Test
+    public void testInitialPieceColorAssignment() {
+        testChessBoard.setupPieces();
+        for (int column = 0; column < 7; column++) {
+
+            // White pieces
+
+            assert !testChessBoard.getPieceAt(0, column).isBlack();
+            assert !testChessBoard.getPieceAt(1, column).isBlack();
+
+            // Black pieces
+
+            assert testChessBoard.getPieceAt(6, column).isBlack();
+            assert testChessBoard.getPieceAt(7, column).isBlack();
+        }
+    }
+    
 
 /*
     @Test
