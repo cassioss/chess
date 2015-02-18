@@ -21,6 +21,13 @@ public abstract class MoveSet {
     protected Board referenceBoard;
     protected boolean colorChoice;
 
+    /**
+     * Creates a new move set having a square, a board and a color as reference.
+     *
+     * @param referenceSquare the square to be taken as reference for relative moves.
+     * @param referenceBoard  the board to be taken as reference for moves.
+     * @param colorChoice     the color choice of the piece, in case a piece has color limitations.
+     */
     public MoveSet(Square referenceSquare, Board referenceBoard, boolean colorChoice) {
         this.referenceSquare = referenceSquare;
         this.referenceBoard = referenceBoard;
@@ -35,25 +42,29 @@ public abstract class MoveSet {
         return possibleMoves;
     }
 
-    public void changeSquareReferenceTo(Square newSquare) {
-        if (this.referenceSquare != newSquare)
-            this.referenceSquare = newSquare;
-    }
+    /*  public void changeSquareReferenceTo(Square newSquare) {
+          if (this.referenceSquare != newSquare)
+              this.referenceSquare = newSquare;
+      }
 
-    private boolean equalsSquareAt(int posX, int posY) {
-        return referenceBoard.hasSquareAt(posX, posY) && referenceBoard.getSquareAt(posX, posY) == referenceSquare;
-    }
-
+      /**
+       * Checks if a piece in a certain square of the chessboard (if any) is the player's piece.
+       *
+       * @param posX X-coordinate of the piece to be compared.
+       * @param posY Y-coordinate of the piece to be compared.
+       * @return {@code true} if there is a piece on that position and if the pieces have the same color.
+       */
     protected boolean playerPieceAt(int posX, int posY) {
         return referenceBoard.hasPieceAt(posX, posY) && referenceBoard.getPieceAt(posX, posY).isBlack() ==
                 this.colorChoice;
     }
 
     /**
-     * Adds a square to the move set having referenceBoard's origin as reference.
+     * Adds a square to the move set having referenceBoard's origin as reference. For most pieces, you only need to
+     * avoid squares that have a player's piece on it.
      *
-     * @param posX cartesian X-coordinate of the square.
-     * @param posY cartesian Y-coordinate of the square.
+     * @param posX cartesian X-coordinate of the square on the board.
+     * @param posY cartesian Y-coordinate of the square on the board.
      */
     protected void addSquareAt(int posX, int posY) {
         if (referenceBoard.hasSquareAt(posX, posY) && !playerPieceAt(posX, posY))
@@ -61,13 +72,28 @@ public abstract class MoveSet {
     }
 
     /**
-     * Adds a square to the move set having referenceSquare's coordinates as reference.
+     * Adds a square to the move set having referenceSquare's coordinates as reference. This is good when a piece's
+     * square is better reference for relative moves.
      *
-     * @param distX horizontal distance from referenceSquare.
-     * @param distY vertical distance from referenceSquare.
+     * @param distX cartesian X-distance from referenceSquare.
+     * @param distY cartesian Y-distance from referenceSquare.
      */
-    protected void addSquareWithReference(int distX, int distY) {
+    protected void addSquareWithReferenceAt(int distX, int distY) {
         addSquareAt(referenceSquare.getPosX() + distX, referenceSquare.getPosY() + distY);
     }
 
+
+    protected void addSquareWithReferenceIfCanCapture(int posX, int posY) {
+        int refX = posX + referenceSquare.getPosX();
+        int refY = posY + referenceSquare.getPosY();
+        if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
+            addSquareAt(refX, refY);
+    }
+
+    protected void addSquareWithReferenceIfNotBlocked(int posX, int posY) {
+        int refX = posX + referenceSquare.getPosX();
+        int refY = posY + referenceSquare.getPosY();
+        if (!referenceBoard.hasPieceAt(refX, refY))
+            addSquareAt(refX, refY);
+    }
 }

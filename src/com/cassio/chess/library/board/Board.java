@@ -89,18 +89,12 @@ public abstract class Board {
     public void putPieceAt(Piece piece, int posX, int posY) {
         if (isInGame())
             throw new InGameException("You tried to set a piece when a game is already being played");
-        else {
-            if (hasPieceAt(posX, posY))
-                throw new PieceInPlaceException("You tried to set a piece on the same place as another piece");
-            else {
-                if (alreadyHasPieceOnBoard(piece))
-                    throw new AlreadyHasPieceException("You tried to add the same piece twice on the board");
-                else {
-                    squareBoard[posX][posY].squarePiece = piece;
-                    piece.learnMoveSetFrom(squareBoard[posX][posY], this);
-                }
-            }
-        }
+        if (alreadyHasPieceOnBoard(piece))
+            throw new AlreadyHasPieceException("You tried to add the same piece twice on the board");
+        if (hasPieceAt(posX, posY))
+            throw new PieceInPlaceException("You tried to set a piece on the same place as another piece");
+        squareBoard[posX][posY].squarePiece = piece;
+        piece.learnMoveSetFrom(squareBoard[posX][posY], this);
     }
 
     /**
@@ -123,6 +117,12 @@ public abstract class Board {
         return gameFlag;
     }
 
+    /**
+     * Checks if a piece is already on board.
+     *
+     * @param piece a piece to be compared.
+     * @return {@code true} if this piece is already on board.
+     */
     public boolean alreadyHasPieceOnBoard(Piece piece) {
         for (Square[] squareArray : squareBoard) {
             for (Square square : squareArray) {
@@ -132,106 +132,6 @@ public abstract class Board {
         }
         return false;
     }
-
-/*
-    /**
-     * Gets the maximum value for an X-coordinate on the board.
-     *
-     * @return the length of the maze.
-     */
-    /*public int getLimitX() {
-        return maze.length;
-    }
-
-    /**
-     * Gets the maximum value for an Y-coordinate on the board, given the respective X-coordinate.
-     *
-     * @return the height of the maze at a certain X-coordinate.
-     */
-    /*public int getLimitY(int posX) {
-        return maze[posX].length;
-    }
-
-    /**
-     * Says if there is a piece of any kind at a certain position of the board.
-     *
-     * @param posX desired X-coordinate of a piece.
-     * @param posY desired Y-coordinate of a piece.
-     * @return {@code true} if there is a piece at that coordinate of the board.
-     *//*
-    public boolean hasPieceAt(int posX, int posY) {
-        return maze[posX][posY].getPiece() != null;
-    }*/
-
-    /**
-     * Says if there is a square at a certain position of the cartesian plane containing the board.
-     *
-     * @param posX desired X-coordinate of a piece.
-     * @param posY desired Y-coordinate of a piece.
-     * @return {@code true} if there is a square at that location.
-     */
-/*    public boolean hasSquareAt(int posX, int posY) {
-        return maze[posX][posY] != null;
-    }
-    
-    
-    
-    
-/*
-    public Board() {
-        setupSquares();
-        paintSquares();
-        clearBoard();
-    }
-
-    public void paintSquares() {
-        for (int posX = 0; posX < maze.length; posX++)
-            for (int posY = 0; posY < maze[posX].length; posY++)
-                paintSquare(posX, posY);
-    }
-
-    protected void putSquareAt(int posX, int posY) {
-        maze[posX][posY] = new Square(this);
-    }
-
-    public boolean hasPieceAt(int posX, int posY) {
-        return maze[posX][posY].hasPiece();
-    }
-
-    public boolean hasNoPieces() {
-        for (Square[] squareColumn : maze) {
-            for (Square square : squareColumn) {
-                if (square.getPiece() != null)
-                    return false;
-            }
-        }
-        return true;
-    }
-
-    public void clearBoard() {
-        for (Square[] squareColumn : maze) {
-            for (Square square : squareColumn) {
-                if (square.getPiece() != null)
-                    square.removePiece();
-            }
-        }
-    }
-
-    // Abstract (board-dependent) methods
-
-    protected abstract void setupSquares();
-
-    protected abstract void paintSquare(int posX, int posY);
-
-    public abstract void setupPieces();
-
-    public abstract void putPieceAt(Piece piece, int targetX, int targetY);
-
-    public abstract char getLetterCoordinate(int posX);
-
-    public boolean hasSquareAt(int posX, int posY) {
-        return maze[posX][posY] != null;
-    }*/
 
     /**
      * Says if an X-coordinate is out of bounds on the board.

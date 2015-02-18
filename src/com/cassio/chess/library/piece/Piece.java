@@ -56,17 +56,26 @@ public abstract class Piece {
     /**
      * Abstract method to update a piece's move set.
      */
-    protected abstract void updateMoveSet();
+    protected void updateMoveSet() {
+
+    }
 
     /**
-     * Gets a MoveSet implementation to ease updating. This method is only called by a chessboard.
+     * Gets a specific MoveSet implementation to ease updating. This method is only called by a chessboard, right after
+     * the piece's creation.
      *
      * @param referenceSquare the square to be used as reference for the MoveSet object.
      * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
      */
     public abstract void learnMoveSetFrom(Square referenceSquare, Board referenceBoard);
 
-    public boolean canMoveTo(Square square){
+    /**
+     * Checks if a square is in the piece's move set, in order to verify if a specific move is possible.
+     *
+     * @param square a desired square for movement.
+     * @return {@code true} if the square is in the move set of the piece.
+     */
+    public boolean canMoveTo(Square square) {
         return moveSet.contains(square);
     }
 

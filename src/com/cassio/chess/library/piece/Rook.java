@@ -2,11 +2,19 @@ package com.cassio.chess.library.piece;
 
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
+import com.cassio.chess.library.moves.RookMoveSet;
 
 /**
- * Created by Cassio on 16/02/2015.
+ * <code>Rook</code> class - defines a rook and its basic moves. Rooks can move horizontally or vertically as many
+ * squares as possible. The move set stops its updates in a certain direction if it finds a piece (which can be captured
+ * if it is an opponent's piece) or the limits of the board.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
  */
 public class Rook extends Piece {
+
     /**
      * Creates a rook based on its color (black or white).
      *
@@ -17,21 +25,13 @@ public class Rook extends Piece {
     }
 
     /**
-     * Abstract method to update a piece's move set.
-     */
-    @Override
-    protected void updateMoveSet() {
-
-    }
-
-    /**
-     * Gets a MoveSet implementation to ease updating. This method is only called by a chessboard.
+     * Gets a specific MoveSet implementation to ease updating. This method is only called by a chessboard, right after
+     * the piece's creation.
      *
      * @param referenceSquare the square to be used as reference for the MoveSet object.
      * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
      */
-    @Override
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
-
+        referenceMoveSet = new RookMoveSet(referenceSquare, referenceBoard, this.isBlack);
     }
 }

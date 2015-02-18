@@ -5,9 +5,10 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.PawnMoveSet;
 
 /**
- * <code>Pawn</code> class - defines a pawn and its basic moves. A pawn can only capture an opponent piece that's on one
- * of its front diagonal squares (different for each side) or move to the square directly to its front. If this is the
- * beginning of the game, the pawn may move two squares to its front.
+ * <code>Pawn</code> class - defines a pawn and its basic moves. Pawns can only move one square ahead (which is
+ * different depending on the piece color) if it's not blocked by any piece (even an opponent's piece), and can only
+ * capture pieces one diagonal square ahead (for any side). If it is the first move of a pawn, it may move two squares
+ * to its front.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -34,7 +35,8 @@ public class Pawn extends Piece {
     }
 
     /**
-     * Gets a specific MoveSet implementation to ease updating.
+     * Gets a specific MoveSet implementation to ease updating. This method is only called by a chessboard, right after
+     * the piece's creation.
      *
      * @param referenceSquare the square to be used as reference for the MoveSet object.
      * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
