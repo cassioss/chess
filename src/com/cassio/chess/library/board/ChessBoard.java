@@ -79,7 +79,6 @@ public class ChessBoard extends Board {
         else paintWhite(posX, posY);
     }
 
-
     /**
      * Paints each square in the board according to the chessboard's specifications. Implementation of Board's abstract
      * method.
@@ -133,7 +132,6 @@ public class ChessBoard extends Board {
      * @param posX desired X-coordinate of a square.
      * @return {@code true} if the X-coordinate is out of bounds.
      */
-    @Override
     public boolean xPosOutOfBounds(int posX) {
         return posX < 0 || posX >= COLUMN_COUNT;
     }
@@ -144,7 +142,6 @@ public class ChessBoard extends Board {
      * @param posY desired Y-coordinate of a square.
      * @return {@code true} if the Y-coordinate is out of bounds.
      */
-    @Override
     public boolean yPosOutOfBounds(int posY) {
         return posY < 0 || posY >= ROW_COUNT;
     }
@@ -164,14 +161,5 @@ public class ChessBoard extends Board {
     }
 
 
-    public void putPieceAt(Piece piece, int targetX, int targetY) {
-        if (targetX < 0 || targetX > COLUMN_COUNT)
-            throw new IndexOutOfBoundsException("You tried to put a piece out of the board.");
-        if (targetY < 0 || targetY > ROW_COUNT)
-            throw new IndexOutOfBoundsException("You tried to put a piece out of the board.");
-        if (maze[targetX][targetY].hasPiece())
-            throw new AlreadyHasPieceException("You tried to put a piece over another one.");
-        maze[targetX][targetY].putPiece(piece);
-        piece.bePutOnBoard(this, targetX, targetY);
-    }*/
+   */
 }
