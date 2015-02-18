@@ -25,6 +25,7 @@ public abstract class MoveSet {
         this.referenceSquare = referenceSquare;
         this.referenceBoard = referenceBoard;
         this.colorChoice = colorChoice;
+        possibleMoves = new HashSet<Square>();
         learnMoveSet();
     }
 
@@ -68,6 +69,5 @@ public abstract class MoveSet {
     protected void addSquareWithReference(int distX, int distY) {
         addSquareAt(referenceSquare.getPosX() + distX, referenceSquare.getPosY() + distY);
     }
-
 
 }

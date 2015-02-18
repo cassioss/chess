@@ -18,9 +18,9 @@ import java.util.HashSet;
 public abstract class Piece {
 
     protected boolean isBlack;
-    protected HashSet<Square> possibleMoves;
     protected boolean isUpToDate;
     protected MoveSet referenceMoveSet;
+    protected HashSet<Square> moveSet;
 
     /**
      * Creates a piece based on its color (black or white). As the piece was probably just added to a board, its move
@@ -31,6 +31,7 @@ public abstract class Piece {
     public Piece(boolean colorChoice) {
         isBlack = colorChoice;
         isUpToDate = false;
+        moveSet = new HashSet<Square>();
     }
 
     /**
@@ -49,9 +50,7 @@ public abstract class Piece {
      * @return a HashSet of available squares that the piece can move to.
      */
     public HashSet<Square> getPossibleMoves() {
-        if (!isUpToDate)
-            updateMoveSet();
-        return possibleMoves;
+        return referenceMoveSet.getMoves();
     }
 
     /**
@@ -67,5 +66,8 @@ public abstract class Piece {
      */
     public abstract void learnMoveSetFrom(Square referenceSquare, Board referenceBoard);
 
+    public boolean canMoveTo(Square square){
+        return moveSet.contains(square);
+    }
 
 }
