@@ -2,6 +2,7 @@ package com.cassio.chess.library.piece;
 
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
+import com.cassio.chess.library.moves.BishopMoveSet;
 
 /**
  * Created by Cassio on 16/02/2015.
@@ -14,18 +15,10 @@ public class Bishop extends Piece {
      */
     public Bishop(boolean colorChoice) {
         super(colorChoice);
-        if(colorChoice)
+        if (colorChoice)
             pathToImage = "src/com/cassio/chess/img/black_bishop_500_500_transparent.png";
         else
             pathToImage = "src/com/cassio/chess/img/white_bishop_500_500_transparent.png";
-    }
-
-    /**
-     * Abstract method to update a piece's move set.
-     */
-    @Override
-    protected void updateMoveSet() {
-
     }
 
     /**
@@ -36,6 +29,7 @@ public class Bishop extends Piece {
      */
     @Override
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
-
+        referenceMoveSet = new BishopMoveSet(referenceSquare, referenceBoard, this.isBlack);
+        moveSet = referenceMoveSet.getMoves();
     }
 }

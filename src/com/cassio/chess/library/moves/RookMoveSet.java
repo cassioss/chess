@@ -52,11 +52,11 @@ public class RookMoveSet extends MoveSet {
     /**
      * Goes through all the vertical squares in a certain direction, according to a pace.
      *
-     * @param pace how the Y-coordinate changes with time. (-1) means downwards, and (+1) means upwards.
+     * @param yPace how the Y-coordinate changes with time. (-1) means downwards, and (+1) means upwards.
      */
-    private void learnVerticalMovesWithDirection(int pace) {
+    private void learnVerticalMovesWithDirection(int yPace) {
         boolean foundPiece = false;
-        for (int yPos = getRefY() + pace; !referenceBoard.yPosOutOfBounds(yPos) && !foundPiece; yPos += pace) {
+        for (int yPos = getRefY() + yPace; !referenceBoard.yPosOutOfBounds(yPos) && !foundPiece; yPos += yPace) {
             if (referenceBoard.hasPieceAt(getRefX(), yPos)) {
                 foundPiece = true;
                 if (opponentPieceAt(getRefX(), yPos)) {
@@ -70,11 +70,11 @@ public class RookMoveSet extends MoveSet {
     /**
      * Goes through all the horizontal squares in a certain direction, according to a pace.
      *
-     * @param pace how the X-coordinate changes with time. (-1) means left, and (+1) means right.
+     * @param xPace how the X-coordinate changes with time. (-1) means left, and (+1) means right.
      */
-    private void learnHorizontalMovesWithDirection(int pace) {
+    private void learnHorizontalMovesWithDirection(int xPace) {
         boolean foundPiece = false;
-        for (int xPos = getRefX() + pace; !(referenceBoard.xPosOutOfBounds(xPos) || foundPiece); xPos += pace) {
+        for (int xPos = getRefX() + xPace; !(referenceBoard.xPosOutOfBounds(xPos) || foundPiece); xPos += xPace) {
             if (referenceBoard.hasPieceAt(xPos, getRefY())) {
                 foundPiece = true;
                 if (opponentPieceAt(xPos, getRefY()))

@@ -2,6 +2,7 @@ package com.cassio.chess.library.piece;
 
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
+import com.cassio.chess.library.moves.QueenMoveSet;
 
 /**
  * Created by Cassio on 16/02/2015.
@@ -14,18 +15,10 @@ public class Queen extends Piece {
      */
     public Queen(boolean colorChoice) {
         super(colorChoice);
-        if(colorChoice)
+        if (colorChoice)
             pathToImage = "src/com/cassio/chess/img/black_queen_500_500_transparent.png";
         else
             pathToImage = "src/com/cassio/chess/img/white_queen_500_500_transparent.png";
-    }
-
-    /**
-     * Abstract method to update a piece's move set.
-     */
-    @Override
-    protected void updateMoveSet() {
-
     }
 
     /**
@@ -34,8 +27,8 @@ public class Queen extends Piece {
      * @param referenceSquare the square to be used as reference for the MoveSet object.
      * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
      */
-    @Override
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
-
+        referenceMoveSet = new QueenMoveSet(referenceSquare, referenceBoard, this.isBlack);
+        moveSet = referenceMoveSet.getMoves();
     }
 }
