@@ -2,6 +2,7 @@ package com.cassio.chess.test.piece;
 
 import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.ChessBoard;
+import com.cassio.chess.library.piece.Queen;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,8 +27,67 @@ public class QueenTest {
         testBoard = new ChessBoard();
     }
 
+    /**
+     * Tests if a queen can move diagonally at any direction.
+     */
     @Test
-    public void testLearnMoveSetFrom() throws Exception {
+    public void testDiagonalMoves() {
+        Queen testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 3, 3);
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(3, 3));
+        for (int dist = 1; dist < 4; dist++) {
+            assert testQueen.canMoveTo(testBoard.getSquareAt(3 + dist, 3 + dist));
+            assert testQueen.canMoveTo(testBoard.getSquareAt(3 + dist, 3 - dist));
+            assert testQueen.canMoveTo(testBoard.getSquareAt(3 - dist, 3 + dist));
+            assert testQueen.canMoveTo(testBoard.getSquareAt(3 - dist, 3 - dist));
+        }
+    }
 
+    /**
+     * Tests if a queen can move upwards.
+     */
+    @Test
+    public void testVerticalUpwardsMovement() {
+        Queen testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 0, 0);
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(0, 0));
+        for (int yPos = 1; yPos < 8; yPos++)
+            assert testQueen.canMoveTo(testBoard.getSquareAt(0, yPos));
+    }
+
+    /**
+     * Tests if a queen can move downwards.
+     */
+    @Test
+    public void testVerticalDownwardsMovement() {
+        Queen testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 0, 7);
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(0, 7));
+        for (int yPos = 6; yPos >= 0; yPos--)
+            assert testQueen.canMoveTo(testBoard.getSquareAt(0, yPos));
+    }
+
+    /**
+     * Tests if a queen can move to the left.
+     */
+    @Test
+    public void testHorizontalLeftMovement() {
+        Queen testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 7, 0);
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(7, 0));
+        for (int xPos = 6; xPos >= 0; xPos--)
+            assert testQueen.canMoveTo(testBoard.getSquareAt(xPos, 0));
+    }
+
+    /**
+     * Tests if a queen can move to the right.
+     */
+    @Test
+    public void testHorizontalRightMovement() {
+        Queen testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 0, 0);
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(0, 0));
+        for (int xPos = 1; xPos < 8; xPos++)
+            assert testQueen.canMoveTo(testBoard.getSquareAt(xPos, 0));
     }
 }

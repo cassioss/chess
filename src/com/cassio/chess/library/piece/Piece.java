@@ -80,4 +80,11 @@ public abstract class Piece {
         return moveSet.contains(square);
     }
 
+    /**
+     * @return {@code true} if the piece is blocked by other pieces.
+     */
+    public boolean pieceIsBlocked() {
+        return moveSet.size() == 0;
+    }
+
 }
