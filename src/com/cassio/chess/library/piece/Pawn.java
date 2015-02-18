@@ -27,14 +27,6 @@ public class Pawn extends Piece {
     }
 
     /**
-     * Abstract method to update a pawns's move set.
-     */
-    @Override
-    protected void updateMoveSet() {
-        isUpToDate = true;
-    }
-
-    /**
      * Gets a specific MoveSet implementation to ease updating. This method is only called by a chessboard, right after
      * the piece's creation.
      *

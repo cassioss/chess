@@ -42,20 +42,32 @@ public abstract class MoveSet {
         return possibleMoves;
     }
 
-    /*  public void changeSquareReferenceTo(Square newSquare) {
-          if (this.referenceSquare != newSquare)
-              this.referenceSquare = newSquare;
-      }
+    public void changeSquareReferenceTo(Square newSquare) {
+        if (this.referenceSquare != newSquare)
+            this.referenceSquare = newSquare;
+    }
 
-      /**
-       * Checks if a piece in a certain square of the chessboard (if any) is the player's piece.
-       *
-       * @param posX X-coordinate of the piece to be compared.
-       * @param posY Y-coordinate of the piece to be compared.
-       * @return {@code true} if there is a piece on that position and if the pieces have the same color.
-       */
+    /**
+     * Checks if a piece in a certain square of the chessboard (if any) is the player's piece.
+     *
+     * @param posX X-coordinate of the piece to be compared.
+     * @param posY Y-coordinate of the piece to be compared.
+     * @return {@code true} if there is a piece on that position and if the pieces have the same color.
+     */
     protected boolean playerPieceAt(int posX, int posY) {
         return referenceBoard.hasPieceAt(posX, posY) && referenceBoard.getPieceAt(posX, posY).isBlack() ==
+                this.colorChoice;
+    }
+
+    /**
+     * Checks if a piece in a certain square of the chessboard (if any) is the opponent's piece.
+     *
+     * @param posX X-coordinate of the piece to be compared.
+     * @param posY Y-coordinate of the piece to be compared.
+     * @return {@code true} if there is a piece on that position and if the pieces have different colors.
+     */
+    protected boolean opponentPieceAt(int posX, int posY) {
+        return referenceBoard.hasPieceAt(posX, posY) && referenceBoard.getPieceAt(posX, posY).isBlack() !=
                 this.colorChoice;
     }
 
@@ -72,27 +84,34 @@ public abstract class MoveSet {
     }
 
     /**
-     * Adds a square to the move set having referenceSquare's coordinates as reference. This is good when a piece's
-     * square is better reference for relative moves.
+     * Returns the X-coordinate of the referenced square.
      *
-     * @param distX cartesian X-distance from referenceSquare.
-     * @param distY cartesian Y-distance from referenceSquare.
+     * @return the X-coordinate of referenceSquare on the board.
      */
-    protected void addSquareWithReferenceAt(int distX, int distY) {
-        addSquareAt(referenceSquare.getPosX() + distX, referenceSquare.getPosY() + distY);
+    protected int getRefX() {
+        return referenceSquare.getPosX();
+    }
+
+    /**
+     * Returns the Y-coordinate of the referenced square.
+     *
+     * @return the Y-coordinate of referenceSquare on the board.
+     */
+    protected int getRefY() {
+        return referenceSquare.getPosY();
     }
 
 
     protected void addSquareWithReferenceIfCanCapture(int posX, int posY) {
-        int refX = posX + referenceSquare.getPosX();
-        int refY = posY + referenceSquare.getPosY();
+        int refX = posX + getRefX();
+        int refY = posY + getRefY();
         if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }
 
     protected void addSquareWithReferenceIfNotBlocked(int posX, int posY) {
-        int refX = posX + referenceSquare.getPosX();
-        int refY = posY + referenceSquare.getPosY();
+        int refX = posX + getRefX();
+        int refY = posY + getRefY();
         if (!referenceBoard.hasPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }
