@@ -91,7 +91,10 @@ public abstract class Board {
         else {
             if (hasPieceAt(posX, posY))
                 throw new AlreadyHasPieceException("You tried to set a piece on the same place as another piece");
-            else squareBoard[posX][posY].squarePiece = piece;
+            else {
+                squareBoard[posX][posY].squarePiece = piece;
+                piece.learnMoveSetFrom(squareBoard[posX][posY], this);
+            }
         }
     }
 

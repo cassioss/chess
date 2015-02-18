@@ -1,12 +1,14 @@
 package com.cassio.chess.library.piece;
 
+import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
+import com.cassio.chess.library.moves.MoveSet;
 
 import java.util.HashSet;
 
 /**
- * <code>Piece</code> class - defines basic attributes of a piece (color and moveSet). The creation of a piece and its
- * positioning (as well as implementation of moves) is dependent on the board.
+ * <code>Piece</code> class - defines basic attributes of a piece (color, move set and how up-to-date is the move set).
+ * The creation of a piece and its positioning (as well as implementation of moves) is dependent on the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -16,16 +18,19 @@ import java.util.HashSet;
 public abstract class Piece {
 
     protected boolean isBlack;
-    protected HashSet<Square> moveSet;
+    protected HashSet<Square> possibleMoves;
+    protected boolean isUpToDate;
+    protected MoveSet referenceMoveSet;
 
     /**
-     * Creates a piece based on its color (black or white).
+     * Creates a piece based on its color (black or white). As the piece was probably just added to a board, its move
+     * set is empty, and the piece is outdated.
      *
      * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
      */
     public Piece(boolean colorChoice) {
         isBlack = colorChoice;
-        moveSet = new HashSet<Square>();
+        isUpToDate = false;
     }
 
     /**
@@ -43,9 +48,24 @@ public abstract class Piece {
      *
      * @return a HashSet of available squares that the piece can move to.
      */
-    public HashSet<Square> getMoveSet() {
-        return moveSet;
+    public HashSet<Square> getPossibleMoves() {
+        if (!isUpToDate)
+            updateMoveSet();
+        return possibleMoves;
     }
+
+    /**
+     * Abstract method to update a piece's move set.
+     */
+    protected abstract void updateMoveSet();
+
+    /**
+     * Gets a MoveSet implementation to ease updating. This method is only called by a chessboard.
+     *
+     * @param referenceSquare the square to be used as reference for the MoveSet object.
+     * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
+     */
+    public abstract void learnMoveSetFrom(Square referenceSquare, Board referenceBoard);
 
 
 }

@@ -28,7 +28,7 @@ public class PawnTest {
     public void testWhitePawnMovement() {
         testWhitePawn = new Pawn(false);
         testBoard.putPieceAt(testWhitePawn, 2, 2);
-        assert testWhitePawn.getMoveSet().contains(testBoard.getSquareAt(2,3));
+        assert testWhitePawn.getPossibleMoves().contains(testBoard.getSquareAt(2, 3));
     }
 
 
