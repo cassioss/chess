@@ -15,7 +15,6 @@ import java.util.HashSet;
  * @version 1.1
  * @since 1.0
  */
-
 public abstract class Piece {
 
     protected boolean isBlack;

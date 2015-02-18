@@ -4,7 +4,14 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * Created by Cassio on 16/02/2015.
+ * <code>King</code> class - defines a king and its basic commands. If a king's square can be captured by one of the
+ * opponent's pieces, the king is in check. If the king cannot defend itself from a check, a checkmate happens, and the
+ * other player wins the game. If a king is (or will) not be in check due to its own moves, it can move one square to
+ * its side (either horizontally, vertically or diagonally).
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
  */
 public class King extends Piece {
     /**
@@ -14,18 +21,10 @@ public class King extends Piece {
      */
     public King(boolean colorChoice) {
         super(colorChoice);
-        if(colorChoice)
+        if (colorChoice)
             pathToImage = "src/com/cassio/chess/img/black_king_500_500_transparent.png";
         else
             pathToImage = "src/com/cassio/chess/img/white_king_500_500_transparent.png";
-    }
-
-    /**
-     * Abstract method to update a piece's move set.
-     */
-    @Override
-    protected void updateMoveSet() {
-
     }
 
     /**
@@ -34,7 +33,6 @@ public class King extends Piece {
      * @param referenceSquare the square to be used as reference for the MoveSet object.
      * @param referenceBoard  the chessboard to be used as reference for the MoveSet object.
      */
-    @Override
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
 
     }

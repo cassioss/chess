@@ -4,9 +4,17 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * Created by Cassio on 18/02/2015.
+ * {@code BishopMoveSet} class - implementation of MoveSet class for bishops. Bishops can move diagonally (with the same
+ * displacement at both the X-axis and the Y-axis) in any direction as many squares as possible. The move set stops its
+ * updates in a certain direction if it finds a piece (which can be captured if it is an opponent's piece) or the limits
+ * of the board.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.0
+ * @see com.cassio.chess.library.moves.MoveSet
  */
 public class BishopMoveSet extends MoveSet {
+
     /**
      * Creates a new bishop move set having a square, a board and a color as reference.
      *
