@@ -18,11 +18,10 @@ public class PawnMoveSet extends MoveSet {
     private void addSquareWithReferenceIfCanCapture(int posX, int posY) {
         int refX = posX + referenceSquare.getPosX();
         int refY = posY + referenceSquare.getPosY();
-        if (referenceBoard.hasPieceAt(refX, refY)) {
-            System.out.println(refX + "," + refY);
-            addSquareWithReference(refX, refY);
-        }
+        if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
+            addSquareAt(refX, refY);
     }
+    
 
     @Override
     protected void learnMoveSet() {
