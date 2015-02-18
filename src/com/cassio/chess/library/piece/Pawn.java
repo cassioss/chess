@@ -21,7 +21,6 @@ public class Pawn extends Piece {
      *
      * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
      */
-
     public Pawn(boolean colorChoice) {
         super(colorChoice);
     }

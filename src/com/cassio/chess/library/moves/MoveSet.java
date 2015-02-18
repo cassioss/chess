@@ -100,19 +100,4 @@ public abstract class MoveSet {
     protected int getRefY() {
         return referenceSquare.getPosY();
     }
-
-
-    protected void addSquareWithReferenceIfCanCapture(int posX, int posY) {
-        int refX = posX + getRefX();
-        int refY = posY + getRefY();
-        if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
-            addSquareAt(refX, refY);
-    }
-
-    protected void addSquareWithReferenceIfNotBlocked(int posX, int posY) {
-        int refX = posX + getRefX();
-        int refY = posY + getRefY();
-        if (!referenceBoard.hasPieceAt(refX, refY))
-            addSquareAt(refX, refY);
-    }
 }

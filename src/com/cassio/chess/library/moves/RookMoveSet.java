@@ -52,12 +52,14 @@ public class RookMoveSet extends MoveSet {
      * @param pace how the Y-coordinate changes with time. (-1) means downwards, and (+1) means upwards.
      */
     private void learnVerticalMovesWithDirection(int pace) {
-        for (int yPos = getRefY() + pace; !referenceBoard.yPosOutOfBounds(yPos); yPos += pace) {
-            if (referenceBoard.hasPieceAt(referenceSquare.getPosX(), yPos)) {
-                if (opponentPieceAt(referenceSquare.getPosX(), yPos))
-                    addSquareAt(referenceSquare.getPosX(), yPos);
-                break;
-            } else addSquareAt(referenceSquare.getPosX(), yPos);
+        boolean foundPiece = false;
+        for (int yPos = getRefY() + pace; !referenceBoard.yPosOutOfBounds(yPos) && !foundPiece; yPos += pace) {
+            if (referenceBoard.hasPieceAt(getRefX(), yPos)) {
+                foundPiece = true;
+                if (opponentPieceAt(getRefX(), yPos)) {
+                    addSquareAt(getRefX(), yPos);
+                }
+            } else addSquareAt(getRefX(), yPos);
         }
     }
 
@@ -68,14 +70,14 @@ public class RookMoveSet extends MoveSet {
      * @param pace how the X-coordinate changes with time. (-1) means left, and (+1) means right.
      */
     private void learnHorizontalMovesWithDirection(int pace) {
-        for (int xPos = getRefX() + pace; !referenceBoard.xPosOutOfBounds(xPos); xPos += pace) {
+        boolean foundPiece = false;
+        for (int xPos = getRefX() + pace; !(referenceBoard.xPosOutOfBounds(xPos) || foundPiece); xPos += pace) {
             if (referenceBoard.hasPieceAt(xPos, getRefY())) {
+                foundPiece = true;
                 if (opponentPieceAt(xPos, getRefY()))
                     addSquareAt(xPos, getRefY());
-                break;
             } else addSquareAt(xPos, getRefY());
         }
     }
-
 
 }
