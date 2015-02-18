@@ -1,7 +1,8 @@
 package com.cassio.chess.library.board;
 
-import com.cassio.chess.exception.board.InGameException;
 import com.cassio.chess.exception.board.AlreadyHasPieceException;
+import com.cassio.chess.exception.board.InGameException;
+import com.cassio.chess.exception.board.PieceInPlaceException;
 import com.cassio.chess.library.piece.Piece;
 
 /**
@@ -52,7 +53,7 @@ public abstract class Board {
      * @return {@code true} if there is a square at the requested position of the plane.
      */
     public boolean hasSquareAt(int targetX, int targetY) {
-        return squareBoard[targetX][targetY] != null;
+        return !(xPosOutOfBounds(targetX) || yPosOutOfBounds(targetY)) && squareBoard[targetX][targetY] != null;
     }
 
     /**
@@ -74,7 +75,7 @@ public abstract class Board {
      * @return {@code true} if there is a piece on that position.
      */
     public boolean hasPieceAt(int posX, int posY) {
-        return squareBoard[posX][posY].getSquarePiece() != null;
+        return !(xPosOutOfBounds(posX) || yPosOutOfBounds(posY)) && squareBoard[posX][posY].getSquarePiece() != null;
     }
 
     /**
@@ -90,10 +91,14 @@ public abstract class Board {
             throw new InGameException("You tried to set a piece when a game is already being played");
         else {
             if (hasPieceAt(posX, posY))
-                throw new AlreadyHasPieceException("You tried to set a piece on the same place as another piece");
+                throw new PieceInPlaceException("You tried to set a piece on the same place as another piece");
             else {
-                squareBoard[posX][posY].squarePiece = piece;
-                piece.learnMoveSetFrom(squareBoard[posX][posY], this);
+                if (alreadyHasPieceOnBoard(piece))
+                    throw new AlreadyHasPieceException("You tried to add the same piece twice on the board");
+                else {
+                    squareBoard[posX][posY].squarePiece = piece;
+                    piece.learnMoveSetFrom(squareBoard[posX][posY], this);
+                }
             }
         }
     }
@@ -118,15 +123,15 @@ public abstract class Board {
         return gameFlag;
     }
 
-    public int getLimitX() {
-        return squareBoard.length;
+    public boolean alreadyHasPieceOnBoard(Piece piece) {
+        for (Square[] squareArray : squareBoard) {
+            for (Square square : squareArray) {
+                if (square.getSquarePiece() == piece)
+                    return true;
+            }
+        }
+        return false;
     }
-
-
-    public int getLimitY(int posX) {
-        return squareBoard[posX].length;
-    }
-
 
 /*
     /**
@@ -227,4 +232,22 @@ public abstract class Board {
     public boolean hasSquareAt(int posX, int posY) {
         return maze[posX][posY] != null;
     }*/
+
+    /**
+     * Says if an X-coordinate is out of bounds on the board.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @return {@code true} if the X-coordinate is out of bounds.
+     */
+    public abstract boolean xPosOutOfBounds(int posX);
+
+    /**
+     * Says if a Y-coordinate is out of bounds on the board.
+     *
+     * @param posY desired Y-coordinate of a square.
+     * @return {@code true} if the Y-coordinate is out of bounds.
+     */
+    public abstract boolean yPosOutOfBounds(int posY);
+
+
 }

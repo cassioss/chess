@@ -19,7 +19,7 @@ public class ChessBoardTest {
     private ChessBoard testChessBoard;
 
     /**
-     * Creates a chessboard for every test - using a static chessboard could be confusing, as tests with different 
+     * Creates a chessboard for every test - using a static chessboard could be confusing, as tests with different
      * modifications could affect each other.
      */
     @Before
@@ -46,10 +46,10 @@ public class ChessBoardTest {
     public void testSquarePainting() {
         for (int posX = 0; posX < 8; posX += 2) {
             for (int posY = 0; posY < 8; posY += 2) {
-                assert testChessBoard.getSquareAt(posX, posY).getSquareColor() == Color.BLACK;
+                assert testChessBoard.getSquareAt(posX, posY).getSquareColor() == Color.LIGHT_GRAY;
                 assert testChessBoard.getSquareAt(posX, posY + 1).getSquareColor() == Color.WHITE;
                 assert testChessBoard.getSquareAt(posX + 1, posY).getSquareColor() == Color.WHITE;
-                assert testChessBoard.getSquareAt(posX + 1, posY + 1).getSquareColor() == Color.BLACK;
+                assert testChessBoard.getSquareAt(posX + 1, posY + 1).getSquareColor() == Color.LIGHT_GRAY;
             }
         }
     }

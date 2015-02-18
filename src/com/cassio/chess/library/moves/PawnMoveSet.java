@@ -21,7 +21,6 @@ public class PawnMoveSet extends MoveSet {
         if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }
-    
 
     @Override
     protected void learnMoveSet() {
@@ -32,14 +31,21 @@ public class PawnMoveSet extends MoveSet {
     }
 
     private void learnWhitePawnMoveSet() {
-        addSquareWithReference(0, 1);
+        addSquareWithReferenceIfNotBlocked(0, 1);
         addSquareWithReferenceIfCanCapture(1, 1);
         addSquareWithReferenceIfCanCapture(-1, 1);
     }
 
     private void learnBlackPawnMoveSet() {
-        addSquareWithReference(0, -1);
+        addSquareWithReferenceIfNotBlocked(0, -1);
         addSquareWithReferenceIfCanCapture(1, -1);
         addSquareWithReferenceIfCanCapture(-1, -1);
+    }
+
+    private void addSquareWithReferenceIfNotBlocked(int posX, int posY) {
+        int refX = posX + referenceSquare.getPosX();
+        int refY = posY + referenceSquare.getPosY();
+        if (!referenceBoard.hasPieceAt(refX, refY))
+            addSquareAt(refX, refY);
     }
 }

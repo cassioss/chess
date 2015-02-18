@@ -127,6 +127,28 @@ public class ChessBoard extends Board {
         gameFlag = true;
     }
 
+    /**
+     * Says if an X-coordinate is out of bounds on the board.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @return {@code true} if the X-coordinate is out of bounds.
+     */
+    @Override
+    public boolean xPosOutOfBounds(int posX) {
+        return posX < 0 || posX >= COLUMN_COUNT;
+    }
+
+    /**
+     * Says if a Y-coordinate is out of bounds on the board.
+     *
+     * @param posY desired Y-coordinate of a square.
+     * @return {@code true} if the Y-coordinate is out of bounds.
+     */
+    @Override
+    public boolean yPosOutOfBounds(int posY) {
+        return posY < 0 || posY >= ROW_COUNT;
+    }
+
 
 /*    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
