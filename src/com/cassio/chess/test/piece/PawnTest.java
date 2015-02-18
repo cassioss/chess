@@ -6,6 +6,14 @@ import com.cassio.chess.library.piece.Pawn;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * {@code PawnTest} class - tests the methods and verifies the expected behavior of a pawn in a chessboard, given its
+ * MoveSet limitations.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
+ */
 public class PawnTest {
 
     private Board testBoard;
@@ -78,7 +86,7 @@ public class PawnTest {
     }
 
     /**
-     * Tests if a white pawn is unable to move if a piece is in front if it, regardless of the color. First case: 
+     * Tests if a white pawn is unable to move if a piece is in front if it, regardless of the color. First case:
      * another white piece is blocking its way.
      */
     @Test
@@ -91,8 +99,8 @@ public class PawnTest {
     }
 
     /**
-     * Tests if a white pawn is unable to move if a piece is in front if it, regardless of the color. Second case:
-     * a black piece is blocking its way.
+     * Tests if a white pawn is unable to move if a piece is in front if it, regardless of the color. Second case: a
+     * black piece is blocking its way.
      */
     @Test
     public void testWhitePawnBlockedByBlack() {

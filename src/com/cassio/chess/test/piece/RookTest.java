@@ -6,10 +6,22 @@ import com.cassio.chess.library.piece.Rook;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * {@code RookTest} class - tests the methods and verifies the expected behavior of a rook in a chessboard, given its
+ * MoveSet limitations.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.1
+ * @since 1.0
+ */
 public class RookTest {
 
     private Board testBoard;
 
+    /**
+     * Creates an empty, not-for-playing chessboard for testing purposes. It is non-static because a static instance of
+     * the board would have pieces being placed without control.
+     */
     @Before
     public void setUp() {
         testBoard = new ChessBoard();
