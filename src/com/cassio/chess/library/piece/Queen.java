@@ -14,6 +14,10 @@ public class Queen extends Piece {
      */
     public Queen(boolean colorChoice) {
         super(colorChoice);
+        if(colorChoice)
+            pathToImage = "src/com/cassio/chess/img/black_queen_500_500_transparent.png";
+        else
+            pathToImage = "src/com/cassio/chess/img/white_queen_500_500_transparent.png";
     }
 
     /**

@@ -14,6 +14,10 @@ public class Bishop extends Piece {
      */
     public Bishop(boolean colorChoice) {
         super(colorChoice);
+        if(colorChoice)
+            pathToImage = "src/com/cassio/chess/img/black_bishop_500_500_transparent.png";
+        else
+            pathToImage = "src/com/cassio/chess/img/white_bishop_500_500_transparent.png";
     }
 
     /**

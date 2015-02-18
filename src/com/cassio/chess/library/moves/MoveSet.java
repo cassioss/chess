@@ -36,8 +36,16 @@ public abstract class MoveSet {
         learnMoveSet();
     }
 
+    /**
+     * Process the piece-specific algorithms to acquire the allowed squares to move to.
+     */
     protected abstract void learnMoveSet();
 
+    /**
+     * Returns a set with all the squares that a piece is allowed to move to.
+     *
+     * @return a HashSet with all the squares on the move set.
+     */
     public HashSet<Square> getMoves() {
         return possibleMoves;
     }

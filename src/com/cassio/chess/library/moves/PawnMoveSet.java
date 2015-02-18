@@ -26,6 +26,10 @@ public class PawnMoveSet extends MoveSet {
         super(referenceSquare, referenceBoard, colorChoice);
     }
 
+    /**
+     * Process the piece-specific algorithms to acquire the allowed squares to move to. For pawns, there is a specific
+     * move set for each piece color.
+     */
     protected void learnMoveSet() {
         if (colorChoice)
             learnBlackPawnMoveSet();
@@ -33,28 +37,46 @@ public class PawnMoveSet extends MoveSet {
             learnWhitePawnMoveSet();
     }
 
+    /**
+     * Moves to be learnt by a white pawn. They can only move or capture upwards.
+     */
     private void learnWhitePawnMoveSet() {
         addSquareWithReferenceIfNotBlocked(0, 1);
         addSquareWithReferenceIfCanCapture(1, 1);
         addSquareWithReferenceIfCanCapture(-1, 1);
     }
 
+    /**
+     * Moves to be learnt by a black pawn. They can only move or capture downwards.
+     */
     private void learnBlackPawnMoveSet() {
         addSquareWithReferenceIfNotBlocked(0, -1);
         addSquareWithReferenceIfCanCapture(1, -1);
         addSquareWithReferenceIfCanCapture(-1, -1);
     }
 
-    private void addSquareWithReferenceIfCanCapture(int posX, int posY) {
-        int refX = posX + getRefX();
-        int refY = posY + getRefY();
+    /**
+     * Tries to add a square with a specified distance to referenceSquare, but only if there is a piece to be captured.
+     *
+     * @param distX the X-distance from a square to referenceSquare.
+     * @param distY the Y-distance from a square to referenceSquare.
+     */
+    private void addSquareWithReferenceIfCanCapture(int distX, int distY) {
+        int refX = distX + getRefX();
+        int refY = distY + getRefY();
         if (referenceBoard.hasPieceAt(refX, refY) && !playerPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }
 
-    private void addSquareWithReferenceIfNotBlocked(int posX, int posY) {
-        int refX = posX + getRefX();
-        int refY = posY + getRefY();
+    /**
+     * Tries to add a square with a specified distance to referenceSquare, but only if there are no pieces on it.
+     *
+     * @param distX the X-distance from a square to referenceSquare.
+     * @param distY the Y-distance from a square to referenceSquare.
+     */
+    private void addSquareWithReferenceIfNotBlocked(int distX, int distY) {
+        int refX = distX + getRefX();
+        int refY = distY + getRefY();
         if (!referenceBoard.hasPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }

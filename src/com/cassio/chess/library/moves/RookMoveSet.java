@@ -25,6 +25,9 @@ public class RookMoveSet extends MoveSet {
         super(referenceSquare, referenceBoard, colorChoice);
     }
 
+    /**
+     * Process the piece-specific algorithms to acquire the allowed squares to move to.
+     */
     protected void learnMoveSet() {
         learnVerticalMoves();
         learnHorizontalMoves();

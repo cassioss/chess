@@ -14,6 +14,10 @@ public class King extends Piece {
      */
     public King(boolean colorChoice) {
         super(colorChoice);
+        if(colorChoice)
+            pathToImage = "src/com/cassio/chess/img/black_king_500_500_transparent.png";
+        else
+            pathToImage = "src/com/cassio/chess/img/white_king_500_500_transparent.png";
     }
 
     /**

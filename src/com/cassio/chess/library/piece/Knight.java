@@ -14,6 +14,10 @@ public class Knight extends Piece {
      */
     public Knight(boolean colorChoice) {
         super(colorChoice);
+        if(colorChoice)
+            pathToImage = "src/com/cassio/chess/img/black_knight_500_500_transparent.png";
+        else
+            pathToImage = "src/com/cassio/chess/img/white_knight_500_500_transparent.png";
     }
 
     /**

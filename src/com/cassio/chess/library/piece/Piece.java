@@ -21,6 +21,7 @@ public abstract class Piece {
     protected boolean isUpToDate;
     protected MoveSet referenceMoveSet;
     protected HashSet<Square> moveSet;
+    String pathToImage;
 
     /**
      * Creates a piece based on its color (black or white). As the piece was probably just added to a board, its move

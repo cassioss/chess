@@ -23,6 +23,10 @@ public class Pawn extends Piece {
      */
     public Pawn(boolean colorChoice) {
         super(colorChoice);
+        if(colorChoice)
+            pathToImage = "src/com/cassio/chess/img/black_pawn_500_500_transparent.png";
+        else
+            pathToImage = "src/com/cassio/chess/img/white_pawn_500_500_transparent.png";
     }
 
     /**
