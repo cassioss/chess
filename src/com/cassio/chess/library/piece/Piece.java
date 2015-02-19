@@ -45,16 +45,6 @@ public abstract class Piece {
     }
 
     /**
-     * Gets the set of available moves (squares) for a piece. It is implemented as a HashSet to benefit from O(1)
-     * searches and non-repeated squares.
-     *
-     * @return a HashSet of available squares that the piece can move to.
-     */
-    public HashSet<Square> getPossibleMoves() {
-        return referenceMoveSet.getMoves();
-    }
-
-    /**
      * Updates a piece's MoveSet. This function is only called by a chessboard.
      */
     public void updateMoveSet() {
@@ -81,13 +71,6 @@ public abstract class Piece {
      */
     public boolean canMoveTo(Square square) {
         return moveSet.contains(square);
-    }
-
-    /**
-     * @return {@code true} if the piece is blocked by other pieces.
-     */
-    public boolean pieceIsBlocked() {
-        return moveSet.size() == 0;
     }
 
 }

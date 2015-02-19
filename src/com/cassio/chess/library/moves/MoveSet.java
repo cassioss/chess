@@ -50,11 +50,6 @@ public abstract class MoveSet {
         return possibleMoves;
     }
 
-    public void changeSquareReferenceTo(Square newSquare) {
-        if (this.referenceSquare != newSquare)
-            this.referenceSquare = newSquare;
-    }
-
     /**
      * Checks if a piece in a certain square of the chessboard (if any) is the player's piece.
      *
