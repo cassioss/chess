@@ -26,12 +26,14 @@ public class QueenMoveSet extends MoveSet {
 
     /**
      * Process the piece-specific algorithms to acquire the allowed squares to move to. As said before, queens have the
-     * move set from rooks and bishops - and their move set cam be implemented as such.
+     * move set from rooks and bishops - and their move set can be implemented as such.
      */
     protected void learnMoveSet() {
         MoveSet bishopMoves = new BishopMoveSet(referenceSquare, referenceBoard, colorChoice);
         MoveSet rookMoves = new RookMoveSet(referenceSquare, referenceBoard, colorChoice);
         bishopMoves.learnMoveSet();
         rookMoves.learnMoveSet();
+        possibleMoves.addAll(bishopMoves.getMoves());
+        possibleMoves.addAll(rookMoves.getMoves());
     }
 }

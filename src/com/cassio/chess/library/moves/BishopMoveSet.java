@@ -37,29 +37,41 @@ public class BishopMoveSet extends MoveSet {
      * Goes through all the squares diagonally too see which ones allow a valid move.
      */
     private void learnDiagonalMoves() {
-        learnDiagonalMovesAt(1, 1);
-        learnDiagonalMovesAt(1, -1);
-        learnDiagonalMovesAt(-1, 1);
-        learnDiagonalMovesAt(-1, -1);
+        learnDiagonalMovesAtMainDiagonal(1);
+        learnDiagonalMovesAtMainDiagonal(-1);
+        learnDiagonalMovesAtSecondaryDiagonal(1);
+        learnDiagonalMovesAtSecondaryDiagonal(-1);
     }
 
     /**
-     * Goes through all the diagonal squares in a certain direction, according to a pace in each direction.
+     * Goes through all the diagonal squares in the piece's main diagonal, according to a pace.
      *
-     * @param xPace how the X-coordinate changes with time. (-1) means left, and (+1) means right.
-     * @param yPace how the Y-coordinate changes with time. (-1) means downwards, and (+1) means upwards.
+     * @param pace how both coordinates changes with time. (+1) means right up, (-1) means left down.
      */
-    private void learnDiagonalMovesAt(int xPace, int yPace) {
+    private void learnDiagonalMovesAtMainDiagonal(int pace) {
         boolean foundPiece = false;
-        int xPos = getRefX() + xPace, yPos = getRefY() + yPace;
-        for (; outOfBounds(xPos, yPos) || !foundPiece; ) {
-            if (referenceBoard.hasPieceAt(xPos, getRefY())) {
+        for (int dist = pace; !outOfBounds(getRefX() + dist, getRefY() + dist) && !foundPiece; dist += pace) {
+            if (referenceBoard.hasPieceAt(getRefX() + dist, getRefY() + dist)) {
                 foundPiece = true;
-                if (opponentPieceAt(xPos, getRefY()))
-                    addSquareAt(xPos, getRefY());
-            } else addSquareAt(xPos, getRefY());
-            xPos += xPace;
-            yPos += yPace;
+                if (opponentPieceAt(getRefX() + dist, getRefY() + dist))
+                    addSquareAt(getRefX() + dist, getRefY() + dist);
+            } else addSquareAt(getRefX() + dist, getRefY() + dist);
+        }
+    }
+
+    /**
+     * Goes through all the diagonal squares in the piece's secondary diagonal, according to a pace.
+     *
+     * @param pace how both coordinates changes with time. (+1) means left up, (-1) means right down.
+     */
+    private void learnDiagonalMovesAtSecondaryDiagonal(int pace) {
+        boolean foundPiece = false;
+        for (int dist = pace; !outOfBounds(getRefX() - dist, getRefY() + dist) && !foundPiece; dist += pace) {
+            if (referenceBoard.hasPieceAt(getRefX() - dist, getRefY() + dist)) {
+                foundPiece = true;
+                if (opponentPieceAt(getRefX() - dist, getRefY() + dist))
+                    addSquareAt(getRefX() - dist, getRefY() + dist);
+            } else addSquareAt(getRefX() - dist, getRefY() + dist);
         }
     }
 

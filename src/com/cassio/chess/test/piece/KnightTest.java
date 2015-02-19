@@ -35,12 +35,14 @@ public class KnightTest {
         Knight testKnight = new Knight(true);
         testBoard.putPieceAt(testKnight, 3, 3);
         assert !testKnight.canMoveTo(testBoard.getSquareAt(3, 3));
-        for (int range = 1; range < 3; range++) {
-            assert testKnight.canMoveTo(testBoard.getSquareAt(range, 3 - range));
-            assert testKnight.canMoveTo(testBoard.getSquareAt(range, 3 - range));
-            assert testKnight.canMoveTo(testBoard.getSquareAt(-range, range - 3));
-            assert testKnight.canMoveTo(testBoard.getSquareAt(-range, range - 3));
-        }
+        assert testKnight.canMoveTo(testBoard.getSquareAt(4, 5));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(5, 4));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(4, 1));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(1, 4));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(1, 2));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(2, 1));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(2, 5));
+        assert testKnight.canMoveTo(testBoard.getSquareAt(5, 2));
     }
 
     /**

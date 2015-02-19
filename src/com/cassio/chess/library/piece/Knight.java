@@ -13,7 +13,7 @@ import com.cassio.chess.library.moves.KnightMoveSet;
  * @since 1.0
  */
 public class Knight extends Piece {
-    
+
     /**
      * Creates a knight based on its color (black or white).
      *
@@ -35,5 +35,6 @@ public class Knight extends Piece {
      */
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new KnightMoveSet(referenceSquare, referenceBoard, isBlack);
+        moveSet = referenceMoveSet.getMoves();
     }
 }
