@@ -1,75 +1,77 @@
 package com.cassio.chess.game;
 
-import javax.imageio.ImageIO;
+import com.cassio.chess.library.board.ChessBoard;
+import com.cassio.chess.library.board.Square;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 
 public class View implements ActionListener {
 
-    public View() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            //silently ignore
+    public View(ChessBoard referenceBoard) {
+        JPanel customPanel = drawSquareBoard(referenceBoard);
+        JFrame frame = new JFrame("\u265A Chess Game \u2654");
+        drawSquareBoard(referenceBoard);
+        frame.setContentPane(customPanel);
+        frame.setSize(800, 800);
+        frame.setLocation(50, 50);
+        frame.setVisible(true);
+    }
+
+    private JPanel drawSquareBoard(ChessBoard referenceBoard) {
+        JPanel squarePanel = new JPanel();
+        for (int xPos = 0; xPos < 8; xPos++) {
+            for (int yPos = 0; yPos < 8; yPos++) {
+                RectDraw squareImage = new RectDraw(100 * xPos, 100 * yPos, referenceBoard.getSquareAt(xPos, yPos));
+                squarePanel.add(squareImage);
+            }
         }
-        String path = "src/com/cassio/chess/img/white_pawn_500_500_transparent.png";
-        File file = new File(path);
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JFrame window = new JFrame("\u265A Chess Game \u2654");
-        window.setSize(800, 800);
-        JPanel myPanel = initializePanel();
-        initializeButton(myPanel);
-        setUpMenu(window);
-        window.setContentPane(myPanel);
-        JLabel picLabel = new JLabel(new ImageIcon(image));
-        window.getContentPane().add(picLabel);
-        window.setLocation(200, 200);
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        return squarePanel;
     }
 
-    private void initializeButton(JPanel myPanel) {
-        JButton button = new JButton("Click me");
-        button.addActionListener(this);
-        myPanel.add(button, BorderLayout.SOUTH);
-    }
-
-    private JPanel initializePanel() {
-        JPanel myPanel = new JPanel();
-        myPanel.setPreferredSize(new Dimension(500, 500));
-        myPanel.setLayout(new BorderLayout());
-        return myPanel;
-    }
-
-    private void setUpMenu(JFrame window) {
-        JMenuBar menubar = new JMenuBar();
-        JMenu file = new JMenu("File");
-        JMenuItem open = new JMenuItem("Open");
-        open.addActionListener(this);
-        file.add(open);
-        menubar.add(file);
-        window.setJMenuBar(menubar);
-    }
-
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e action event of any kind.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null,
-                "I was clicked by " + e.getActionCommand(),
-                "Title here", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    private static class RectDraw extends JPanel implements ActionListener {
+
+        private int posX, posY;
+        private Square referenceSquare;
+
+        protected RectDraw(int posX, int posY, Square referenceSquare) {
+            this.posX = posX;
+            this.posY = posY;
+            this.referenceSquare = referenceSquare;
+        }
+
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawRect(posX, posY, 100, 100);
+            g.setColor(referenceSquare.getSquareColor());
+            g.fillRect(posX, posY, 100, 100);
+        }
+
+        /**
+         * Invoked when an action occurs.
+         *
+         * @param e action event of any kind.
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 
     public static void main(String[] args) {
-        new View();
+        new View(new ChessBoard());
     }
 }
