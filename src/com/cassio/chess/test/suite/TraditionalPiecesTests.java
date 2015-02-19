@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
  * @since 1.0
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({PawnTest.class, RookTest.class, BishopTest.class, KnightTest.class, QueenTest.class})
+@Suite.SuiteClasses({PieceTest.class, PawnTest.class, RookTest.class, BishopTest.class, KnightTest.class, QueenTest
+        .class})
 public class TraditionalPiecesTests {
 
 }
