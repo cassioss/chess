@@ -38,6 +38,5 @@ public class Bishop extends Piece {
     @Override
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new BishopMoveSet(referenceSquare, referenceBoard, this.isBlack);
-        moveSet = referenceMoveSet.getMoves();
     }
 }

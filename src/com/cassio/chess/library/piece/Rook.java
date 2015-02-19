@@ -37,6 +37,5 @@ public class Rook extends Piece {
      */
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new RookMoveSet(referenceSquare, referenceBoard, this.isBlack);
-        moveSet = referenceMoveSet.getMoves();
     }
 }

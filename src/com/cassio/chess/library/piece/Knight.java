@@ -35,6 +35,5 @@ public class Knight extends Piece {
      */
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new KnightMoveSet(referenceSquare, referenceBoard, isBlack);
-        moveSet = referenceMoveSet.getMoves();
     }
 }

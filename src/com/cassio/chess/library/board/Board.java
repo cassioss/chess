@@ -95,6 +95,20 @@ public abstract class Board {
             throw new PieceInPlaceException("You tried to set a piece on the same place as another piece");
         squareBoard[posX][posY].squarePiece = piece;
         piece.learnMoveSetFrom(squareBoard[posX][posY], this);
+        updateAllPieces();
+    }
+
+    /**
+     * Updates the move set of all pieces in the board.
+     */
+    private void updateAllPieces() {
+        for (Square[] squareArray : squareBoard) {
+            for (Square square : squareArray) {
+                if(square.getSquarePiece() != null){
+                    square.getSquarePiece().updateMoveSet();
+                }
+            }
+        }
     }
 
     /**

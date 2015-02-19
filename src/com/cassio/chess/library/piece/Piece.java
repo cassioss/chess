@@ -57,8 +57,10 @@ public abstract class Piece {
     /**
      * Abstract method to update a piece's move set.
      */
-    protected void updateMoveSet() {
-
+    public void updateMoveSet() {
+        moveSet.clear();
+        moveSet = new HashSet<Square>();
+        moveSet = referenceMoveSet.getMoves();
     }
 
     /**

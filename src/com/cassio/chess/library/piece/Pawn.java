@@ -38,7 +38,6 @@ public class Pawn extends Piece {
      */
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new PawnMoveSet(referenceSquare, referenceBoard, isBlack());
-        moveSet = referenceMoveSet.getMoves();
     }
 
 

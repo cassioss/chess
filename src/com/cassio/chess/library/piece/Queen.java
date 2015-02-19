@@ -34,6 +34,5 @@ public class Queen extends Piece {
      */
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new QueenMoveSet(referenceSquare, referenceBoard, this.isBlack);
-        moveSet = referenceMoveSet.getMoves();
     }
 }
