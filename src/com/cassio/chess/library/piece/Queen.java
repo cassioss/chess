@@ -5,8 +5,8 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.QueenMoveSet;
 
 /**
- * <code>Queen</code> class - defines a queen and its basic moves. Queens have the same move freedom as rooks and
- * bishops, being able to move diagonally, vertically and horizontally as many squares as possible.
+ * {@code Queen} class - defines a queen and its basic moves. Queens have the same move freedom as rooks and bishops,
+ * being able to move diagonally, vertically and horizontally as many squares as possible.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

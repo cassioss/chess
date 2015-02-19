@@ -1,7 +1,7 @@
 package com.cassio.chess.exception.board;
 
 /**
- * {@code AlreadyHasPieceException class} - called whenever a piece is set twice in a board.
+ * {@code AlreadyHasPieceException} class - called whenever a piece is set twice in a board.
  */
 public class AlreadyHasPieceException extends RuntimeException {
 

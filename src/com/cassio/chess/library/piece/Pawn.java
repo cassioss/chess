@@ -5,10 +5,10 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.PawnMoveSet;
 
 /**
- * <code>Pawn</code> class - defines a pawn and its basic moves. Pawns can only move one square ahead (which is
- * different depending on the piece color) if it's not blocked by any piece (even an opponent's piece), and can only
- * capture pieces one diagonal square ahead (for any side). If it is the first move of a pawn, it may move two squares
- * to its front.
+ * {@code Pawn} class - defines a pawn and its basic moves. Pawns can only move one square ahead (which is different
+ * depending on the piece color) if it's not blocked by any piece (even an opponent's piece), and can only capture
+ * pieces one diagonal square ahead (for any side). If it is the first move of a pawn, it may move two squares to its
+ * front.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -23,7 +23,7 @@ public class Pawn extends Piece {
      */
     public Pawn(boolean colorChoice) {
         super(colorChoice);
-        if(colorChoice)
+        if (colorChoice)
             pathToImage = "src/com/cassio/chess/img/black_pawn_500_500_transparent.png";
         else
             pathToImage = "src/com/cassio/chess/img/white_pawn_500_500_transparent.png";

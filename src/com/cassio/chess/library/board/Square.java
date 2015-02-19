@@ -19,7 +19,6 @@ public class Square {
     protected Color squareColor;
     private int posX, posY;
 
-
     /**
      * Creates a square in a certain position of a board. The coordinates are the only things the square knows about its
      * board, as identifying a square on a board could take a lot of time.
@@ -51,7 +50,6 @@ public class Square {
     public Piece getSquarePiece() {
         return squarePiece;
     }
-
 
     /**
      * Returns the X-coordinate of the square in a chessboard.

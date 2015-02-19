@@ -13,7 +13,6 @@ import com.cassio.chess.library.piece.Piece;
  * @version 1.1
  * @since 1.0
  */
-
 public abstract class Board {
 
     protected Square[][] squareBoard;
@@ -104,7 +103,7 @@ public abstract class Board {
     private void updateAllPieces() {
         for (Square[] squareArray : squareBoard) {
             for (Square square : squareArray) {
-                if(square.getSquarePiece() != null){
+                if (square.getSquarePiece() != null) {
                     square.getSquarePiece().updateMoveSet();
                 }
             }

@@ -12,7 +12,6 @@ import java.awt.*;
  * @version 1.1
  * @since 1.0
  */
-
 public class ChessBoard extends Board {
 
     private static final int ROW_COUNT = 8, COLUMN_COUNT = 8;
@@ -146,20 +145,11 @@ public class ChessBoard extends Board {
         return posY < 0 || posY >= ROW_COUNT;
     }
 
-
 /*    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
     public char getLetterCoordinate(int posX) {
         return LETTER_COORDINATES[posX];
     }
-
-    public void setupSquares() {
-        maze = new Square[COLUMN_COUNT][ROW_COUNT];
-        for (int posX = 0; posX < COLUMN_COUNT; posX++)
-            for (int posY = 0; posY < ROW_COUNT; posY++)
-                putSquareAt(posX, posY);
-    }
-
 
    */
 }

@@ -7,8 +7,8 @@ import com.cassio.chess.library.moves.MoveSet;
 import java.util.HashSet;
 
 /**
- * <code>Piece</code> class - defines basic attributes of a piece (color, move set, path to image and how up-to-date is
- * its move set). The creation of a piece and its positioning (as well as implementation of moves) is dependent on the
+ * {@code Piece} class - defines basic attributes of a piece (color, move set, path to image and how up-to-date is its
+ * move set). The creation of a piece and its positioning (as well as implementation of moves) is dependent on the
  * board.
  *
  * @author Cassio dos Santos Sousa
