@@ -7,70 +7,110 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-
+/**
+ * {@code View} class - class that handles how the chessboard (including squares and pieces) is going to be drawn.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.0
+ */
 public class View implements ActionListener {
 
+    SquareBoardPaint squarePane;
+
+    /**
+     * Draws a chessboard on the screen.
+     *
+     * @param referenceBoard chessboard used as reference.
+     */
     public View(ChessBoard referenceBoard) {
-        JPanel customPanel = drawSquareBoard(referenceBoard);
         JFrame frame = new JFrame("\u265A Chess Game \u2654");
-        drawSquareBoard(referenceBoard);
-        frame.setContentPane(customPanel);
-        frame.setSize(800, 800);
-        frame.setLocation(50, 50);
+        squarePane = new SquareBoardPaint();
+        fillBoard(referenceBoard);
+        frame.setContentPane(squarePane);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setSize(817, 840);
+        frame.setLocation(350, 50);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
-    private JPanel drawSquareBoard(ChessBoard referenceBoard) {
-        JPanel squarePanel = new JPanel();
+    /**
+     * Goes through an entire board to get each one of the squares in it.
+     *
+     * @param referenceBoard chessboard used as reference.
+     */
+    private void fillBoard(ChessBoard referenceBoard) {
         for (int xPos = 0; xPos < 8; xPos++) {
-            for (int yPos = 0; yPos < 8; yPos++) {
-                RectDraw squareImage = new RectDraw(100 * xPos, 100 * yPos, referenceBoard.getSquareAt(xPos, yPos));
-                squarePanel.add(squareImage);
-            }
+            for (int yPos = 0; yPos < 8; yPos++)
+                squarePane.addSquareAt(referenceBoard.getSquareAt(xPos, yPos), xPos * 100, yPos * 100);
         }
-        return squarePanel;
     }
 
     /**
      * Invoked when an action occurs.
      *
-     * @param e action event of any kind.
+     * @param e some action.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
-    private static class RectDraw extends JPanel implements ActionListener {
+    /**
+     * {@code SquareBoardPaint} class - inner class that keeps track of every square that needs to be drawn on the
+     * board.
+     *
+     * @author Cassio dos Santos Sousa
+     * @version 1.0
+     */
+    protected class SquareBoardPaint extends JPanel {
 
-        private int posX, posY;
-        private Square referenceSquare;
+        private final ArrayList<SquarePaint> squares = new ArrayList<SquarePaint>();
 
-        protected RectDraw(int posX, int posY, Square referenceSquare) {
-            this.posX = posX;
-            this.posY = posY;
-            this.referenceSquare = referenceSquare;
+        protected void addSquareAt(Square square, int xPos, int yPos) {
+            squares.add(new SquarePaint(square, xPos, yPos));
         }
 
         protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawRect(posX, posY, 100, 100);
-            g.setColor(referenceSquare.getSquareColor());
-            g.fillRect(posX, posY, 100, 100);
-        }
-
-        /**
-         * Invoked when an action occurs.
-         *
-         * @param e action event of any kind.
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
+            for (final SquarePaint square : squares) {
+                Graphics2D g2 = (Graphics2D) g;
+                square.paint(g2);
+            }
         }
     }
 
+    /**
+     * {@code SquarePaint} class - inner class that handles how each square is going to be drawn.
+     *
+     * @author Cassio dos Santos Sousa
+     * @version 1.0
+     */
+    protected class SquarePaint {
+        private int xPos, yPos;
+        private Square referenceSquare;
+
+        public SquarePaint(Square square, int xPos, int yPos) {
+            this.xPos = xPos;
+            this.yPos = yPos;
+            this.referenceSquare = square;
+        }
+
+        public void paint(Graphics2D g) {
+            g.drawRect(xPos, yPos, 100, 100);
+            g.setColor(referenceSquare.getSquareColor());
+            g.fillRect(xPos + 1, yPos + 1, 99, 99);
+            g.setColor(Color.BLACK);
+        }
+    }
+
+    /**
+     * Main function that draws a new chessboard.
+     *
+     * @param args String entries - none are required.
+     */
     public static void main(String[] args) {
         new View(new ChessBoard());
     }
