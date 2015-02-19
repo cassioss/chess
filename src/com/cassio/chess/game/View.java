@@ -38,7 +38,8 @@ public class View implements ActionListener {
     }
 
     /**
-     * Goes through an entire board to get each one of the squares in it.
+     * Goes through an entire board to get each one of the squares in it. Having only the square colors is enough to
+     * draw the board, but having the squares referenced eases up the drawing of pieces.
      *
      * @param referenceBoard chessboard used as reference.
      */
@@ -97,6 +98,7 @@ public class View implements ActionListener {
             this.yPos = yPos;
             this.referenceSquare = square;
         }
+
 
         public void paint(Graphics2D g) {
             g.drawRect(xPos, yPos, 100, 100);
