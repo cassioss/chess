@@ -108,4 +108,11 @@ public abstract class MoveSet {
     protected int getRefY() {
         return referenceSquare.getPosY();
     }
+
+    /**
+     * Updates a piece's move set by request.
+     */
+    public void requestUpdate() {
+        learnMoveSet();
+    }
 }

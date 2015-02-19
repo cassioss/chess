@@ -55,11 +55,12 @@ public abstract class Piece {
     }
 
     /**
-     * Abstract method to update a piece's move set.
+     * Updates a piece's MoveSet. This function is only called by a chessboard.
      */
     public void updateMoveSet() {
         moveSet.clear();
         moveSet = new HashSet<Square>();
+        referenceMoveSet.requestUpdate();
         moveSet = referenceMoveSet.getMoves();
     }
 

@@ -36,8 +36,8 @@ public class PieceTest {
         testBoard.putPieceAt(testPieceOne, 0, 0);
         assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 1));
         assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 2));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 3)); // Two allowed moves
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 4)); // for a queen
+        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 3)); // Vertical moves allowed
+        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 4)); // in the case of a queen
         assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 5));
         assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 6));
         assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 7));
