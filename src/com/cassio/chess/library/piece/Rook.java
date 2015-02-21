@@ -18,14 +18,10 @@ public class Rook extends Piece {
     /**
      * Creates a rook based on its color (black or white).
      *
-     * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
+     * @param colorChoice a boolean value defining the color of the piece (black if <em>true</em>, white otherwise).
      */
     public Rook(boolean colorChoice) {
         super(colorChoice);
-        if (colorChoice)
-            pathToImage = "src/com/cassio/chess/img/black_rook_500_500_transparent.png";
-        else
-            pathToImage = "src/com/cassio/chess/img/white_rook_500_500_transparent.png";
     }
 
     /**

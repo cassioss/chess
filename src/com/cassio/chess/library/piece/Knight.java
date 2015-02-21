@@ -17,14 +17,10 @@ public class Knight extends Piece {
     /**
      * Creates a knight based on its color (black or white).
      *
-     * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
+     * @param colorChoice a boolean value defining the color of the piece (black if <em>true</em>, white otherwise).
      */
     public Knight(boolean colorChoice) {
         super(colorChoice);
-        if (colorChoice)
-            pathToImage = "src/com/cassio/chess/img/black_knight_500_500_transparent.png";
-        else
-            pathToImage = "src/com/cassio/chess/img/white_knight_500_500_transparent.png";
     }
 
     /**

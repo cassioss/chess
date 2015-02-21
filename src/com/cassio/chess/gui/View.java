@@ -27,15 +27,33 @@ public class View implements ActionListener {
     /**
      * Draws a chessboard on the screen.
      *
-     * @param referenceBoard chessboard used as reference.
+     * @param referenceBoard chessboard used as reference for painting.
      */
     public View(ChessBoard referenceBoard) {
         JFrame frame = new JFrame("\u265A Chess Game \u2654");
+        paintBoardIn(referenceBoard, frame);
+        setFrame(frame);
+    }
+
+    /**
+     * Paints a chessboard by creating a JPanel inside a JFrame.
+     *
+     * @param board chessboard used as reference.
+     * @param frame JFrame object used for the GUI.
+     */
+    private void paintBoardIn(ChessBoard board, JFrame frame) {
         squarePane = new SquareBoardPaint();
-        fillBoard(referenceBoard);
+        fillBoard(board);
         frame.setContentPane(squarePane);
         frame.pack();
-        frame.setLocationRelativeTo(null);
+    }
+
+    /**
+     * Set properties of a chessboard JFrame.
+     *
+     * @param frame JFrame used for GUI View.
+     */
+    private void setFrame(JFrame frame) {
         frame.setSize(807, 830);
         frame.setLocation(350, 50);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +87,7 @@ public class View implements ActionListener {
 
     /**
      * <strong>SquareBoardPaint</strong> class - inner class that keeps track of every square that needs to be drawn on
-     * the board.
+     * the board. Left as inner class because it only concerns the GUI, so it is less important.
      *
      * @author Cassio dos Santos Sousa
      * @version 1.0
@@ -78,10 +96,22 @@ public class View implements ActionListener {
 
         private final ArrayList<SquarePaint> squares = new ArrayList<SquarePaint>();
 
+        /**
+         * Adds a square to an array list of items to be painted.
+         *
+         * @param square a Square object to be checked.
+         * @param xPos   the X-coordinate of the square on the chessboard.
+         * @param yPos   the Y-coordinate of the square on the chessboard.
+         */
         protected void addSquareAt(Square square, int xPos, int yPos) {
             squares.add(new SquarePaint(square, xPos, yPos));
         }
 
+        /**
+         * Painting method that access all items of the array list.
+         *
+         * @param g Graphics object used for painting.
+         */
         protected void paintComponent(Graphics g) {
             for (final SquarePaint square : squares) {
                 Graphics2D g2 = (Graphics2D) g;
@@ -91,7 +121,8 @@ public class View implements ActionListener {
     }
 
     /**
-     * <strong>SquarePaint</strong> class - inner class that handles how each square is going to be drawn.
+     * <strong>SquarePaint</strong> class - inner class that handles how each square is going to be drawn. Left as inner
+     * class because it only concerns the GUI, so it is less important.
      *
      * @author Cassio dos Santos Sousa
      * @version 1.0
@@ -100,25 +131,38 @@ public class View implements ActionListener {
         private int xPos, yPos;
         private Square referenceSquare;
 
-        public SquarePaint(Square square, int xPos, int yPos) {
+        protected SquarePaint(Square square, int xPos, int yPos) {
             this.xPos = xPos;
             this.yPos = yPos;
             this.referenceSquare = square;
         }
 
-        public void paint(Graphics2D g) {
+        /**
+         * Paint method for squares. If the square has a piece, the method paints the piece as well.
+         *
+         * @param g Graphics2D object accessed by the GUI's JPanel.
+         */
+        protected void paint(Graphics2D g) {
             g.drawRect(xPos, yPos, 100, 100);
             g.setColor(referenceSquare.getSquareColor());
             g.fillRect(xPos + 1, yPos + 1, 99, 99);
             g.setColor(Color.BLACK);
+            paintExistentPiece(g);
+        }
+
+        /**
+         * Paints the image of a piece if the referenced Square object has one.
+         *
+         * @param g Graphics2D object that paints all the items on the GUI's JPanel.
+         */
+        private void paintExistentPiece(Graphics2D g) {
             if (referenceSquare.getSquarePiece() != null) {
                 try {
                     BufferedImage img = ImageIO.read(new File(referenceSquare.getSquarePiece().getPathToImage()));
                     g.drawImage(img, xPos, yPos, null);
                 } catch (IOException e) {
-                    System.out.println("Exception happened:" + e.getMessage());
+                    System.out.println("You tried to draw a non-existent image for a piece.");
                 }
-
             }
         }
     }

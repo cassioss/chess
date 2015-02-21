@@ -19,14 +19,10 @@ public class Pawn extends Piece {
     /**
      * Creates a pawn based on its color (black or white).
      *
-     * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
+     * @param colorChoice a boolean value defining the color of the piece (black if <em>true</em>, white otherwise).
      */
     public Pawn(boolean colorChoice) {
         super(colorChoice);
-        if (colorChoice)
-            pathToImage = "src/com/cassio/chess/img/black_pawn_500_500_transparent.png";
-        else
-            pathToImage = "src/com/cassio/chess/img/white_pawn_500_500_transparent.png";
     }
 
     /**

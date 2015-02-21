@@ -18,7 +18,7 @@ public class Princess extends Piece {
     /**
      * Creates a princess based on its color (black or white).
      *
-     * @param colorChoice a boolean value defining the color of the piece (black if {@code true}, white otherwise).
+     * @param colorChoice a boolean value defining the color of the piece (black if <em>true</em>, white otherwise).
      */
     public Princess(boolean colorChoice) {
         super(colorChoice);

@@ -21,7 +21,6 @@ public abstract class Piece {
     protected boolean isUpToDate;
     protected MoveSet referenceMoveSet;
     protected HashSet<Square> moveSet;
-    String pathToImage;
 
     /**
      * Creates a piece based on its color (black or white). As the piece was probably just added to a board, its move
@@ -74,12 +73,18 @@ public abstract class Piece {
     }
 
     /**
-     * Gets the relative path to a piece's image.
+     * Gets the relative path to a piece's image. The figures follow the same naming pattern.
      *
      * @return a String referring to a path to the piece's image.
      */
     public String getPathToImage() {
-        return this.pathToImage;
+        String path = "src/com/cassio/chess/img/";
+        if (isBlack())
+            path += "black_";
+        else
+            path += "white_";
+        path += this.getClass().getSimpleName().toLowerCase() + ".png";
+        return path;
     }
 
 }
