@@ -68,8 +68,8 @@ public class View implements ActionListener {
     }
 
     /**
-     * {@code SquareBoardPaint} class - inner class that keeps track of every square that needs to be drawn on the
-     * board.
+     * <strong>SquareBoardPaint</strong> class - inner class that keeps track of every square that needs to be drawn on
+     * the board.
      *
      * @author Cassio dos Santos Sousa
      * @version 1.0
