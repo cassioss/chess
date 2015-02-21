@@ -6,8 +6,8 @@ import com.cassio.chess.exception.board.PieceInPlaceException;
 import com.cassio.chess.library.piece.Piece;
 
 /**
- * {@code Board} class - abstract class for chessboards. Common methods are implemented, and board-dependent methods
- * (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
+ * <strong>Board</strong> class - abstract class for chessboards. Common methods are implemented, and board-dependent
+ * methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -21,7 +21,7 @@ public abstract class Board {
     /**
      * Creates a chess board with two abstract methods: one to set the positioning of the squares, and one to paint each
      * square accordingly (which is determined by the implementation of the board). As the board is only being created,
-     * the game flag is set to {@code false}.
+     * the GUI flag is set to <em>false</em>.
      */
     public Board() {
         setupSquares();
@@ -40,7 +40,7 @@ public abstract class Board {
     protected abstract void paintSquares();
 
     /**
-     * Abstract method to set pieces for a board-specific game. No pieces can be added after a game has begun.
+     * Abstract method to set pieces for a board-specific gui. No pieces can be added after a gui has begun.
      */
     public abstract void setupPieces();
 
@@ -49,7 +49,7 @@ public abstract class Board {
      *
      * @param targetX desired X-coordinate on the board to be verified.
      * @param targetY desired Y-coordinate on the board to be verified.
-     * @return {@code true} if there is a square at the requested position of the plane.
+     * @return <em>true</em> if there is a square at the requested position of the plane.
      */
     public boolean hasSquareAt(int targetX, int targetY) {
         return !(xPosOutOfBounds(targetX) || yPosOutOfBounds(targetY)) && squareBoard[targetX][targetY] != null;
@@ -71,7 +71,7 @@ public abstract class Board {
      *
      * @param posX desired X-coordinate of a square to be inspected.
      * @param posY desired Y-coordinate of a square to be inspected.
-     * @return {@code true} if there is a piece on that position.
+     * @return <em>true</em> if there is a piece on that position.
      */
     public boolean hasPieceAt(int posX, int posY) {
         return !(xPosOutOfBounds(posX) || yPosOutOfBounds(posY)) && squareBoard[posX][posY].getSquarePiece() != null;
@@ -87,7 +87,7 @@ public abstract class Board {
      */
     public void putPieceAt(Piece piece, int posX, int posY) {
         if (isInGame())
-            throw new InGameException("You tried to set a piece when a game is already being played");
+            throw new InGameException("You tried to set a piece when a gui is already being played");
         if (alreadyHasPieceOnBoard(piece))
             throw new AlreadyHasPieceException("You tried to add the same piece twice on the board");
         if (hasPieceAt(posX, posY))
@@ -122,9 +122,9 @@ public abstract class Board {
     }
 
     /**
-     * Checks whether a board is being used in a game. If it is, no pieces can be added to the board.
+     * Checks whether a board is being used in a gui. If it is, no pieces can be added to the board.
      *
-     * @return {@code true} if the board is already being used in the game.
+     * @return <em>true</em> if the board is already being used in the gui.
      */
     public boolean isInGame() {
         return gameFlag;
@@ -134,7 +134,7 @@ public abstract class Board {
      * Checks if a piece is already on board.
      *
      * @param piece a piece to be compared.
-     * @return {@code true} if this piece is already on board.
+     * @return <em>true</em> if this piece is already on board.
      */
     public boolean alreadyHasPieceOnBoard(Piece piece) {
         for (Square[] squareArray : squareBoard) {
@@ -150,7 +150,7 @@ public abstract class Board {
      * Says if an X-coordinate is out of bounds on the board.
      *
      * @param posX desired X-coordinate of a square.
-     * @return {@code true} if the X-coordinate is out of bounds.
+     * @return <em>true</em> if the X-coordinate is out of bounds.
      */
     public abstract boolean xPosOutOfBounds(int posX);
 
@@ -158,7 +158,7 @@ public abstract class Board {
      * Says if a Y-coordinate is out of bounds on the board.
      *
      * @param posY desired Y-coordinate of a square.
-     * @return {@code true} if the Y-coordinate is out of bounds.
+     * @return <em>true</em> if the Y-coordinate is out of bounds.
      */
     public abstract boolean yPosOutOfBounds(int posY);
 

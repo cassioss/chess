@@ -5,8 +5,8 @@ import com.cassio.chess.library.piece.*;
 import java.awt.*;
 
 /**
- * {@code ChessBoard} class - the classic Chess board: 8x8 Squares, 16 Pieces for each player, alternate painting of
- * Squares as either gray (darker color) or white.
+ * <strong>ChessBoard</strong> class - the classic Chess board: 8x8 Squares, 16 Pieces for each player, * alternate
+ * painting of Squares as either gray (darker color) or white.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -120,7 +120,7 @@ public class ChessBoard extends Board {
         putPieceAt(new Knight(true), 7, 6);
         putPieceAt(new Rook(true), 7, 7);
 
-        // Sets flag for game - if those pieces are in play, no other piece should be added
+        // Sets flag for GUI - if those pieces are in play, no other piece should be added
 
         gameFlag = true;
     }
@@ -129,7 +129,7 @@ public class ChessBoard extends Board {
      * Says if an X-coordinate is out of bounds on the board.
      *
      * @param posX desired X-coordinate of a square.
-     * @return {@code true} if the X-coordinate is out of bounds.
+     * @return <em>true</em> if the X-coordinate is out of bounds.
      */
     public boolean xPosOutOfBounds(int posX) {
         return posX < 0 || posX >= COLUMN_COUNT;
@@ -139,7 +139,7 @@ public class ChessBoard extends Board {
      * Says if a Y-coordinate is out of bounds on the board.
      *
      * @param posY desired Y-coordinate of a square.
-     * @return {@code true} if the Y-coordinate is out of bounds.
+     * @return <em>true</em> if the Y-coordinate is out of bounds.
      */
     public boolean yPosOutOfBounds(int posY) {
         return posY < 0 || posY >= ROW_COUNT;

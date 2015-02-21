@@ -4,10 +4,10 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code BishopMoveSet} class - implementation of MoveSet class for bishops. Bishops can move diagonally (with the same
- * displacement at both the X-axis and the Y-axis) in any direction as many squares as possible. The move set stops its
- * updates in a certain direction if it finds a piece (which can be captured if it is an opponent's piece) or the limits
- * of the board.
+ * <strong>BishopMoveSet</strong> class - implementation of MoveSet class for bishops. Bishops can move diagonally (with
+ * the same displacement at both the X-axis and the Y-axis) in any direction as many squares as possible. The move set
+ * stops its updates in a certain direction if it finds a piece (which can be captured if it is an opponent's piece) or
+ * the limits of the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
@@ -80,7 +80,7 @@ public class BishopMoveSet extends MoveSet {
      *
      * @param xPos X-coordinate to be verified.
      * @param yPos Y-coordinate to be verified.
-     * @return {@code true} if any of the coordinates is out of bounds on the referenced chessboard.
+     * @return <em>true</em> if any of the coordinates is out of bounds on the referenced chessboard.
      */
     private boolean outOfBounds(int xPos, int yPos) {
         return referenceBoard.xPosOutOfBounds(xPos) ||

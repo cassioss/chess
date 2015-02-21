@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * {@code BoardTest} class - tests the non-abstract methods of the Board class.
+ * <strong>BoardTest</strong> class - tests the non-abstract methods of the Board class.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -41,28 +41,28 @@ public class BoardTest {
     }
 
     /**
-     * Tests the exception for trying to set a piece in a square when a game is already being played. First case: the
+     * Tests the exception for trying to set a piece in a square when a gui is already being played. First case: the
      * square has no pieces (does not trigger an AlreadyHasPieceException).
      *
-     * @throws com.cassio.chess.exception.board.InGameException for trying to add a new piece when a game has already
+     * @throws com.cassio.chess.exception.board.InGameException for trying to add a new piece when a gui has already
      *                                                          begun.
      */
     @Test(expected = InGameException.class)
     public void testInGameExceptionFirstCase() {
-        testBoard.setupPieces();                    // Sets the game flag
+        testBoard.setupPieces();                    // Sets the gui flag
         testBoard.putPieceAt(new Pawn(true), 2, 2); // A square with no pieces
     }
 
     /**
-     * Tests the exception for trying to set a piece in a square when a game is already being played. Second case: the
+     * Tests the exception for trying to set a piece in a square when a gui is already being played. Second case: the
      * square already has a piece (should trigger an AlreadyHasPieceException).
      *
-     * @throws com.cassio.chess.exception.board.InGameException for trying to add a new piece when a game has already
+     * @throws com.cassio.chess.exception.board.InGameException for trying to add a new piece when a gui has already
      *                                                          begun.
      */
     @Test(expected = InGameException.class)
     public void testInGameExceptionSecondCase() {
-        testBoard.setupPieces();                    // Sets the game flag
+        testBoard.setupPieces();                    // Sets the gui flag
         testBoard.putPieceAt(new Pawn(true), 0, 0); // A square that already has a piece
     }
 

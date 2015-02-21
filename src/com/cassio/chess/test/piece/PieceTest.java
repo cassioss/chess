@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * {@code PieceTest} class - tests the non-abstract methods of the Piece class.
+ * <strong>PieceTest</strong> class - tests the non-abstract methods of the Piece class.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

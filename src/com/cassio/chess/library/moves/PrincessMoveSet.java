@@ -4,9 +4,9 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code PrincessMoveSet} class - implementation of MoveSet class for princesses. A princess is a fairy chess piece
- * with the compound moves of a Knight piece and a Bishop piece. Although this piece gets the moves of a Knight, it can
- * only jump to other squares when it moves as a Knight.
+ * <strong>PrincessMoveSet</strong>  class - implementation of MoveSet class for princesses. A princess is a fairy chess
+ * piece with the compound moves of a Knight piece and a Bishop piece. Although this piece gets the moves of a Knight,
+ * it can only jump to other squares when it moves as a Knight.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0

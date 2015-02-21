@@ -6,10 +6,10 @@ import com.cassio.chess.library.board.Square;
 import java.util.HashSet;
 
 /**
- * {@code MoveSet} class - has a list of possible squares for a piece to move in a board. The main reasons for creating
- * this class is that (1) most pieces share the same moves (for example, the Queen can move the same way as a Rook or a
- * Bishop), (2) sets do not accept copies, and (3) having a set of possible moves eases the job to find whether a King
- * piece is in check or checkmate. It is abstract so it can be implemented differently for each piece.
+ * <strong>MoveSet</strong> class - has a list of possible squares for a piece to move in a board. The main reasons for
+ * creating this class is that (1) most pieces share the same moves (for example, the Queen can move the same way as a
+ * Rook or a Bishop), (2) sets do not accept copies, and (3) having a set of possible moves eases the job to find
+ * whether a King piece is in check or checkmate. It is abstract so it can be implemented differently for each piece.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
@@ -55,7 +55,7 @@ public abstract class MoveSet {
      *
      * @param posX X-coordinate of the piece to be compared.
      * @param posY Y-coordinate of the piece to be compared.
-     * @return {@code true} if there is a piece on that position and if the pieces have the same color.
+     * @return <em>true</em> if there is a piece on that position and if the pieces have the same color.
      */
     protected boolean playerPieceAt(int posX, int posY) {
         return referenceBoard.hasPieceAt(posX, posY) && referenceBoard.getPieceAt(posX, posY).isBlack() ==
@@ -67,7 +67,7 @@ public abstract class MoveSet {
      *
      * @param posX X-coordinate of the piece to be compared.
      * @param posY Y-coordinate of the piece to be compared.
-     * @return {@code true} if there is a piece on that position and if the pieces have different colors.
+     * @return <em>true</em> if there is a piece on that position and if the pieces have different colors.
      */
     protected boolean opponentPieceAt(int posX, int posY) {
         return referenceBoard.hasPieceAt(posX, posY) && referenceBoard.getPieceAt(posX, posY).isBlack() !=

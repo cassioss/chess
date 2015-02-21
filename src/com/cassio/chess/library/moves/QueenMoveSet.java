@@ -4,8 +4,8 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code QueenMoveSet} class - implementation of MoveSet class for queens. Queens have the same move freedom as rooks
- * and bishops, being able to move diagonally, vertically and horizontally as many squares as possible.
+ * <strong>QueenMoveSet</strong>  class - implementation of MoveSet class for queens. Queens have the same move freedom
+ * as rooks and bishops, being able to move diagonally, vertically and horizontally as many squares as possible.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
@@ -13,6 +13,7 @@ import com.cassio.chess.library.board.Square;
  */
 
 public class QueenMoveSet extends MoveSet {
+
     /**
      * Creates a new queen move set having a square, a board and a color as reference.
      *

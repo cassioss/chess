@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 
 /**
- * {@code RunAllTests} class - triggers all the test suites in the package.
+ * <strong>RunAllTests</strong> class - triggers all the test suites in the package.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

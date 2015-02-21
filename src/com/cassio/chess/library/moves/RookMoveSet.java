@@ -4,9 +4,9 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code RookMoveSet} class - implementation of MoveSet class for rooks. Rooks can move horizontally or vertically as
- * many squares as possible. The move set stops its updates in a certain direction if it finds a piece (which can be
- * captured if it is an opponent's piece) or the limits of the board.
+ * <strong>RookMoveSet</strong> class - implementation of MoveSet class for rooks. Rooks can move horizontally or
+ * vertically as many squares as possible. The move set stops its updates in a certain direction if it finds a piece
+ * (which can be captured if it is an opponent's piece) or the limits of the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
@@ -65,7 +65,6 @@ public class RookMoveSet extends MoveSet {
             } else addSquareAt(getRefX(), yPos);
         }
     }
-
 
     /**
      * Goes through all the horizontal squares in a certain direction, according to a pace.

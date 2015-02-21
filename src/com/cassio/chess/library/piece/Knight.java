@@ -5,8 +5,8 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.KnightMoveSet;
 
 /**
- * {@code Knight} class - defines a knight and its basic moves. Knights can "jump" directly to the squares, and their
- * moves have an L-shape: two squares to one direction, one square to the other direction.
+ * <strong>Knight</strong> class - defines a knight and its basic moves. Knights can "jump" directly to the squares,
+ * and their moves have an L-shape: two squares to one direction, one square to the other direction.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

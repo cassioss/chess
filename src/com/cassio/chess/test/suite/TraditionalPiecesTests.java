@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * {@code TraditionalPiecesTests} class - triggers the tests of all the traditional pieces on a chessboard.
+ * <strong>TraditionalPiecesTests</strong> class - triggers the tests of all the traditional pieces on a chessboard.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

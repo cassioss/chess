@@ -5,10 +5,10 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.BishopMoveSet;
 
 /**
- * {@code Bishop} class - defines a bishop and its basic moves. Bishops can move diagonally (with the same displacement
- * at both the X-axis and the Y-axis) in any direction as many squares as possible. The move set stops its updates in a
- * certain direction if it finds a piece (which can be captured if it is an opponent's piece) or the limits of the
- * board.
+ * <strong>Bishop</strong> class - defines a bishop and its basic moves. Bishops can move diagonally (with the same
+ * displacement at both the X-axis and the Y-axis) in any direction as many squares as possible. The move set stops its
+ * updates in a certain direction if it finds a piece (which can be captured if it is an opponent's piece) or the limits
+ * of the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

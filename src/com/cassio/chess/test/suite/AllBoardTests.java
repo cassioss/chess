@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * {@code AllBoardTests} class - triggers the tests of all the classes related to the (chess)board's logic.
+ * <strong>AllBoardTests</strong> class - triggers the tests of all the classes related to the (chess)board's logic.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

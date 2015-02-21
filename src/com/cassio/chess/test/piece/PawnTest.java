@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * {@code PawnTest} class - tests the methods and verifies the expected behavior of a pawn in a chessboard, given its
- * MoveSet limitations.
+ * <strong>PawnTest</strong> class - tests the methods and verifies the expected behavior of a pawn in a chessboard,
+ * given its MoveSet limitations.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

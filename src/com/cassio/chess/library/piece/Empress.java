@@ -5,9 +5,9 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.EmpressMoveSet;
 
 /**
- * {@code Empress} class - defines an empress and its basic moves. An empress is a fairy chess piece with the compound
- * moves of a Knight piece and a Rook piece. Although this piece gets the moves of a Knight, it can only jump to other
- * squares when it moves as a Knight.
+ * <strong>Empress</strong> class - defines an empress and its basic moves. An empress is a fairy chess piece with the
+ * compound moves of a Knight piece and a Rook piece. Although this piece gets the moves of a Knight, it can only jump
+ * to other squares when it moves as a Knight.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0

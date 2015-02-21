@@ -7,9 +7,9 @@ import com.cassio.chess.library.moves.MoveSet;
 import java.util.HashSet;
 
 /**
- * {@code Piece} class - defines basic attributes of a piece (color, move set, path to image and how up-to-date is its
- * move set). The creation of a piece and its positioning (as well as implementation of moves) is dependent on the
- * board.
+ * <strong>Piece</strong> class - defines basic attributes of a piece (color, move set, path to image and how up-to-date
+ * is its move set). The creation of a piece and its positioning (as well as implementation of moves) is dependent on
+ * the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1
@@ -38,7 +38,7 @@ public abstract class Piece {
     /**
      * Gets the color choice of the piece.
      *
-     * @return {@code true} if the piece color is black, {@code false} if the piece color is white.
+     * @return <em>true</em> if the piece color is black, <em>false</em> if the piece color is white.
      */
     public boolean isBlack() {
         return this.isBlack;
@@ -67,10 +67,19 @@ public abstract class Piece {
      * Checks if a square is in the piece's move set, in order to verify if a specific move is possible.
      *
      * @param square a desired square for movement.
-     * @return {@code true} if the square is in the move set of the piece.
+     * @return <em>true</em> if the square is in the move set of the piece.
      */
     public boolean canMoveTo(Square square) {
         return moveSet.contains(square);
+    }
+
+    /**
+     * Gets the relative path to a piece's image.
+     *
+     * @return a String referring to a path to the piece's image.
+     */
+    public String getPathToImage() {
+        return this.pathToImage;
     }
 
 }

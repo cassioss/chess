@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.awt.*;
 
 /**
- * {@code ChessBoardTest} class - tests the specific implementations of a traditional chessboard.
+ * <strong>ChessBoardTest</strong> class - tests the specific implementations of a traditional chessboard.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

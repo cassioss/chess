@@ -5,9 +5,9 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.RookMoveSet;
 
 /**
- * {@code Rook} class - defines a rook and its basic moves. Rooks can move horizontally or vertically as many squares as
- * possible. The move set stops its updates in a certain direction if it finds a piece (which can be captured if it is
- * an opponent's piece) or the limits of the board.
+ * <strong>Rook</strong> class - defines a rook and its basic moves. Rooks can move horizontally or vertically as many
+ * squares as possible. The move set stops its updates in a certain direction if it finds a piece (which can be captured
+ * if it is an opponent's piece) or the limits of the board.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

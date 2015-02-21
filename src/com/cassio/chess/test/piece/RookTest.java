@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * {@code RookTest} class - tests the methods and verifies the expected behavior of a rook in a chessboard, given its
- * MoveSet limitations.
+ * <strong>RookTest</strong> class - tests the methods and verifies the expected behavior of a rook in a chessboard,
+ * given its MoveSet limitations.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

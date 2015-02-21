@@ -4,14 +4,15 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code KnightMoveSet} class - implementation of MoveSet class for knights. Knights can "jump" directly to the
- * squares, and their moves have an L-shape: two squares to one direction, one square to the other direction.
+ * <strong>KnightMoveSet</strong> class - implementation of MoveSet class for knights. Knights can "jump" directly to
+ * the squares, and their moves have an L-shape: two squares to one direction, one square to the other direction.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
  * @see com.cassio.chess.library.moves.MoveSet
  */
 public class KnightMoveSet extends MoveSet {
+
     /**
      * Creates a new move set having a square, a board and a color as reference.
      *

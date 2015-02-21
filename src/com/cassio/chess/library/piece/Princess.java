@@ -5,9 +5,9 @@ import com.cassio.chess.library.board.Square;
 import com.cassio.chess.library.moves.PrincessMoveSet;
 
 /**
- * {@code Princess} class - defines a princess and its basic moves. A princess is a fairy chess piece with the compound
- * moves of a Knight piece and a Bishop piece. Although this piece gets the moves of a Knight, it can only jump to other
- * squares when it moves as a Knight.
+ * <strong>Princess</strong> class - defines a princess and its basic moves. A princess is a fairy chess piece with the
+ * compound moves of a Knight piece and a Bishop piece. Although this piece gets the moves of a Knight, it can only jump
+ * to other squares when it moves as a Knight.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0

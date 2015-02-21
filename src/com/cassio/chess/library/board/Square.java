@@ -5,9 +5,9 @@ import com.cassio.chess.library.piece.Piece;
 import java.awt.Color;
 
 /**
- * {@code Square} class - describes a chessboard square and its basic properties: color, position and piece over it. The
- * painting is done according to the chessboard that creates it, and the pieces are set depending on the game - which
- * requires these properties to be protected.
+ * <strong>Square</strong> class - describes a chessboard square and its basic properties: color, position and piece
+ * over it. The painting is done according to the chessboard that creates it, and the pieces are set depending on the
+ * GUI - which requires these properties to be protected.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.1

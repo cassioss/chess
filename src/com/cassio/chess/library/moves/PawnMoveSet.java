@@ -4,10 +4,10 @@ import com.cassio.chess.library.board.Board;
 import com.cassio.chess.library.board.Square;
 
 /**
- * {@code PawnMoveSet} class - implementation of MoveSet class for pawns. Pawns can only move one square ahead (which is
- * different depending on the piece color) if it's not blocked by any piece (even an opponent's piece), and can only
- * capture pieces one diagonal square ahead (for any side). If it is the first move of a pawn, it may move two squares
- * to its front.
+ * <strong>PawnMoveSet</strong> class - implementation of MoveSet class for pawns. Pawns can only move one square ahead
+ * (which is different depending on the piece color) if it's not blocked by any piece (even an opponent's piece), and
+ * can only capture pieces one diagonal square ahead (for any side). If it is the first move of a pawn, it may move two
+ * squares to its front.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
