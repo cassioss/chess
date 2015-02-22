@@ -111,5 +111,24 @@ public class PawnTest {
         assert !testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 3));
     }
 
+    /**
+     * Tests the initial two-square move of a white pawn.
+     */
+    @Test
+    public void testWhitePawnTwoSquareInitialMove() {
+        Pawn testWhitePawn = new Pawn(false);
+        testBoard.putPieceAt(testWhitePawn, 2, 2);
+        assert testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 4));
+    }
 
+
+    /**
+     * Tests the initial two-square move of a black pawn.
+     */
+    @Test
+    public void testBlackPawnTwoSquareInitialMove() {
+        Pawn testBlackPawn = new Pawn(true);
+        testBoard.putPieceAt(testBlackPawn, 2, 2);
+        assert testBlackPawn.canMoveTo(testBoard.getSquareAt(2, 0));
+    }
 }

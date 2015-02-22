@@ -15,6 +15,8 @@ import com.cassio.chess.library.board.Square;
  */
 public class PawnMoveSet extends MoveSet {
 
+    private boolean isFirstMove;
+
     /**
      * Creates a new move set for a Pawn having a square, a board and a color as reference.
      *
@@ -24,6 +26,7 @@ public class PawnMoveSet extends MoveSet {
      */
     public PawnMoveSet(Square referenceSquare, Board referenceBoard, boolean colorChoice) {
         super(referenceSquare, referenceBoard, colorChoice);
+        isFirstMove = true;
     }
 
     /**
@@ -38,21 +41,27 @@ public class PawnMoveSet extends MoveSet {
     }
 
     /**
-     * Moves to be learnt by a white pawn. They can only move or capture upwards.
+     * Moves to be learnt by a white pawn. They can only move or capture upwards. If it is their initial move, they may
+     * move two squares downwards.
      */
     private void learnWhitePawnMoveSet() {
         addSquareWithReferenceIfNotBlocked(0, 1);
         addSquareWithReferenceIfCanCapture(1, 1);
         addSquareWithReferenceIfCanCapture(-1, 1);
+        if (isFirstMove)
+            addSquareWithReferenceIfNotBlocked(0, 2);
     }
 
     /**
-     * Moves to be learnt by a black pawn. They can only move or capture downwards.
+     * Moves to be learnt by a black pawn. They can only move or capture downwards. If it is their initial move, they
+     * may move two squares downwards.
      */
     private void learnBlackPawnMoveSet() {
         addSquareWithReferenceIfNotBlocked(0, -1);
         addSquareWithReferenceIfCanCapture(1, -1);
         addSquareWithReferenceIfCanCapture(-1, -1);
+        if (isFirstMove)
+            addSquareWithReferenceIfNotBlocked(0, -2);
     }
 
     /**
