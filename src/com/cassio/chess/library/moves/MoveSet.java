@@ -110,4 +110,16 @@ public abstract class MoveSet {
     public void requestUpdate() {
         learnMoveSet();
     }
+
+    public void declareMove(int posX, int posY) {
+        if (possibleMoves.contains(referenceBoard.getSquareAt(posX, posY))) {
+            Square previousSquare = referenceSquare;
+            changeReferenceSquareTo(posX, posY);
+            referenceBoard.movePieceTo(previousSquare, posX, posY);
+        }
+    }
+
+    private void changeReferenceSquareTo(int posX, int posY) {
+        referenceSquare = referenceBoard.getSquareAt(posX, posY);
+    }
 }

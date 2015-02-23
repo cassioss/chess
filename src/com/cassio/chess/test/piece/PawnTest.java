@@ -112,6 +112,32 @@ public class PawnTest {
     }
 
     /**
+     * Tests if a black pawn is unable to move if a piece is in front if it, regardless of the color. First case:
+     * another black piece is blocking its way.
+     */
+    @Test
+    public void testBlackPawnBlockedByWhite() {
+        Pawn testBlackPawnOne = new Pawn(true);
+        Pawn testBlackPawnTwo = new Pawn(true);
+        testBoard.putPieceAt(testBlackPawnOne, 2, 2);
+        testBoard.putPieceAt(testBlackPawnTwo, 2, 3);
+        assert !testBlackPawnTwo.canMoveTo(testBoard.getSquareAt(2, 2));
+    }
+
+    /**
+     * Tests if a black pawn is unable to move if a piece is in front if it, regardless of the color. Second case: a
+     * white piece is blocking its way.
+     */
+    @Test
+    public void testBlackPawnBlockedByBlack() {
+        Pawn testBlackPawn = new Pawn(true);
+        Pawn testWhitePawn = new Pawn(false);
+        testBoard.putPieceAt(testBlackPawn, 2, 3);
+        testBoard.putPieceAt(testWhitePawn, 2, 2);
+        assert !testBlackPawn.canMoveTo(testBoard.getSquareAt(2, 2));
+    }
+
+    /**
      * Tests the initial two-square move of a white pawn.
      */
     @Test
@@ -131,4 +157,45 @@ public class PawnTest {
         testBoard.putPieceAt(testBlackPawn, 2, 2);
         assert testBlackPawn.canMoveTo(testBoard.getSquareAt(2, 0));
     }
+
+    /**
+     * Tests the initial two-square move of a white pawn being blocked by another piece.
+     */
+    @Test
+    public void testWhitePawnTwoSquareMoveBlocked() {
+        Pawn testWhitePawn = new Pawn(false);
+        Pawn testBlackPawn = new Pawn(true);
+        testBoard.putPieceAt(testWhitePawn, 2, 2);
+        testBoard.putPieceAt(testBlackPawn, 2, 3);
+        assert !testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 4));
+    }
+
+    /**
+     * Tests the initial two-square move of a black pawn being blocked by another piece.
+     */
+    @Test
+    public void testBlackPawnTwoSquareMoveBlocked() {
+        Pawn testBlackPawn = new Pawn(true);
+        Pawn testWhitePawn = new Pawn(false);
+        testBoard.putPieceAt(testBlackPawn, 2, 4);
+        testBoard.putPieceAt(testWhitePawn, 2, 3);
+        assert !testBlackPawn.canMoveTo(testBoard.getSquareAt(2, 2));
+    }
+
+    /**
+     * Tests if the two-square initial move is blocked after a white pawn moves two squares.
+     */
+    @Test
+    public void testWhitePawnAfterTwoSquare() {
+        Pawn testWhitePawn = new Pawn(false);
+        testBoard.putPieceAt(testWhitePawn, 2, 3);
+        assert testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 5));
+        testWhitePawn.moveTo(2, 5);
+        assert !testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 4));
+        assert !testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 5));
+        assert testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 6));
+        assert !testWhitePawn.canMoveTo(testBoard.getSquareAt(2, 7));
+    }
+
+
 }

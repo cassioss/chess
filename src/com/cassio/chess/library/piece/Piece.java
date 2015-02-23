@@ -87,4 +87,14 @@ public abstract class Piece {
         return path;
     }
 
+    /**
+     * Moves to a determined square of the board.
+     *
+     * @param targetX desired X-coordinate to move to.
+     * @param targetY desired Y-coordinate to move to.
+     */
+    public void moveTo(int targetX, int targetY) {
+        referenceMoveSet.declareMove(targetX, targetY);
+    }
+
 }

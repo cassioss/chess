@@ -48,7 +48,7 @@ public class PawnMoveSet extends MoveSet {
         addSquareWithReferenceIfNotBlocked(0, 1);
         addSquareWithReferenceIfCanCapture(1, 1);
         addSquareWithReferenceIfCanCapture(-1, 1);
-        if (isFirstMove)
+        if (isFirstMove && !referenceBoard.hasPieceAt(getRefX(), getRefY() + 1))
             addSquareWithReferenceIfNotBlocked(0, 2);
     }
 
@@ -60,7 +60,7 @@ public class PawnMoveSet extends MoveSet {
         addSquareWithReferenceIfNotBlocked(0, -1);
         addSquareWithReferenceIfCanCapture(1, -1);
         addSquareWithReferenceIfCanCapture(-1, -1);
-        if (isFirstMove)
+        if (isFirstMove && !referenceBoard.hasPieceAt(getRefX(), getRefY() - 1))
             addSquareWithReferenceIfNotBlocked(0, -2);
     }
 

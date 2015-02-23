@@ -97,6 +97,11 @@ public abstract class Board {
         updateAllPieces();
     }
 
+    public void movePieceTo(Square originalSquare, int posX, int posY) {
+        squareBoard[posX][posY].squarePiece = originalSquare.getSquarePiece();
+        originalSquare.squarePiece = null;
+    }
+
     /**
      * Updates the move set of all pieces in the board.
      */

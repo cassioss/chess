@@ -32,23 +32,50 @@ public class PieceTest {
      */
     @Test
     public void testUpdateMoveSet() {
-        Piece testPieceOne = new Queen(true);
-        testBoard.putPieceAt(testPieceOne, 0, 0);
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 1));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 2));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 3)); // Vertical moves allowed
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 4)); // in the case of a queen
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 5));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 6));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 7));
-        Piece testPieceTwo = new Queen(true);
-        testBoard.putPieceAt(testPieceTwo, 0, 3);
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 1));
-        assert testPieceOne.canMoveTo(testBoard.getSquareAt(0, 2));
-        assert !testPieceOne.canMoveTo(testBoard.getSquareAt(0, 3)); // With a new piece in the way,
-        assert !testPieceOne.canMoveTo(testBoard.getSquareAt(0, 4)); // the moves above become invalid
-        assert !testPieceOne.canMoveTo(testBoard.getSquareAt(0, 5));
-        assert !testPieceOne.canMoveTo(testBoard.getSquareAt(0, 6));
-        assert !testPieceOne.canMoveTo(testBoard.getSquareAt(0, 7));
+        Piece testQueenOne = new Queen(true);
+        testBoard.putPieceAt(testQueenOne, 0, 0);
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 1));
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 2));
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 3)); // Vertical moves allowed
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 4)); // in the case of a queen
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 5));
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 6));
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 7));
+        Piece testQueenTwo = new Queen(true);
+        testBoard.putPieceAt(testQueenTwo, 0, 3);
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 1));
+        assert testQueenOne.canMoveTo(testBoard.getSquareAt(0, 2));
+        assert !testQueenOne.canMoveTo(testBoard.getSquareAt(0, 3)); // With a new piece in the way,
+        assert !testQueenOne.canMoveTo(testBoard.getSquareAt(0, 4)); // the moves above become invalid
+        assert !testQueenOne.canMoveTo(testBoard.getSquareAt(0, 5));
+        assert !testQueenOne.canMoveTo(testBoard.getSquareAt(0, 6));
+        assert !testQueenOne.canMoveTo(testBoard.getSquareAt(0, 7));
+    }
+
+    /**
+     * Tests the change of pieces after a move has been declared.
+     */
+    @Test
+    public void testChangeOfPiecesAfterMove() {
+        Piece testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 0, 0);
+        assert testQueen.canMoveTo(testBoard.getSquareAt(0, 3));
+        testQueen.moveTo(0, 3);
+        assert testBoard.getPieceAt(0, 0) == null;
+        assert testBoard.getPieceAt(0, 3) == testQueen;
+    }
+
+    /**
+     * Tests the change of move set after a move has been declared.
+     */
+    @Test
+    public void testChangeOfMoveSetAfterMove() {
+        Piece testQueen = new Queen(true);
+        testBoard.putPieceAt(testQueen, 0, 0);
+        assert testQueen.canMoveTo(testBoard.getSquareAt(0, 2));    // A possible move
+        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 0));    // An intended move
+        testQueen.moveTo(3, 0);                                     // The actual move
+        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 5));    // A previously impossible move made possible
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(0, 2));   // A previously possible move now impossible
     }
 }
