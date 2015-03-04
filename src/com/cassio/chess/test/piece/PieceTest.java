@@ -73,9 +73,10 @@ public class PieceTest {
         Piece testQueen = new Queen(true);
         testBoard.putPieceAt(testQueen, 0, 0);
         assert testQueen.canMoveTo(testBoard.getSquareAt(0, 2));    // A possible move
-        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 0));    // An intended move
+        assert !testQueen.canMoveTo(testBoard.getSquareAt(3, 5));   // An impossible move
+        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 0));    // An intended (possible) move
         testQueen.moveTo(3, 0);                                     // The actual move
-        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 5));    // A previously impossible move made possible
         assert !testQueen.canMoveTo(testBoard.getSquareAt(0, 2));   // A previously possible move now impossible
+        assert testQueen.canMoveTo(testBoard.getSquareAt(3, 5));    // A previously impossible move made possible
     }
 }
