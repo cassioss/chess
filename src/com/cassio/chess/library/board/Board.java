@@ -98,7 +98,7 @@ public abstract class Board {
     }
 
     /**
-     * Moves a piece to a specific square on the board.
+     * Moves a piece to a specific square on the board. After updating the piece, all move sets must be updated.
      *
      * @param originalSquare original square of a piece.
      * @param posX           desired X-coordinate of the piece.
@@ -107,6 +107,7 @@ public abstract class Board {
     public void movePieceTo(Square originalSquare, int posX, int posY) {
         squareBoard[posX][posY].squarePiece = originalSquare.getSquarePiece();
         originalSquare.squarePiece = null;
+        updateAllPieces();
     }
 
     /**
