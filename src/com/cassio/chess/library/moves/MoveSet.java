@@ -12,7 +12,8 @@ import java.util.HashSet;
  * whether a King piece is in check or checkmate. It is abstract so it can be implemented differently for each piece.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.0
+ * @version 1.1
+ * @since 1.0
  */
 public abstract class MoveSet {
 
@@ -115,6 +116,8 @@ public abstract class MoveSet {
         if (possibleMoves.contains(referenceBoard.getSquareAt(posX, posY))) {
             Square previousSquare = referenceSquare;
             changeReferenceSquareTo(posX, posY);
+            possibleMoves.clear();
+            possibleMoves = new HashSet<Square>();
             referenceBoard.movePieceTo(previousSquare, posX, posY);
         }
     }

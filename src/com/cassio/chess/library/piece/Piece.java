@@ -12,8 +12,8 @@ import java.util.HashSet;
  * the board.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.1
- * @since 1.0
+ * @version 1.2
+ * @since 1.1
  */
 public abstract class Piece {
 
@@ -48,7 +48,6 @@ public abstract class Piece {
      */
     public void updateMoveSet() {
         moveSet.clear();
-        moveSet = new HashSet<Square>();
         referenceMoveSet.requestUpdate();
         moveSet = referenceMoveSet.getMoves();
     }

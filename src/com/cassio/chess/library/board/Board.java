@@ -10,8 +10,8 @@ import com.cassio.chess.library.piece.Piece;
  * methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.1
- * @since 1.0
+ * @version 1.2
+ * @since 1.1
  */
 public abstract class Board {
 
@@ -82,7 +82,7 @@ public abstract class Board {
      * square of another piece, an exception must be thrown.
      *
      * @param piece a piece to be put at a specific position.
-     * @param posX  desired Y-coordinate of the piece.
+     * @param posX  desired X-coordinate of the piece.
      * @param posY  desired Y-coordinate of the piece.
      */
     public void putPieceAt(Piece piece, int posX, int posY) {
@@ -97,6 +97,13 @@ public abstract class Board {
         updateAllPieces();
     }
 
+    /**
+     * Moves a piece to a specific square on the board.
+     *
+     * @param originalSquare original square of a piece.
+     * @param posX           desired X-coordinate of the piece.
+     * @param posY           desired Y-coordinate of the piece.
+     */
     public void movePieceTo(Square originalSquare, int posX, int posY) {
         squareBoard[posX][posY].squarePiece = originalSquare.getSquarePiece();
         originalSquare.squarePiece = null;
@@ -166,6 +173,5 @@ public abstract class Board {
      * @return <em>true</em> if the Y-coordinate is out of bounds.
      */
     public abstract boolean yPosOutOfBounds(int posY);
-
 
 }
