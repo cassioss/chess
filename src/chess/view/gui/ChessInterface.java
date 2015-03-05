@@ -166,15 +166,4 @@ public class ChessInterface implements ActionListener {
             }
         }
     }
-
-    /**
-     * Main function that draws a new chessboard.
-     *
-     * @param args String entries - none are required.
-     */
-    public static void main(String[] args) {
-        ChessBoard newBoard = new ChessBoard();
-        newBoard.setupPieces();
-        new ChessInterface(newBoard);
-    }
 }
