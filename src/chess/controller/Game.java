@@ -13,8 +13,8 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private static ChessBoard gameBoard;
-    private static ChessInterface chessGui;
+    private ChessBoard gameBoard;
+    private ChessInterface chessGui;
     private int plays_counter;
     private LinkedList<ChessBoard> previous_games;
     private boolean canRedo, canUndo;
@@ -23,7 +23,7 @@ public class Game {
     /**
      * Starts a new game.
      */
-    public Game(){
+    public Game() {
         previous_games = new LinkedList<ChessBoard>();
         plays_counter = 0;
         canRedo = canUndo = false;
@@ -31,21 +31,28 @@ public class Game {
         whitePlayerTurn = true;
     }
 
-    private void undo(){
-
+    /**
+     * Method that undoes the previous move, if possible.
+     */
+    private void undo() {
+        if (canUndo) {
+            gameBoard = previous_games.get(--plays_counter);
+        }
     }
 
     /**
-     * Returns the game to the previous play.
+     * Method that redoes an undone move, if possible.
      */
-    private void redo(){
-
+    private void redo() {
+        if (canRedo) {
+            gameBoard = previous_games.get(plays_counter++);
+        }
     }
 
     /**
      * Saves the existing game.
      */
-    private void saveGame(){
+    private void saveGame() {
         previous_games.add(plays_counter++, gameBoard);
         canRedo = false;
     }
@@ -53,7 +60,7 @@ public class Game {
     /**
      * Starts the game itself.
      */
-    private void beginGame(){
+    private void beginGame() {
         gameBoard.setupPieces();
         chessGui = new ChessInterface(gameBoard);
     }
