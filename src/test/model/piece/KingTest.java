@@ -23,7 +23,7 @@ public class KingTest {
 
     /**
      * Creates an empty, not-for-playing chessboard for testing purposes, creating kings in both extremes of the
-     * board. Setting them up like this helps gua
+     * board. Setting them up like this helps verifying check/checkmate conditions.
      */
     @Before
     public void setUp() {
