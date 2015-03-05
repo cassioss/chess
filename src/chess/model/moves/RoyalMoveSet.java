@@ -13,7 +13,7 @@ import chess.model.board.Square;
  */
 public abstract class RoyalMoveSet extends MoveSet {
 
-    private boolean isInCheck, isInCheckMate;
+    private boolean isInCheck;
 
     /**
      * Creates a new move set having a square, a board and a color as reference.
@@ -24,7 +24,7 @@ public abstract class RoyalMoveSet extends MoveSet {
      */
     public RoyalMoveSet(Square referenceSquare, Board referenceBoard, boolean colorChoice) {
         super(referenceSquare, referenceBoard, colorChoice);
-        isInCheck = isInCheckMate = false;
+        isInCheck = false;
     }
 
     /**
@@ -35,7 +35,8 @@ public abstract class RoyalMoveSet extends MoveSet {
      * @return <em>true</em> if the intended square is being threatened by the opponent.
      */
     private boolean squareThreatenedAt(int posX, int posY) {
-        return referenceBoard.checkThreatAt(posX, posY, colorChoice);
+        return !referenceBoard.xPosOutOfBounds(posX) && !referenceBoard.yPosOutOfBounds(posY) &&
+                referenceBoard.checkThreatAt(posX, posY, colorChoice);
     }
 
     /**
@@ -52,17 +53,10 @@ public abstract class RoyalMoveSet extends MoveSet {
      *
      * @return <em>true</em> if the piece is in check.
      */
-    public boolean getInCheck(){
+    public boolean getInCheck() {
+        if(isBeingAttacked())
+            isInCheck = true;
         return isInCheck;
-    }
-
-    /**
-     * Gets the value of the isInCheckMate boolean.
-     *
-     * @return <em>true</em> if the piece is in checkmate.
-     */
-    public boolean getInCheckMate(){
-        return isInCheckMate;
     }
 
     /**
@@ -72,8 +66,9 @@ public abstract class RoyalMoveSet extends MoveSet {
      * @param posY Y-coordinate of a square being checked on the board.
      */
     protected void addSquareIfNotThreatened(int posX, int posY) {
-        if(!squareThreatenedAt(posX, posY))
-            addSquareAt(posX, posY);
+        if (referenceBoard.hasSquareAt(posX, posY))
+            if (!squareThreatenedAt(posX, posY))
+                addSquareAt(posX, posY);
     }
 
 }

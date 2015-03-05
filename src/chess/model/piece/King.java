@@ -3,6 +3,7 @@ package chess.model.piece;
 import chess.model.board.Board;
 import chess.model.board.Square;
 import chess.model.moves.KingMoveSet;
+import chess.model.moves.RoyalMoveSet;
 
 /**
  * <strong>King</strong> class - defines a king and its basic commands. If a king's square can be captured by one of the
@@ -34,4 +35,14 @@ public class King extends Piece {
     public void learnMoveSetFrom(Square referenceSquare, Board referenceBoard) {
         referenceMoveSet = new KingMoveSet(referenceSquare, referenceBoard, this.isBlack);
     }
+
+    /**
+     * Checks if a king (a royal piece) is being threatened.
+     *
+     * @return <em>true</em> if the king is in check.
+     */
+    public boolean isThreatened() {
+        return referenceMoveSet instanceof RoyalMoveSet && ((RoyalMoveSet) referenceMoveSet).getInCheck();
+    }
+
 }

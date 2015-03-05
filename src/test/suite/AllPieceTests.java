@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({PieceTest.class, PawnTest.class, RookTest.class, BishopTest.class, KnightTest.class, QueenTest
-        .class, EmpressTest.class, PrincessTest.class})
+        .class, EmpressTest.class, PrincessTest.class, KingTest.class})
 public class AllPieceTests {
 
 }

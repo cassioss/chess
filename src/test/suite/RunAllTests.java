@@ -3,7 +3,6 @@ package test.suite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-
 /**
  * <strong>RunAllTests</strong> class - triggers all the test suites in the package.
  *
