@@ -13,7 +13,6 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private static final String PIECE_IN_CHECK = "King";
     private static ChessBoard gameBoard;
     private static ChessInterface chessGui;
     private int plays_counter;
@@ -68,6 +67,5 @@ public class Game {
         Game chessGame = new Game();
         chessGame.beginGame();
     }
-
 
 }

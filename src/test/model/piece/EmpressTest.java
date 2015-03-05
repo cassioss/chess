@@ -4,12 +4,12 @@ import chess.model.piece.Empress;
 import org.junit.Test;
 
 /**
-        * <strong>EmpressTest</strong> class - tests the methods and verifies the expected behavior of an empress in a
-        * chessboard, given its MoveSet limitations.
-        *
-        * @author Cassio dos Santos Sousa
-        * @version 1.0
-        */
+ * <strong>EmpressTest</strong> class - tests the methods and verifies the expected behavior of an empress in a
+ * chessboard, given its MoveSet limitations.
+ *
+ * @author Cassio dos Santos Sousa
+ * @version 1.0
+ */
 public class EmpressTest {
 
     /**

@@ -182,10 +182,10 @@ public abstract class Board {
      *
      * @param selectedPiece piece selected by a player.
      */
-    public void showAvailableMovesOf(Piece selectedPiece){
-        for(Square[] squareArray: squareBoard){
-            for(Square s: squareArray){
-                if(selectedPiece.canMoveTo(s))
+    public void showAvailableMovesOf(Piece selectedPiece) {
+        for (Square[] squareArray : squareBoard) {
+            for (Square s : squareArray) {
+                if (selectedPiece.canMoveTo(s))
                     s.squareColor = Color.GREEN;
             }
         }
@@ -194,8 +194,27 @@ public abstract class Board {
     /**
      * Returns the original coloring of the chessboard when a piece is unselected.
      */
-    public void unselectPiece(){
+    public void unselectPiece() {
         paintSquares();
     }
 
+    /**
+     * Checks whether a square is being threatened by the opponent.
+     *
+     * @param posX        X-coordinate to be checked.
+     * @param posY        Y-coordinate to be checked.
+     * @param colorChoice color of the royal piece in question.
+     * @return <em>true</em> if an opponent can move to that square.
+     */
+    public boolean checkThreatAt(int posX, int posY, boolean colorChoice) {
+        for (Square[] squareArray : squareBoard) {
+            for (Square square : squareArray) {
+                if (square.getSquarePiece() != null && square.getSquarePiece().isBlack() != colorChoice) {
+                    if (square.getSquarePiece().canMoveTo(squareBoard[posX][posY]))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 }

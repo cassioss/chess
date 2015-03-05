@@ -10,9 +10,9 @@ import chess.model.board.Square;
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
- * @see chess.model.moves.MoveSet
+ * @see chess.model.moves.RoyalMoveSet
  */
-public class KingMoveSet extends MoveSet {
+public class KingMoveSet extends RoyalMoveSet {
     
     /**
      * Creates a new king move set having a square, a board and a color as reference.
@@ -46,6 +46,6 @@ public class KingMoveSet extends MoveSet {
      * @param distY the Y-distance from a square to referenceSquare.
      */
     private void addSquareWithReferenceAt(int distX, int distY) {
-        addSquareAt(getRefX() + distX, getRefY() + distY);
+        addSquareIfNotThreatened(getRefX() + distX, getRefY() + distY);
     }
 }
