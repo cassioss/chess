@@ -6,8 +6,6 @@ import chess.model.board.Square;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +18,10 @@ import java.util.ArrayList;
  * @author Cassio dos Santos Sousa
  * @version 1.0
  */
-public class ChessInterface implements ActionListener {
+public class ChessInterface {
 
     SquareBoardPaint squarePane;
+    JButton[][] buttonGrid;
 
     /**
      * Draws a chessboard on the screen.
@@ -31,6 +30,7 @@ public class ChessInterface implements ActionListener {
      */
     public ChessInterface(ChessBoard referenceBoard) {
         JFrame frame = new JFrame("\u265A Chess Game \u2654");
+        buttonGrid = new JButton[8][8];
         paintBoardIn(referenceBoard, frame);
         setFrame(frame);
     }
@@ -54,7 +54,7 @@ public class ChessInterface implements ActionListener {
      * @param frame JFrame used for GUI View.
      */
     private void setFrame(JFrame frame) {
-        frame.setSize(807, 830);
+        frame.setSize(1207, 830);
         frame.setLocation(350, 50);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -73,16 +73,6 @@ public class ChessInterface implements ActionListener {
             for (int yPos = 0; yPos < 8; yPos++)
                 squarePane.addSquareAt(referenceBoard.getSquareAt(xPos, yPos), yPos * 100, xPos * 100);
         }
-    }
-
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e some action.
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 
     /**
