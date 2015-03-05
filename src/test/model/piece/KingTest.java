@@ -4,6 +4,7 @@ import chess.model.board.Board;
 import chess.model.board.ChessBoard;
 import chess.model.piece.King;
 import chess.model.piece.Queen;
+import chess.model.piece.Rook;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,10 +18,20 @@ import org.junit.Test;
 public class KingTest {
 
     private Board testBoard;
+    private King testBlackKing;
+    private King testWhiteKing;
 
+    /**
+     * Creates an empty, not-for-playing chessboard for testing purposes, creating kings in both extremes of the
+     * board. Setting them up like this helps gua
+     */
     @Before
     public void setUp() {
         testBoard = new ChessBoard();
+        testBlackKing = new King(true);
+        testWhiteKing = new King(false);
+        testBoard.putPieceAt(testBlackKing, 7, 7);
+        testBoard.putPieceAt(testWhiteKing, 0, 0);
     }
 
     /**
@@ -29,8 +40,6 @@ public class KingTest {
      */
     @Test
     public void testImageGathering() {
-        King testBlackKing = new King(true);
-        King testWhiteKing = new King(false);
         assert testBlackKing.getPathToImage().equals("src/chess/view/img/black_king.png");
         assert testWhiteKing.getPathToImage().equals("src/chess/view/img/white_king.png");
     }
@@ -42,13 +51,38 @@ public class KingTest {
     public void testKingWithoutThreat() {
         Queen testBlackQueen = new Queen(true);
         Queen testWhiteQueen = new Queen(false);
-        King testBlackKing = new King(true);
-        King testWhiteKing = new King(true);
         testBoard.putPieceAt(testBlackQueen, 3, 4);
         testBoard.putPieceAt(testWhiteQueen, 4, 2);
-        testBoard.putPieceAt(testBlackKing, 7, 7);
-        testBoard.putPieceAt(testWhiteKing, 0, 0);
-        assert !testBlackKing.isThreatened();
-        assert !testWhiteKing.isThreatened();
+        assert !testBlackKing.isInCheck();
+        assert !testWhiteKing.isInCheck();
+    }
+
+    /**
+     * Tests a situation where one of the kings is in check on the board.
+     */
+    @Test
+    public void testKingInCheck(){
+        Queen testBlackQueen = new Queen(true);
+        Queen testWhiteQueen = new Queen(false);
+        testBoard.putPieceAt(testBlackQueen, 3, 4);
+        testBoard.putPieceAt(testWhiteQueen, 0, 7);
+        assert testBlackKing.isInCheck();
+        assert !testWhiteKing.isInCheck();
+    }
+
+    /**
+     * Tests a situation where one of the kings is in checkmate on the board.
+     */
+    @Test
+    public void testKingInCheckMate(){
+        Rook testBlackRook = new Rook(true);
+        Rook testWhiteRook = new Rook(false);
+        Queen testWhiteQueen = new Queen(false);
+        testBoard.putPieceAt(testBlackRook, 3, 4);
+        testBoard.putPieceAt(testWhiteRook, 0, 6);
+        testBoard.putPieceAt(testWhiteQueen, 0, 7);
+        assert !testWhiteKing.isInCheck();
+        assert testBlackKing.isInCheck();
+        assert testBlackKing.isInCheckMate();
     }
 }

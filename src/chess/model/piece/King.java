@@ -37,12 +37,21 @@ public class King extends Piece {
     }
 
     /**
-     * Checks if a king (a royal piece) is being threatened.
+     * Checks if a king (a royal piece) is in check (can be attacked by the opponent).
      *
      * @return <em>true</em> if the king is in check.
      */
-    public boolean isThreatened() {
+    public boolean isInCheck() {
         return referenceMoveSet instanceof RoyalMoveSet && ((RoyalMoveSet) referenceMoveSet).getInCheck();
+    }
+
+    /**
+     * Checks if a king (a royal piece) is in checkmate (can be attacked by the opponent, but cannot defend).
+     *
+     * @return <em>true</em> if the king is in checkmate.
+     */
+    public boolean isInCheckMate() {
+        return referenceMoveSet instanceof RoyalMoveSet && ((RoyalMoveSet) referenceMoveSet).getInCheckMate();
     }
 
 }

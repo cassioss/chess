@@ -71,4 +71,12 @@ public abstract class RoyalMoveSet extends MoveSet {
                 addSquareAt(posX, posY);
     }
 
+    public boolean getInCheckMate(){
+        return getInCheck() && cannotMove();
+    }
+
+    private boolean cannotMove() {
+        return possibleMoves == null || possibleMoves.isEmpty();
+    }
+
 }
