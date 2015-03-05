@@ -5,6 +5,8 @@ import exception.InGameException;
 import exception.PieceInPlaceException;
 import chess.model.piece.Piece;
 
+import java.awt.*;
+
 /**
  * <strong>Board</strong> class - abstract class for chessboards. Common methods are implemented, and board-dependent
  * methods (such as Square setup, Square painting, initial disposition of Pieces, and so on) are set as abstract.
@@ -174,5 +176,26 @@ public abstract class Board {
      * @return <em>true</em> if the Y-coordinate is out of bounds.
      */
     public abstract boolean yPosOutOfBounds(int posY);
+
+    /**
+     * Show all the square a piece can move to.
+     *
+     * @param selectedPiece piece selected by a player.
+     */
+    public void showAvailableMovesOf(Piece selectedPiece){
+        for(Square[] squareArray: squareBoard){
+            for(Square s: squareArray){
+                if(selectedPiece.canMoveTo(s))
+                    s.squareColor = Color.GREEN;
+            }
+        }
+    }
+
+    /**
+     * Returns the original coloring of the chessboard when a piece is unselected.
+     */
+    public void unselectPiece(){
+        paintSquares();
+    }
 
 }
