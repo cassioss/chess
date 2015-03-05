@@ -1,6 +1,8 @@
 package chess.controller;
 
+import chess.model.board.Board;
 import chess.model.board.ChessBoard;
+import chess.view.gui.BasicInterface;
 import chess.view.gui.ChessInterface;
 
 import java.util.LinkedList;
@@ -13,22 +15,22 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private ChessBoard gameBoard;
-    private ChessInterface chessGui;
+    private Board gameBoard;
+    private BasicInterface gameGUI;
     private int plays_counter;
-    private LinkedList<ChessBoard> previous_games;
+    private LinkedList<Board> previous_games;
     private boolean canRedo, canUndo;
     private boolean whitePlayerTurn;
 
     /**
      * Starts a new game.
      */
-    public Game() {
-        previous_games = new LinkedList<ChessBoard>();
-        plays_counter = 0;
+    public Game(Board gameBoard) {
+        this.gameBoard = gameBoard;
+        previous_games = new LinkedList<Board>();
         canRedo = canUndo = false;
-        gameBoard = new ChessBoard();
         whitePlayerTurn = true;
+        plays_counter = 0;
     }
 
     /**
@@ -60,9 +62,9 @@ public class Game {
     /**
      * Starts the game itself.
      */
-    private void beginGame() {
+    private void begin() {
         gameBoard.setupPieces();
-        chessGui = new ChessInterface(gameBoard);
+        gameGUI = new ChessInterface(gameBoard);
     }
 
     /**
@@ -71,8 +73,8 @@ public class Game {
      * @param args String entries - none are required.
      */
     public static void main(String[] args) {
-        Game chessGame = new Game();
-        chessGame.beginGame();
+        Game chessGame = new Game(new ChessBoard());
+        chessGame.begin();
     }
 
 }
