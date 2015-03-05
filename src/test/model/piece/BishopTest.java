@@ -28,6 +28,18 @@ public class BishopTest {
     }
 
     /**
+     * Tests if the path to the Bishop's image is correct. The test path is gathered directly from the image using
+     * Ctrl+Shift+C.
+     */
+    @Test
+    public void testImageGathering() {
+        Bishop testBlackBishop = new Bishop(true);
+        Bishop testWhiteBishop = new Bishop(false);
+        assert testBlackBishop.getPathToImage().equals("src/chess/view/img/black_bishop.png");
+        assert testWhiteBishop.getPathToImage().equals("src/chess/view/img/white_bishop.png");
+    }
+
+    /**
      * Tests if a bishop can move diagonally at any direction.
      */
     @Test

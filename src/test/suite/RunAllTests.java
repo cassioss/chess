@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
  * @since 1.0
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AllBoardTests.class, TraditionalPiecesTests.class})
+@Suite.SuiteClasses({AllBoardTests.class, AllPieceTests.class})
 public class RunAllTests {
 
 }

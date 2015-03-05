@@ -28,6 +28,18 @@ public class PawnTest {
     }
 
     /**
+     * Tests if the path to the Pawn's image is correct. The test path is gathered directly from the image using
+     * Ctrl+Shift+C.
+     */
+    @Test
+    public void testImageGathering() {
+        Pawn testBlackPawn = new Pawn(true);
+        Pawn testWhitePawn = new Pawn(false);
+        assert testBlackPawn.getPathToImage().equals("src/chess/view/img/black_pawn.png");
+        assert testWhitePawn.getPathToImage().equals("src/chess/view/img/white_pawn.png");
+    }
+
+    /**
      * Tests the one-square move possibility of a white pawn.
      */
     @Test

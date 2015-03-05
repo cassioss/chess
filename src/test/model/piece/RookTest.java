@@ -28,6 +28,18 @@ public class RookTest {
     }
 
     /**
+     * Tests if the path to the Rook's image is correct. The test path is gathered directly from the image using
+     * Ctrl+Shift+C.
+     */
+    @Test
+    public void testImageGathering() {
+        Rook testBlackRook = new Rook(true);
+        Rook testWhiteRook = new Rook(false);
+        assert testBlackRook.getPathToImage().equals("src/chess/view/img/black_rook.png");
+        assert testWhiteRook.getPathToImage().equals("src/chess/view/img/white_rook.png");
+    }
+
+    /**
      * Tests if a rook can move upwards.
      */
     @Test

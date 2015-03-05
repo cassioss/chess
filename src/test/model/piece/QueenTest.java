@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class QueenTest {
 
-    public Board testBoard;
+    private Board testBoard;
 
     /**
      * Creates an empty, not-for-playing chessboard for testing purposes. It is non-static because a static instance of
@@ -25,6 +25,18 @@ public class QueenTest {
     @Before
     public void setUp() {
         testBoard = new ChessBoard();
+    }
+
+    /**
+     * Tests if the path to the Queen's image is correct. The test path is gathered directly from the image using
+     * Ctrl+Shift+C.
+     */
+    @Test
+    public void testImageGathering() {
+        Queen testBlackQueen = new Queen(true);
+        Queen testWhiteQueen = new Queen(false);
+        assert testBlackQueen.getPathToImage().equals("src/chess/view/img/black_queen.png");
+        assert testWhiteQueen.getPathToImage().equals("src/chess/view/img/white_queen.png");
     }
 
     /**

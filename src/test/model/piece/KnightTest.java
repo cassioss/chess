@@ -28,6 +28,18 @@ public class KnightTest {
     }
 
     /**
+     * Tests if the path to the Knight's image is correct. The test path is gathered directly from the image using
+     * Ctrl+Shift+C.
+     */
+    @Test
+    public void testImageGathering() {
+        Knight testBlackKnight = new Knight(true);
+        Knight testWhiteKnight = new Knight(false);
+        assert testBlackKnight.getPathToImage().equals("src/chess/view/img/black_knight.png");
+        assert testWhiteKnight.getPathToImage().equals("src/chess/view/img/white_knight.png");
+    }
+
+    /**
      * Tests the L-shape moves of a knight.
      */
     @Test

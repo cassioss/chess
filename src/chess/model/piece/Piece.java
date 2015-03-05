@@ -77,7 +77,7 @@ public abstract class Piece {
      * @return a String referring to a path to the piece's image.
      */
     public String getPathToImage() {
-        String path = "src/chess/view/img";
+        String path = "src/chess/view/img/";
         if (isBlack())
             path += "black_";
         else
