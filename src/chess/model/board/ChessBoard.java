@@ -145,11 +145,4 @@ public class ChessBoard extends Board {
         return posY < 0 || posY >= ROW_COUNT;
     }
 
-/*    private static final char[] LETTER_COORDINATES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-
-    public char getLetterCoordinate(int posX) {
-        return LETTER_COORDINATES[posX];
-    }
-
-   */
 }

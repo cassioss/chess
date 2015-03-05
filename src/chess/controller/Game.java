@@ -30,6 +30,17 @@ public class Game {
         chessGui = new ChessInterface(gameBoard);
     }
 
+    private void undo(){
+
+    }
+
+    /**
+     * Brings
+     */
+    private void redo(){
+
+    }
+
     /**
      * Main function that draws a new chessboard.
      *
