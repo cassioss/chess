@@ -1,6 +1,6 @@
 package test.suite;
 
-import test.piece.*;
+import test.model.piece.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

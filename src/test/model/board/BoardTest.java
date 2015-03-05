@@ -1,4 +1,4 @@
-package test.board;
+package test.model.board;
 
 import exception.AlreadyHasPieceException;
 import exception.InGameException;

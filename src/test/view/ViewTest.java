@@ -1,4 +1,4 @@
-package test.gui;
+package test.view;
 
 /**
  * <strong>ViewTest</strong> class - JUnit test case the verifies what the GUI should do and draw on screen. As the test

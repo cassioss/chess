@@ -1,7 +1,7 @@
 package test.suite;
 
-import test.board.BoardTest;
-import test.board.ChessBoardTest;
+import test.model.board.BoardTest;
+import test.model.board.ChessBoardTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

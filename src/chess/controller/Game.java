@@ -6,6 +6,5 @@ package chess.controller;
  * @author Cassio dos Santos Sousa
  * @version 1.0
  */
-
 public class Game {
 }
