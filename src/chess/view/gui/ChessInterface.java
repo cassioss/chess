@@ -1,4 +1,4 @@
-package chess.view;
+package chess.view.gui;
 
 import chess.model.board.ChessBoard;
 import chess.model.board.Square;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @author Cassio dos Santos Sousa
  * @version 1.0
  */
-public class View implements ActionListener {
+public class ChessInterface implements ActionListener {
 
     SquareBoardPaint squarePane;
 
@@ -29,7 +29,7 @@ public class View implements ActionListener {
      *
      * @param referenceBoard chessboard used as reference for painting.
      */
-    public View(ChessBoard referenceBoard) {
+    public ChessInterface(ChessBoard referenceBoard) {
         JFrame frame = new JFrame("\u265A Chess Game \u2654");
         paintBoardIn(referenceBoard, frame);
         setFrame(frame);
@@ -175,6 +175,6 @@ public class View implements ActionListener {
     public static void main(String[] args) {
         ChessBoard newBoard = new ChessBoard();
         newBoard.setupPieces();
-        new View(newBoard);
+        new ChessInterface(newBoard);
     }
 }
