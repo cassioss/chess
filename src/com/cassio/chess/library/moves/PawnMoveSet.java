@@ -15,8 +15,6 @@ import com.cassio.chess.library.board.Square;
  */
 public class PawnMoveSet extends MoveSet {
 
-    private boolean isFirstMove;
-
     /**
      * Creates a new move set for a Pawn having a square, a board and a color as reference.
      *
@@ -26,7 +24,6 @@ public class PawnMoveSet extends MoveSet {
      */
     public PawnMoveSet(Square referenceSquare, Board referenceBoard, boolean colorChoice) {
         super(referenceSquare, referenceBoard, colorChoice);
-        isFirstMove = true;
     }
 
     /**
@@ -48,7 +45,7 @@ public class PawnMoveSet extends MoveSet {
         addSquareWithReferenceIfNotBlocked(0, 1);
         addSquareWithReferenceIfCanCapture(1, 1);
         addSquareWithReferenceIfCanCapture(-1, 1);
-        if (isFirstMove && !referenceBoard.hasPieceAt(getRefX(), getRefY() + 1))
+        if (isFirstMove() && !referenceBoard.hasPieceAt(getRefX(), getRefY() + 1))
             addSquareWithReferenceIfNotBlocked(0, 2);
     }
 
@@ -60,7 +57,7 @@ public class PawnMoveSet extends MoveSet {
         addSquareWithReferenceIfNotBlocked(0, -1);
         addSquareWithReferenceIfCanCapture(1, -1);
         addSquareWithReferenceIfCanCapture(-1, -1);
-        if (isFirstMove && !referenceBoard.hasPieceAt(getRefX(), getRefY() - 1))
+        if (isFirstMove() && !referenceBoard.hasPieceAt(getRefX(), getRefY() - 1))
             addSquareWithReferenceIfNotBlocked(0, -2);
     }
 
@@ -89,5 +86,4 @@ public class PawnMoveSet extends MoveSet {
         if (!referenceBoard.hasPieceAt(refX, refY))
             addSquareAt(refX, refY);
     }
-
 }

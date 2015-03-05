@@ -21,6 +21,7 @@ public abstract class MoveSet {
     protected Square referenceSquare;
     protected Board referenceBoard;
     protected boolean colorChoice;
+    private boolean isFirstMove;
 
     /**
      * Creates a new move set having a square, a board and a color as reference.
@@ -33,6 +34,7 @@ public abstract class MoveSet {
         this.referenceSquare = referenceSquare;
         this.referenceBoard = referenceBoard;
         this.colorChoice = colorChoice;
+        isFirstMove = true;
         possibleMoves = new HashSet<Square>();
         learnMoveSet();
     }
@@ -106,22 +108,54 @@ public abstract class MoveSet {
     }
 
     /**
+     * Checks whether this is the first move of a piece. Useful for pawns, which may move two squares instead of one on
+     * the first turn.
+     *
+     * @return <em>true</em> if it is the first move of a piece.
+     */
+    public boolean isFirstMove() {
+        return isFirstMove;
+    }
+
+    /**
      * Updates a piece's move set by request.
      */
     public void requestUpdate() {
         learnMoveSet();
     }
 
+    /**
+     * Effectively declares a move on the board. If the intended position for the move is available on the
+     * chessboard, all variables involved change accordingly.
+     *
+     * @param posX the intended X-coordinate of a move.
+     * @param posY the intended Y-coordinate of a move.
+     */
     public void declareMove(int posX, int posY) {
         if (possibleMoves.contains(referenceBoard.getSquareAt(posX, posY))) {
             Square previousSquare = referenceSquare;
             changeReferenceSquareTo(posX, posY);
             possibleMoves.clear();
             possibleMoves = new HashSet<Square>();
+            notFirstMove();
             referenceBoard.movePieceTo(previousSquare, posX, posY);
         }
     }
 
+    /**
+     * Helper method that turns the first-move boolean into <em>false</em>.
+     */
+    private void notFirstMove(){
+        if(isFirstMove)
+            isFirstMove = false;
+    }
+
+    /**
+     * Changes the referenced square used for the moveSet to one of the squares on the referenced Board.
+     *
+     * @param posX desired X-coordinate of a square.
+     * @param posY desired Y-coordinate of a square.
+     */
     private void changeReferenceSquareTo(int posX, int posY) {
         referenceSquare = referenceBoard.getSquareAt(posX, posY);
     }
