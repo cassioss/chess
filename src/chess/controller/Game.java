@@ -3,7 +3,6 @@ package chess.controller;
 import chess.model.board.Board;
 import chess.model.board.ChessBoard;
 import chess.view.gui.BasicInterface;
-import chess.view.gui.ChessInterface;
 
 import java.util.LinkedList;
 
@@ -64,7 +63,7 @@ public class Game {
      */
     private void begin() {
         gameBoard.setupPieces();
-        gameGUI = new ChessInterface(gameBoard);
+      //  gameGUI = new ChessInterface(gameBoard);
     }
 
     /**
