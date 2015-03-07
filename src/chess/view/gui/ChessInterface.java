@@ -22,6 +22,10 @@ public class ChessInterface extends BasicInterface {
         super(chessModel);
     }
 
+    protected void setChessLayout() {
+        chessLayout = new GridLayout(8, 0);
+    }
+
     protected void setButtons() {
         buttons = new JButton[8][8];
         for (int posX = 0; posX < 8; posX++) {

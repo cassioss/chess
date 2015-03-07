@@ -31,7 +31,7 @@ public class Game {
         chessFrame = new JFrame("♚ Chess Game ♔");
         chessFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         chessFrame.setSize(880, 880);
-        chessFrame.setResizable(false);
+        //chessFrame.setResizable(false);
         chessFrame.setLocation(350, 50);
         chessFrame.setVisible(true);
     }
