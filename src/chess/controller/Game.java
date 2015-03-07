@@ -30,8 +30,8 @@ public class Game {
     private void setFrame() {
         chessFrame = new JFrame("♚ Chess Game ♔");
         chessFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        chessFrame.setSize(880, 880);
-        //chessFrame.setResizable(false);
+        chessFrame.setSize(1100, 880);
+        chessFrame.setResizable(false);
         chessFrame.setLocation(350, 50);
         chessFrame.setVisible(true);
     }
@@ -40,7 +40,7 @@ public class Game {
      * Fills the frame with.
      */
     private void fillFrame() {
-        JPanel gamePanel = gameGUI.getChessPanel();
+        JSplitPane gamePanel = gameGUI.getChessPanel();
         chessFrame.add(gamePanel);
         chessFrame.setVisible(true);
     }
