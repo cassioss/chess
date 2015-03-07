@@ -3,9 +3,10 @@ package chess.controller;
 import chess.model.board.Board;
 import chess.model.board.ChessBoard;
 import chess.view.gui.BasicInterface;
+import chess.view.gui.ChessInterface;
 
 import javax.swing.*;
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * <strong>Game</strong> class - implements the actual game of Chess.
@@ -18,11 +19,14 @@ public class Game {
     private Board gameBoard;
     private BasicInterface gameGUI;
     private int plays_counter;
-    private LinkedList<Board> previous_games;
+    private Stack<Board> previous_games;
     private boolean canRedo, canUndo;
     private boolean whitePlayerTurn;
     private JFrame chessFrame;
 
+    /**
+     * Configures the main JFrame object for the chess game.
+     */
     private void setFrame() {
         chessFrame = new JFrame("♚ Chess Game ♔");
         chessFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -32,6 +36,9 @@ public class Game {
         chessFrame.setVisible(true);
     }
 
+    /**
+     * Fills the frame with.
+     */
     private void fillFrame() {
         JPanel gamePanel = gameGUI.getChessPanel();
         chessFrame.add(gamePanel);
@@ -44,8 +51,8 @@ public class Game {
     public Game() {
         gameBoard = new ChessBoard();
         gameBoard.setupPieces();
-        gameGUI = new BasicInterface(gameBoard);
-        previous_games = new LinkedList<Board>();
+        gameGUI = new ChessInterface(gameBoard);
+        previous_games = new Stack<Board>();
         canRedo = canUndo = false;
         whitePlayerTurn = true;
         setFrame();
