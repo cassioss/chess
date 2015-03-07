@@ -4,6 +4,7 @@ import chess.model.board.Board;
 import chess.model.board.ChessBoard;
 import chess.view.gui.BasicInterface;
 
+import javax.swing.*;
 import java.util.LinkedList;
 
 /**
@@ -20,16 +21,35 @@ public class Game {
     private LinkedList<Board> previous_games;
     private boolean canRedo, canUndo;
     private boolean whitePlayerTurn;
+    private JFrame chessFrame;
+
+    private void setFrame() {
+        chessFrame = new JFrame("♚ Chess Game ♔");
+        chessFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        chessFrame.setSize(880, 880);
+        chessFrame.setResizable(false);
+        chessFrame.setLocation(350, 50);
+        chessFrame.setVisible(true);
+    }
+
+    private void fillFrame() {
+        JPanel gamePanel = gameGUI.getChessPanel();
+        chessFrame.add(gamePanel);
+        chessFrame.setVisible(true);
+    }
 
     /**
      * Starts a new game.
      */
-    public Game(Board gameBoard) {
-        this.gameBoard = gameBoard;
+    public Game() {
+        gameBoard = new ChessBoard();
+        gameBoard.setupPieces();
+        gameGUI = new BasicInterface(gameBoard);
         previous_games = new LinkedList<Board>();
         canRedo = canUndo = false;
         whitePlayerTurn = true;
-        plays_counter = 0;
+        setFrame();
+        fillFrame();
     }
 
     /**
@@ -59,21 +79,12 @@ public class Game {
     }
 
     /**
-     * Starts the game itself.
-     */
-    private void begin() {
-        gameBoard.setupPieces();
-      //  gameGUI = new ChessInterface(gameBoard);
-    }
-
-    /**
      * Main function that draws a new chessboard.
      *
      * @param args String entries - none are required.
      */
     public static void main(String[] args) {
-        Game chessGame = new Game(new ChessBoard());
-        chessGame.begin();
+        Game chessGame = new Game();
     }
 
 }
