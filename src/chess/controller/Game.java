@@ -23,7 +23,7 @@ public class Game {
     private BasicInterface gameGUI;
     private JFrame chessFrame;
     private Square chosenSquare;
-    private boolean squareSelected;
+    private boolean aPieceWasSelected;
     private boolean blackTurn;
 
     /**
@@ -33,7 +33,7 @@ public class Game {
         Board gameBoard = new ChessBoard();
         gameBoard.setupPieces();
         gameGUI = new ChessInterface(gameBoard);
-        squareSelected = false;
+        aPieceWasSelected = false;
         chosenSquare = null;
         blackTurn = false;
         setFrame();
@@ -83,12 +83,17 @@ public class Game {
                 button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if (!squareSelected) {
-                            if (gameGUI.hasPieceAt(xPos, yPos) && gameGUI.getPieceAt(xPos, yPos).isBlack() == blackTurn) {
-                                squareSelected = true;
-                                chosenSquare = gameGUI.getSquareAt(xPos, yPos);
-                                gameGUI.movesOf(chosenSquare.getSquarePiece());
-                                button.setBackground(Color.CYAN);
+                        if (!aPieceWasSelected) {
+                            if (gameGUI.hasPieceAt(xPos, yPos)) {
+                                if (gameGUI.getPieceAt(xPos, yPos).isBlack() ==
+                                        blackTurn) {
+                                    aPieceWasSelected = true;
+                                    chosenSquare = gameGUI.getSquareAt(xPos, yPos);
+                                    gameGUI.movesOf(chosenSquare.getSquarePiece());
+                                    button.setBackground(Color.CYAN);
+                                } else {
+                                    wrongPieceColor();
+                                }
                             }
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
@@ -97,10 +102,7 @@ public class Game {
                                         (newSquare)) {
                                     final Piece piece = chosenSquare.getSquarePiece();
                                     piece.moveTo(xPos, yPos);
-                                    System.out.println(gameGUI.hasPieceAt(xPos, yPos));
-                                    gameGUI.originalPainting();
-                                    chosenSquare = null;
-                                    squareSelected = false;
+                                    cleanBoardAndReferences();
                                     blackTurn = !blackTurn;
                                 } else {
                                     chosenSquare = newSquare;
@@ -110,9 +112,8 @@ public class Game {
                                     button.setBackground(Color.CYAN);
                                 }
                             else {
-                                gameGUI.originalPainting();
-                                squareSelected = false;
-                                chosenSquare = null;
+                                cleanBoardAndReferences();
+                                cancelMove();
                             }
                         }
                         System.out.println(xPos + "," + yPos);
@@ -120,6 +121,31 @@ public class Game {
                 });
             }
         }
+    }
+
+    /**
+     * Cleans board after a move was successfully made or cancelled.
+     */
+    private void cleanBoardAndReferences() {
+        gameGUI.originalPainting();
+        chosenSquare = null;
+        aPieceWasSelected = false;
+    }
+
+    private void cancelMove() {
+        gameGUI.setMessage(playerColorUppercase() + "player has cancelled his selection. Try another one.");
+    }
+
+    private void wrongPieceColor() {
+        gameGUI.setMessage("You tried to move an opponent's piece. You only move " + playerColorLowercase() + "pieces.");
+    }
+
+    private String playerColorUppercase() {
+        return blackTurn ? "Black " : "White ";
+    }
+
+    private String playerColorLowercase() {
+        return playerColorUppercase().toLowerCase();
     }
 
 }

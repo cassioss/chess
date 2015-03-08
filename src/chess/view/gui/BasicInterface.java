@@ -30,6 +30,8 @@ public abstract class BasicInterface {
     protected JLabel whitePlayerScore;
     protected JLabel blackPlayerScore;
     protected JPanel scoreBoard;
+    protected JLabel currentTurn;
+    protected JLabel myName;
 
     /**
      * Creates a basic interface for a chessboard.
@@ -59,9 +61,11 @@ public abstract class BasicInterface {
      * Creates basic JLabels to show the main messages of the game and the score of each player.
      */
     private void createLabels() {
-        gameMessages = blackBoardLabel("Welcome to Chess!");
-        whitePlayerScore = blackBoardLabel("Player 1 (White) -  0 points");
-        blackPlayerScore = blackBoardLabel("Player 2 (Black) -  0 points");
+        currentTurn = blackBoardLabel(Color.ORANGE, "White player's turn");
+        gameMessages = blackBoardLabel(Color.ORANGE, "Welcome to Chess!");
+        whitePlayerScore = blackBoardLabel(Color.CYAN, "Player 1 (White) -  0 points");
+        blackPlayerScore = blackBoardLabel(Color.CYAN, "Player 2 (Black) -  0 points");
+        myName = blackBoardLabel(Color.GREEN, "Created by Cassio Sousa (dssntss2@illinois.edu)");
     }
 
     /**
@@ -70,10 +74,11 @@ public abstract class BasicInterface {
      * @param message a string that contains the JLabel's message.
      * @return a JLabel with white background and black borders.
      */
-    private JLabel blackBoardLabel(String message) {
-        JLabel simpleLabel = new JLabel(message);
+    private JLabel blackBoardLabel(Color color, String message) {
+        JLabel simpleLabel = new JLabel(centeredWrappedMessage(message));
         simpleLabel.setBorder(new LineBorder(Color.BLACK));
-        simpleLabel.setBackground(Color.WHITE);
+        simpleLabel.setBackground(color);
+        simpleLabel.setOpaque(true);
         simpleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         return simpleLabel;
     }
@@ -86,10 +91,12 @@ public abstract class BasicInterface {
         scoreBoard.add(undo);
         scoreBoard.add(restart);
         scoreBoard.add(forfeit);
+        scoreBoard.add(currentTurn);
         scoreBoard.add(gameMessages);
+        scoreBoard.add(rename);
         scoreBoard.add(whitePlayerScore);
         scoreBoard.add(blackPlayerScore);
-        scoreBoard.add(rename);
+        scoreBoard.add(myName);
     }
 
     /**
@@ -170,5 +177,13 @@ public abstract class BasicInterface {
     }
 
     protected abstract void resetColors();
+
+    public void setMessage(String message) {
+        gameMessages.setText(centeredWrappedMessage(message));
+    }
+
+    public String centeredWrappedMessage(String message) {
+        return "<html><div style=\"text-align: center;\">" + message + "</html>";
+    }
 
 }
