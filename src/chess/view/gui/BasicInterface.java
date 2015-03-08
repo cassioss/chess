@@ -1,7 +1,7 @@
 package chess.view.gui;
 
 import chess.model.board.Board;
-import chess.model.piece.Piece;
+import chess.model.board.Square;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -150,7 +150,8 @@ public abstract class BasicInterface {
         return chessModel.hasPieceAt(posX, posY);
     }
 
-    public Piece getPieceAt(int posX, int posY) {
-        return chessModel.getPieceAt(posX, posY);
+    public Square getSquareAt(int posX, int posY) {
+        return chessModel.getSquareAt(posX, posY);
     }
+
 }

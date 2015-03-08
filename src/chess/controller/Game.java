@@ -2,6 +2,7 @@ package chess.controller;
 
 import chess.model.board.Board;
 import chess.model.board.ChessBoard;
+import chess.model.board.Square;
 import chess.view.gui.BasicInterface;
 import chess.view.gui.ChessInterface;
 
@@ -26,6 +27,8 @@ public class Game {
     private boolean canRedo, canUndo;
     private boolean whitePlayerTurn;
     private JFrame chessFrame;
+    private Square selectedSquare;
+    private boolean squareSelected;
 
     /**
      * Starts a new game.
@@ -35,7 +38,8 @@ public class Game {
         gameBoard.setupPieces();
         gameGUI = new ChessInterface(gameBoard);
         previous_games = new Stack<Board>();
-        canRedo = canUndo = false;
+        canRedo = canUndo = squareSelected = false;
+        selectedSquare = null;
         whitePlayerTurn = true;
         setFrame();
         fillFrame();
@@ -110,9 +114,19 @@ public class Game {
                 button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        button.setBackground(Color.GREEN);
-                        if (gameGUI.hasPieceAt(xPos, yPos))
-                            button.setBackground(Color.RED);
+                        if (!squareSelected) {
+                            if (gameGUI.hasPieceAt(xPos, yPos)) {
+                                squareSelected = true;
+                                selectedSquare = gameGUI.getSquareAt(xPos, yPos);
+                                button.setBackground(Color.BLUE);
+                            }
+                        } else {
+                            Square newSquare = gameGUI.getSquareAt(xPos, yPos);
+                            if (newSquare != selectedSquare) {
+                                selectedSquare = newSquare;
+                                button.setBackground(Color.PINK);
+                            }
+                        }
                     }
                 });
             }
