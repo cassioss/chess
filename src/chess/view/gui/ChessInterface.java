@@ -39,8 +39,8 @@ public class ChessInterface extends BasicInterface {
      */
     protected void setChessBoardAsButtons() {
         buttons = new JButton[8][8];
-        for (int posX = 0; posX < 8; posX++) {
-            for (int posY = 0; posY < 8; posY++) {
+        for (int posY = 7; posY >= 0; posY--) {
+            for (int posX = 0; posX < 8; posX++) {
                 buttons[posX][posY] = newSquareButton(posX, posY);
                 chessPanel.add(buttons[posX][posY]);
             }

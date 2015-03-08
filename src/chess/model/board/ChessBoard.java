@@ -9,8 +9,8 @@ import java.awt.*;
  * painting of Squares as either gray (darker color) or white.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.1
- * @since 1.0
+ * @version 1.2
+ * @since 1.1
  */
 public class ChessBoard extends Board {
 
@@ -93,31 +93,31 @@ public class ChessBoard extends Board {
      * Bishop - Queen - King - Bishop - Knight - Rook.
      */
     public void setupPieces() {
-        for (int posY = 0; posY < ROW_COUNT; posY++) {
-            putPieceAt(new Pawn(false), 1, posY);   // White pawns
-            putPieceAt(new Pawn(true), 6, posY);    // Black pawns
+        for (int posX = 0; posX < COLUMN_COUNT; posX++) {
+            putPieceAt(new Pawn(false), posX, 1);   // White pawns
+            putPieceAt(new Pawn(true), posX, 6);    // Black pawns
         }
 
         // White pieces
 
         putPieceAt(new Rook(false), 0, 0);
-        putPieceAt(new Knight(false), 0, 1);
-        putPieceAt(new Bishop(false), 0, 2);
-        putPieceAt(new Queen(false), 0, 3);
-        putPieceAt(new King(false), 0, 4);
-        putPieceAt(new Bishop(false), 0, 5);
-        putPieceAt(new Knight(false), 0, 6);
-        putPieceAt(new Rook(false), 0, 7);
+        putPieceAt(new Knight(false), 1, 0);
+        putPieceAt(new Bishop(false), 2, 0);
+        putPieceAt(new Queen(false), 3, 0);
+        putPieceAt(new King(false), 4, 0);
+        putPieceAt(new Bishop(false), 5, 0);
+        putPieceAt(new Knight(false), 6, 0);
+        putPieceAt(new Rook(false), 7, 0);
 
         // Black pieces
 
-        putPieceAt(new Rook(true), 7, 0);
-        putPieceAt(new Knight(true), 7, 1);
-        putPieceAt(new Bishop(true), 7, 2);
-        putPieceAt(new Queen(true), 7, 3);
-        putPieceAt(new King(true), 7, 4);
-        putPieceAt(new Bishop(true), 7, 5);
-        putPieceAt(new Knight(true), 7, 6);
+        putPieceAt(new Rook(true), 0, 7);
+        putPieceAt(new Knight(true), 1, 7);
+        putPieceAt(new Bishop(true), 2, 7);
+        putPieceAt(new Queen(true), 3, 7);
+        putPieceAt(new King(true), 4, 7);
+        putPieceAt(new Bishop(true), 5, 7);
+        putPieceAt(new Knight(true), 6, 7);
         putPieceAt(new Rook(true), 7, 7);
 
         // Sets flag for GUI - if those pieces are in play, no other piece should be added

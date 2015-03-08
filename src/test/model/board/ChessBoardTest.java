@@ -11,8 +11,8 @@ import java.awt.*;
  * <strong>ChessBoardTest</strong> class - tests the specific implementations of a traditional chessboard.
  *
  * @author Cassio dos Santos Sousa
- * @version 1.1
- * @since 1.0
+ * @version 1.2
+ * @since 1.1
  */
 public class ChessBoardTest {
 
@@ -65,28 +65,28 @@ public class ChessBoardTest {
         // White pieces
 
         assert testChessBoard.getPieceAt(0, 0).getClass() == Rook.class;
-        assert testChessBoard.getPieceAt(0, 1).getClass() == Knight.class;
-        assert testChessBoard.getPieceAt(0, 2).getClass() == Bishop.class;
-        assert testChessBoard.getPieceAt(0, 3).getClass() == Queen.class;
-        assert testChessBoard.getPieceAt(0, 4).getClass() == King.class;
-        assert testChessBoard.getPieceAt(0, 5).getClass() == Bishop.class;
-        assert testChessBoard.getPieceAt(0, 6).getClass() == Knight.class;
-        assert testChessBoard.getPieceAt(0, 7).getClass() == Rook.class;
+        assert testChessBoard.getPieceAt(1, 0).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(2, 0).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(3, 0).getClass() == Queen.class;
+        assert testChessBoard.getPieceAt(4, 0).getClass() == King.class;
+        assert testChessBoard.getPieceAt(5, 0).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(6, 0).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(7, 0).getClass() == Rook.class;
 
         // Black pieces
 
-        assert testChessBoard.getPieceAt(7, 0).getClass() == Rook.class;
-        assert testChessBoard.getPieceAt(7, 1).getClass() == Knight.class;
-        assert testChessBoard.getPieceAt(7, 2).getClass() == Bishop.class;
-        assert testChessBoard.getPieceAt(7, 3).getClass() == Queen.class;
-        assert testChessBoard.getPieceAt(7, 4).getClass() == King.class;
-        assert testChessBoard.getPieceAt(7, 5).getClass() == Bishop.class;
-        assert testChessBoard.getPieceAt(7, 6).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(0, 7).getClass() == Rook.class;
+        assert testChessBoard.getPieceAt(1, 7).getClass() == Knight.class;
+        assert testChessBoard.getPieceAt(2, 7).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(3, 7).getClass() == Queen.class;
+        assert testChessBoard.getPieceAt(4, 7).getClass() == King.class;
+        assert testChessBoard.getPieceAt(5, 7).getClass() == Bishop.class;
+        assert testChessBoard.getPieceAt(6, 7).getClass() == Knight.class;
         assert testChessBoard.getPieceAt(7, 7).getClass() == Rook.class;
 
-        for (int i = 0; i < 7; i++) {
-            assert testChessBoard.getPieceAt(1, i).getClass() == Pawn.class;
-            assert testChessBoard.getPieceAt(6, i).getClass() == Pawn.class;
+        for (int x = 0; x < 7; x++) {
+            assert testChessBoard.getPieceAt(x, 1).getClass() == Pawn.class;
+            assert testChessBoard.getPieceAt(x, 6).getClass() == Pawn.class;
         }
     }
 
@@ -96,17 +96,17 @@ public class ChessBoardTest {
     @Test
     public void testInitialPieceColorAssignment() {
         testChessBoard.setupPieces();
-        for (int column = 0; column < 7; column++) {
+        for (int x = 0; x < 7; x++) {
 
             // White pieces
 
-            assert !testChessBoard.getPieceAt(0, column).isBlack();
-            assert !testChessBoard.getPieceAt(1, column).isBlack();
+            assert !testChessBoard.getPieceAt(x, 0).isBlack();
+            assert !testChessBoard.getPieceAt(x, 1).isBlack();
 
             // Black pieces
 
-            assert testChessBoard.getPieceAt(6, column).isBlack();
-            assert testChessBoard.getPieceAt(7, column).isBlack();
+            assert testChessBoard.getPieceAt(x, 6).isBlack();
+            assert testChessBoard.getPieceAt(x, 7).isBlack();
         }
     }
     

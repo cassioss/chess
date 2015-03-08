@@ -131,6 +131,7 @@ public class Game {
                                 button.setBackground(Color.CYAN);
                             }
                         }
+                        System.out.println(xPos + ", " + yPos);
                     }
                 });
             }
