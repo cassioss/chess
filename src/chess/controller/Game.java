@@ -6,6 +6,9 @@ import chess.view.gui.BasicInterface;
 import chess.view.gui.ChessInterface;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Stack;
 
 /**
@@ -25,6 +28,20 @@ public class Game {
     private JFrame chessFrame;
 
     /**
+     * Starts a new game.
+     */
+    public Game() {
+        gameBoard = new ChessBoard();
+        gameBoard.setupPieces();
+        gameGUI = new ChessInterface(gameBoard);
+        previous_games = new Stack<Board>();
+        canRedo = canUndo = false;
+        whitePlayerTurn = true;
+        setFrame();
+        fillFrame();
+    }
+
+    /**
      * Configures the main JFrame object for the chess game.
      */
     private void setFrame() {
@@ -42,21 +59,6 @@ public class Game {
     private void fillFrame() {
         JSplitPane gamePanel = gameGUI.getChessPanel();
         chessFrame.add(gamePanel);
-        chessFrame.setVisible(true);
-    }
-
-    /**
-     * Starts a new game.
-     */
-    public Game() {
-        gameBoard = new ChessBoard();
-        gameBoard.setupPieces();
-        gameGUI = new ChessInterface(gameBoard);
-        previous_games = new Stack<Board>();
-        canRedo = canUndo = false;
-        whitePlayerTurn = true;
-        setFrame();
-        fillFrame();
     }
 
     /**
@@ -92,6 +94,29 @@ public class Game {
      */
     public static void main(String[] args) {
         Game chessGame = new Game();
+        chessGame.defineMouseListener();
+        chessGame.chessFrame.setVisible(true);
+    }
+
+    /**
+     * Defines a MouseListener for each square button on the GUI.
+     */
+    private void defineMouseListener() {
+        for (int posX = 0; posX < 8; posX++) {
+            for (int posY = 0; posY < 8; posY++) {
+                final JButton button = gameGUI.getButtonAt(posX, posY);
+                final int xPos = posX;
+                final int yPos = posY;
+                button.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        button.setBackground(Color.GREEN);
+                        if (gameGUI.hasPieceAt(xPos, yPos))
+                            button.setBackground(Color.RED);
+                    }
+                });
+            }
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package chess.view.gui;
 
 import chess.model.board.Board;
+import chess.model.piece.Piece;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -134,4 +135,22 @@ public abstract class BasicInterface {
         return split;
     }
 
+    /**
+     * Gets the button at a certain position of the board.
+     *
+     * @param posX X-coordinate of a targeted JButton.
+     * @param posY Y-coordinate of a targeted JButton.
+     * @return a JButton at the desired position.
+     */
+    public JButton getButtonAt(int posX, int posY) {
+        return buttons[posX][posY];
+    }
+
+    public boolean hasPieceAt(int posX, int posY) {
+        return chessModel.hasPieceAt(posX, posY);
+    }
+
+    public Piece getPieceAt(int posX, int posY) {
+        return chessModel.getPieceAt(posX, posY);
+    }
 }
