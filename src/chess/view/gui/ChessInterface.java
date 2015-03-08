@@ -47,6 +47,15 @@ public class ChessInterface extends BasicInterface {
         }
     }
 
+    protected void resetColors() {
+        for (int xPos = 0; xPos < 8; xPos++) {
+            for (int yPos = 0; yPos < 8; yPos++) {
+                final JButton button = buttons[xPos][yPos];
+                button.setBackground(chessModel.getSquareAt(xPos, yPos).getSquareColor());
+            }
+        }
+    }
+
     /**
      * Creates a new JButton directly related to a square on the chessboard.
      *

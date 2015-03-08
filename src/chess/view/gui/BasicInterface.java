@@ -2,6 +2,7 @@ package chess.view.gui;
 
 import chess.model.board.Board;
 import chess.model.board.Square;
+import chess.model.piece.Piece;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -153,5 +154,17 @@ public abstract class BasicInterface {
     public Square getSquareAt(int posX, int posY) {
         return chessModel.getSquareAt(posX, posY);
     }
+
+    public void originalPainting() {
+        chessModel.deselectPiece();
+        resetColors();
+    }
+
+    public void movesOf(Piece piece) {
+        chessModel.showAvailableMovesOf(piece);
+        resetColors();
+    }
+
+    protected abstract void resetColors();
 
 }

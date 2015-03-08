@@ -184,9 +184,11 @@ public abstract class Board {
      */
     public void showAvailableMovesOf(Piece selectedPiece) {
         for (Square[] squareArray : squareBoard) {
-            for (Square s : squareArray) {
-                if (selectedPiece.canMoveTo(s))
+            for (final Square s : squareArray) {
+                if (selectedPiece.canMoveTo(s)) {
                     s.squareColor = Color.GREEN;
+                    System.out.println("Pintou movimento");
+                }
             }
         }
     }
@@ -194,7 +196,7 @@ public abstract class Board {
     /**
      * Returns the original coloring of the chessboard when a piece is unselected.
      */
-    public void unselectPiece() {
+    public void deselectPiece() {
         paintSquares();
     }
 

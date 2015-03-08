@@ -118,13 +118,17 @@ public class Game {
                             if (gameGUI.hasPieceAt(xPos, yPos)) {
                                 squareSelected = true;
                                 selectedSquare = gameGUI.getSquareAt(xPos, yPos);
-                                button.setBackground(Color.BLUE);
+                                gameGUI.movesOf(selectedSquare.getSquarePiece());
+                                button.setBackground(Color.CYAN);
                             }
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
                             if (newSquare != selectedSquare) {
                                 selectedSquare = newSquare;
-                                button.setBackground(Color.PINK);
+                                gameGUI.originalPainting();
+                                if (selectedSquare.getSquarePiece() != null)
+                                    gameGUI.movesOf(selectedSquare.getSquarePiece());
+                                button.setBackground(Color.CYAN);
                             }
                         }
                     }
