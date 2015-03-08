@@ -52,6 +52,8 @@ public class ChessInterface extends BasicInterface {
             for (int yPos = 0; yPos < 8; yPos++) {
                 final JButton button = buttons[xPos][yPos];
                 button.setBackground(chessModel.getSquareAt(xPos, yPos).getSquareColor());
+                button.setIcon(null);
+                addPieceAt(button, xPos, yPos);
             }
         }
     }

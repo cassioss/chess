@@ -3,6 +3,7 @@ package chess.controller;
 import chess.model.board.Board;
 import chess.model.board.ChessBoard;
 import chess.model.board.Square;
+import chess.model.piece.Piece;
 import chess.view.gui.BasicInterface;
 import chess.view.gui.ChessInterface;
 
@@ -90,11 +91,21 @@ public class Game {
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
                             if (newSquare != chosenSquare) {
-                                chosenSquare = newSquare;
-                                gameGUI.originalPainting();
-                                if (chosenSquare.getSquarePiece() != null)
-                                    gameGUI.movesOf(chosenSquare.getSquarePiece());
-                                button.setBackground(Color.CYAN);
+                                if (chosenSquare.getSquarePiece() != null && chosenSquare.getSquarePiece().canMoveTo
+                                        (newSquare)) {
+                                    final Piece piece = chosenSquare.getSquarePiece();
+                                    piece.moveTo(xPos, yPos);
+                                    System.out.println(gameGUI.hasPieceAt(xPos, yPos));
+                                    gameGUI.originalPainting();
+                                    chosenSquare = null;
+                                    squareSelected = false;
+                                } else {
+                                    chosenSquare = newSquare;
+                                    gameGUI.originalPainting();
+                                    if (chosenSquare.getSquarePiece() != null)
+                                        gameGUI.movesOf(chosenSquare.getSquarePiece());
+                                    button.setBackground(Color.CYAN);
+                                }
                             } else {
                                 gameGUI.originalPainting();
                                 squareSelected = false;
