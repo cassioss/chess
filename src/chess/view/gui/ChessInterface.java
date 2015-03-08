@@ -32,7 +32,6 @@ public class ChessInterface extends BasicInterface {
      */
     protected void setChessLayout() {
         chessLayout = new GridLayout(8, 0);
-        setChessBoardAsButtons();
     }
 
     /**
