@@ -155,6 +155,10 @@ public abstract class BasicInterface {
         return chessModel.getSquareAt(posX, posY);
     }
 
+    public Piece getPieceAt(int posX, int posY) {
+        return chessModel.getSquareAt(posX, posY).getSquarePiece();
+    }
+
     public void originalPainting() {
         chessModel.deselectPiece();
         resetColors();

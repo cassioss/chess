@@ -24,6 +24,7 @@ public class Game {
     private JFrame chessFrame;
     private Square chosenSquare;
     private boolean squareSelected;
+    private boolean blackTurn;
 
     /**
      * Starts a new game.
@@ -34,6 +35,7 @@ public class Game {
         gameGUI = new ChessInterface(gameBoard);
         squareSelected = false;
         chosenSquare = null;
+        blackTurn = false;
         setFrame();
         fillFrame();
     }
@@ -82,7 +84,7 @@ public class Game {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (!squareSelected) {
-                            if (gameGUI.hasPieceAt(xPos, yPos)) {
+                            if (gameGUI.hasPieceAt(xPos, yPos) && gameGUI.getPieceAt(xPos, yPos).isBlack() == blackTurn) {
                                 squareSelected = true;
                                 chosenSquare = gameGUI.getSquareAt(xPos, yPos);
                                 gameGUI.movesOf(chosenSquare.getSquarePiece());
@@ -90,7 +92,7 @@ public class Game {
                             }
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
-                            if (newSquare != chosenSquare) {
+                            if (newSquare != chosenSquare)
                                 if (chosenSquare.getSquarePiece() != null && chosenSquare.getSquarePiece().canMoveTo
                                         (newSquare)) {
                                     final Piece piece = chosenSquare.getSquarePiece();
@@ -99,6 +101,7 @@ public class Game {
                                     gameGUI.originalPainting();
                                     chosenSquare = null;
                                     squareSelected = false;
+                                    blackTurn = !blackTurn;
                                 } else {
                                     chosenSquare = newSquare;
                                     gameGUI.originalPainting();
@@ -106,7 +109,7 @@ public class Game {
                                         gameGUI.movesOf(chosenSquare.getSquarePiece());
                                     button.setBackground(Color.CYAN);
                                 }
-                            } else {
+                            else {
                                 gameGUI.originalPainting();
                                 squareSelected = false;
                                 chosenSquare = null;
