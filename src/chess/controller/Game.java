@@ -68,6 +68,7 @@ public class Game {
     public static void main(String[] args) {
         Game chessGame = new Game();
         chessGame.defineMouseListener();
+        chessGame.addListenerToOtherButtons();
         chessGame.chessFrame.setVisible(true);
     }
 
@@ -121,6 +122,53 @@ public class Game {
         }
     }
 
+    private void addListenerToOtherButtons() {
+        addRenameListener();
+        addUndoListener();
+        addForfeitListener();
+        addRestartListener();
+    }
+
+    private void addRenameListener() {
+        final JButton rename = gameGUI.getRename();
+        rename.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void addUndoListener() {
+        final JButton undo = gameGUI.getUndo();
+        undo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void addForfeitListener() {
+        final JButton forfeit = gameGUI.getForfeit();
+        forfeit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void addRestartListener() {
+        final JButton restart = gameGUI.getRestart();
+        restart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+        });
+    }
+
     /**
      * Cleans board after a move was successfully made or cancelled.
      */
@@ -158,7 +206,8 @@ public class Game {
     }
 
     private void wrongPieceColor() {
-        gameGUI.setMessage("You tried to move an opponent's piece. You only move " + playerColorLowercase() + "pieces.");
+        gameGUI.setMessage("You tried to move an opponent's piece. You can only move " + playerColorLowercase() +
+                "pieces.");
     }
 
     private void noPiece() {

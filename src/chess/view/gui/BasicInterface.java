@@ -207,4 +207,20 @@ public abstract class BasicInterface {
         return "<html><div style=\"text-align: center;\">" + message + "</html>";
     }
 
+    public JButton getRestart() {
+        return restart;
+    }
+
+    public JButton getForfeit() {
+        return forfeit;
+    }
+
+    public JButton getUndo() {
+        return undo;
+    }
+
+    public JButton getRename() {
+        return rename;
+    }
+
 }
