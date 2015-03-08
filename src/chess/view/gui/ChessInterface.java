@@ -10,37 +10,59 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * <strong>ChessInterface</strong> class - class that handles how the chessboard (including squares and pieces) is going
- * to be drawn.
+ * <strong>ChessInterface</strong> class - class that handles how a classic chessboard (including squares and pieces) is
+ * going to be drawn.
  *
  * @author Cassio dos Santos Sousa
  * @version 1.0
  */
 public class ChessInterface extends BasicInterface {
 
+    /**
+     * Creates a complete GUI for the traditional chessboard game.
+     *
+     * @param chessModel a chessboard taken as reference for square creation and piece positioning.
+     */
     public ChessInterface(Board chessModel) {
         super(chessModel);
     }
 
+    /**
+     * Creates a JPanel with a GridLayout set specifically for the chess interface.
+     */
     protected void setChessLayout() {
         chessLayout = new GridLayout(8, 0);
+        setChessBoardAsButtons();
     }
 
-    protected void setButtons() {
+    /**
+     * Creates a JButton for each square on the board.
+     */
+    protected void setChessBoardAsButtons() {
         buttons = new JButton[8][8];
         for (int posX = 0; posX < 8; posX++) {
             for (int posY = 0; posY < 8; posY++) {
-                JButton new_button = new JButton();
-                new_button.setMinimumSize(new Dimension(110, 110));
-                new_button.setPreferredSize(new Dimension(110, 110));
-                new_button.setBorder(new LineBorder(Color.BLACK));
-                new_button.setBackground(chessModel.getSquareAt(posX, posY).getSquareColor());
-                addPieceAt(new_button, posX, posY);
-                //new_button.setContentAreaFilled(false);
-                buttons[posX][posY] = new_button;
+                buttons[posX][posY] = newSquareButton(posX, posY);
                 chessPanel.add(buttons[posX][posY]);
             }
         }
+    }
+
+    /**
+     * Creates a new JButton directly related to a square on the chessboard.
+     *
+     * @param posX X-coordinate of a square on the chessboard.
+     * @param posY Y-coordinate of a square on the chessboard.
+     * @return a JButton with all the needed properties of the square.
+     */
+    private JButton newSquareButton(int posX, int posY) {
+        JButton newButton = new JButton();
+        newButton.setMinimumSize(new Dimension(110, 110));
+        newButton.setPreferredSize(new Dimension(110, 110));
+        newButton.setBorder(new LineBorder(Color.BLACK));
+        newButton.setBackground(chessModel.getSquareAt(posX, posY).getSquareColor());
+        addPieceAt(newButton, posX, posY);
+        return newButton;
     }
 
     /**
