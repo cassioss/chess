@@ -62,7 +62,7 @@ public abstract class BasicInterface {
      */
     private void createLabels() {
         currentTurn = blackBoardLabel(Color.ORANGE, "White player's turn");
-        gameMessages = blackBoardLabel(Color.ORANGE, "Welcome to Chess!");
+        gameMessages = blackBoardLabel(Color.YELLOW, "Welcome to Chess!");
         whitePlayerScore = blackBoardLabel(Color.CYAN, "Player 1 (White) -  0 points");
         blackPlayerScore = blackBoardLabel(Color.CYAN, "Player 2 (Black) -  0 points");
         myName = blackBoardLabel(Color.GREEN, "Created by Cassio Sousa (dssntss2@illinois.edu)");
@@ -75,7 +75,7 @@ public abstract class BasicInterface {
      * @return a JLabel with white background and black borders.
      */
     private JLabel blackBoardLabel(Color color, String message) {
-        JLabel simpleLabel = new JLabel(centeredWrappedMessage(message));
+        JLabel simpleLabel = new JLabel(centerWrapMessage(message));
         simpleLabel.setBorder(new LineBorder(Color.BLACK));
         simpleLabel.setBackground(color);
         simpleLabel.setOpaque(true);
@@ -171,18 +171,39 @@ public abstract class BasicInterface {
         resetColors();
     }
 
-    public void movesOf(Piece piece) {
+    public void paintMovesOf(Piece piece) {
         chessModel.showAvailableMovesOf(piece);
         resetColors();
     }
 
+    /**
+     * Repaints the colors and pieces on the chessboard. As iterating over them is board-dependent, this method is
+     * abstract.
+     */
     protected abstract void resetColors();
 
+    /**
+     * Sets a new message on the message board, in order to help players. By default, it will always have center
+     * alignment and wrapped content.
+     *
+     * @param message a new message to be set.
+     */
     public void setMessage(String message) {
-        gameMessages.setText(centeredWrappedMessage(message));
+        gameMessages.setText(centerWrapMessage(message));
     }
 
-    public String centeredWrappedMessage(String message) {
+    public void changeTurn(boolean newPlayerTurn) {
+        String playerName = newPlayerTurn ? "Black " : "White ";
+        currentTurn.setText(playerName + "player's turn");
+    }
+
+    /**
+     * Turns a string into a centered, wrapped message for a JLabel (using HTML properties).
+     *
+     * @param message the original string.
+     * @return a string containing the necessary HTML brackets for text centering and wrapping.
+     */
+    private String centerWrapMessage(String message) {
         return "<html><div style=\"text-align: center;\">" + message + "</html>";
     }
 

@@ -85,33 +85,31 @@ public class Game {
                     public void mouseClicked(MouseEvent e) {
                         if (!aPieceWasSelected) {
                             if (gameGUI.hasPieceAt(xPos, yPos)) {
-                                if (gameGUI.getPieceAt(xPos, yPos).isBlack() ==
-                                        blackTurn) {
-                                    aPieceWasSelected = true;
-                                    chosenSquare = gameGUI.getSquareAt(xPos, yPos);
-                                    gameGUI.movesOf(chosenSquare.getSquarePiece());
-                                    button.setBackground(Color.CYAN);
+                                if (gameGUI.getPieceAt(xPos, yPos).isBlack() == blackTurn) {
+                                    foundPieceIn(button, xPos, yPos);
                                 } else {
                                     wrongPieceColor();
                                 }
+                            } else {
+                                noPiece();
                             }
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
-                            if (newSquare != chosenSquare)
-                                if (chosenSquare.getSquarePiece() != null && chosenSquare.getSquarePiece().canMoveTo
-                                        (newSquare)) {
-                                    final Piece piece = chosenSquare.getSquarePiece();
-                                    piece.moveTo(xPos, yPos);
-                                    cleanBoardAndReferences();
-                                    blackTurn = !blackTurn;
+                            if (newSquare != chosenSquare) {
+                                if (chosenSquare.getSquarePiece().canMoveTo(newSquare)) {
+                                    movePieceTo(xPos, yPos);
                                 } else {
-                                    chosenSquare = newSquare;
-                                    gameGUI.originalPainting();
-                                    if (chosenSquare.getSquarePiece() != null)
-                                        gameGUI.movesOf(chosenSquare.getSquarePiece());
-                                    button.setBackground(Color.CYAN);
+                                    if (newSquare.getSquarePiece() == null) {
+                                        cannotMoveThere();
+                                    } else {
+                                        if (newSquare.getSquarePiece().isBlack() != blackTurn) {
+                                            wrongPieceColor();
+                                        } else {
+                                            choseNewPieceIn(button, newSquare);
+                                        }
+                                    }
                                 }
-                            else {
+                            } else {
                                 cleanBoardAndReferences();
                                 cancelMove();
                             }
@@ -132,12 +130,43 @@ public class Game {
         aPieceWasSelected = false;
     }
 
+    private void foundPieceIn(JButton button, int xPos, int yPos) {
+        aPieceWasSelected = true;
+        chosenSquare = gameGUI.getSquareAt(xPos, yPos);
+        gameGUI.paintMovesOf(chosenSquare.getSquarePiece());
+        button.setBackground(Color.CYAN);
+        gameGUI.setMessage("One of your pieces was selected.");
+    }
+
+    private void choseNewPieceIn(JButton button, Square newSquare) {
+        chosenSquare = newSquare;
+        gameGUI.originalPainting();
+        gameGUI.paintMovesOf(chosenSquare.getSquarePiece());
+        button.setBackground(Color.CYAN);
+    }
+
+    private void movePieceTo(int xPos, int yPos) {
+        final Piece movingPiece = chosenSquare.getSquarePiece();
+        movingPiece.moveTo(xPos, yPos);
+        cleanBoardAndReferences();
+        blackTurn = !blackTurn;
+        gameGUI.changeTurn(blackTurn);
+    }
+
     private void cancelMove() {
         gameGUI.setMessage(playerColorUppercase() + "player has cancelled his selection. Try another one.");
     }
 
     private void wrongPieceColor() {
         gameGUI.setMessage("You tried to move an opponent's piece. You only move " + playerColorLowercase() + "pieces.");
+    }
+
+    private void noPiece() {
+        gameGUI.setMessage("You did not select one of your pieces yet.");
+    }
+
+    private void cannotMoveThere() {
+        gameGUI.setMessage("Your piece cannot move to the selected square.");
     }
 
     private String playerColorUppercase() {
