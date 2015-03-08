@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Stack;
 
 /**
  * <strong>Game</strong> class - implements the actual game of Chess.
@@ -20,27 +19,20 @@ import java.util.Stack;
  */
 public class Game {
 
-    private Board gameBoard;
     private BasicInterface gameGUI;
-    private int plays_counter;
-    private Stack<Board> previous_games;
-    private boolean canRedo, canUndo;
-    private boolean whitePlayerTurn;
     private JFrame chessFrame;
-    private Square selectedSquare;
+    private Square chosenSquare;
     private boolean squareSelected;
 
     /**
      * Starts a new game.
      */
     public Game() {
-        gameBoard = new ChessBoard();
+        Board gameBoard = new ChessBoard();
         gameBoard.setupPieces();
         gameGUI = new ChessInterface(gameBoard);
-        previous_games = new Stack<Board>();
-        canRedo = canUndo = squareSelected = false;
-        selectedSquare = null;
-        whitePlayerTurn = true;
+        squareSelected = false;
+        chosenSquare = null;
         setFrame();
         fillFrame();
     }
@@ -63,32 +55,6 @@ public class Game {
     private void fillFrame() {
         JSplitPane gamePanel = gameGUI.getChessPanel();
         chessFrame.add(gamePanel);
-    }
-
-    /**
-     * Method that undoes the previous move, if possible.
-     */
-    private void undo() {
-        if (canUndo) {
-            gameBoard = previous_games.get(--plays_counter);
-        }
-    }
-
-    /**
-     * Method that redoes an undone move, if possible.
-     */
-    private void redo() {
-        if (canRedo) {
-            gameBoard = previous_games.get(plays_counter++);
-        }
-    }
-
-    /**
-     * Saves the existing game.
-     */
-    private void saveGame() {
-        previous_games.add(plays_counter++, gameBoard);
-        canRedo = false;
     }
 
     /**
@@ -117,21 +83,25 @@ public class Game {
                         if (!squareSelected) {
                             if (gameGUI.hasPieceAt(xPos, yPos)) {
                                 squareSelected = true;
-                                selectedSquare = gameGUI.getSquareAt(xPos, yPos);
-                                gameGUI.movesOf(selectedSquare.getSquarePiece());
+                                chosenSquare = gameGUI.getSquareAt(xPos, yPos);
+                                gameGUI.movesOf(chosenSquare.getSquarePiece());
                                 button.setBackground(Color.CYAN);
                             }
                         } else {
                             Square newSquare = gameGUI.getSquareAt(xPos, yPos);
-                            if (newSquare != selectedSquare) {
-                                selectedSquare = newSquare;
+                            if (newSquare != chosenSquare) {
+                                chosenSquare = newSquare;
                                 gameGUI.originalPainting();
-                                if (selectedSquare.getSquarePiece() != null)
-                                    gameGUI.movesOf(selectedSquare.getSquarePiece());
+                                if (chosenSquare.getSquarePiece() != null)
+                                    gameGUI.movesOf(chosenSquare.getSquarePiece());
                                 button.setBackground(Color.CYAN);
+                            } else {
+                                gameGUI.originalPainting();
+                                squareSelected = false;
+                                chosenSquare = null;
                             }
                         }
-                        System.out.println(xPos + ", " + yPos);
+                        System.out.println(xPos + "," + yPos);
                     }
                 });
             }
