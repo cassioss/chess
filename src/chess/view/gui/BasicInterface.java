@@ -31,12 +31,17 @@ public abstract class BasicInterface {
     protected JLabel currentTurn;
     protected JLabel authorName;
 
+    /// Variables responsible for each player's score
+    //  White player
 
     protected JLabel whitePlayerScore;
-    protected JLabel blackPlayerScore;
     protected String whitePlayerName;
-    protected String blackPlayerName;
     protected int whiteScore;
+
+    //  Black player
+
+    protected JLabel blackPlayerScore;
+    protected String blackPlayerName;
     protected int blackScore;
 
     /**
@@ -45,15 +50,19 @@ public abstract class BasicInterface {
      * @param chessModel a chessboard used as reference for square creation and piece positioning.
      */
     public BasicInterface(Board chessModel) {
-        whitePlayerName = "Player1";
-        blackPlayerName = "Player2";
-        whiteScore = blackScore = 0;
+        initialNamingSetup();
         createLateralButtons();
         createLabels();
         setScoreBoard();
         setChessPanel(chessModel);
         setChessBoardAsButtons();
         setSplitPanel();
+    }
+
+    private void initialNamingSetup() {
+        whitePlayerName = "Player1";
+        blackPlayerName = "Player2";
+        whiteScore = blackScore = 0;
     }
 
     /**
@@ -163,23 +172,52 @@ public abstract class BasicInterface {
         return buttons[posX][posY];
     }
 
+    /**
+     * Checks if the GUI chessboard has a piece at a certain location.
+     *
+     * @param posX X-coordinate of a square being verified.
+     * @param posY Y-coordinate of a square being verified.
+     * @return <em>true</em> if there is a piece on the specified location.
+     */
     public boolean hasPieceAt(int posX, int posY) {
         return chessModel.hasPieceAt(posX, posY);
     }
 
+    /**
+     * Gets the square at a certain position on the board.
+     *
+     * @param posX the chosen X-coordinate of a square on the board.
+     * @param posY the chosen Y-coordinate of a square on the board.
+     * @return the Square object located at (X,Y).
+     */
     public Square getSquareAt(int posX, int posY) {
         return chessModel.getSquareAt(posX, posY);
     }
 
+    /**
+     * Gets the piece at a certain position on the board.
+     *
+     * @param posX the chosen X-coordinate of a square on the board.
+     * @param posY the chosen Y-coordinate of a square on the board.
+     * @return a Piece object located at (X,Y).
+     */
     public Piece getPieceAt(int posX, int posY) {
         return chessModel.getSquareAt(posX, posY).getSquarePiece();
     }
 
+    /**
+     * Returns the original painting of the chessboard (gray and white).
+     */
     public void originalPainting() {
         chessModel.deselectPiece();
         resetColors();
     }
 
+    /**
+     * Paints the possible moves for a piece on the screen.
+     *
+     * @param piece a piece that was selected during the game.
+     */
     public void paintMovesOf(Piece piece) {
         chessModel.showAvailableMovesOf(piece);
         resetColors();
@@ -201,6 +239,11 @@ public abstract class BasicInterface {
         gameMessages.setText(centerWrapMessage(message));
     }
 
+    /**
+     * Change the current turn.
+     *
+     * @param newPlayerTurn the new player's turn (<em>true</em> if black).
+     */
     public void changeTurn(boolean newPlayerTurn) {
         String playerName = newPlayerTurn ? "Black " : "White ";
         currentTurn.setText(playerName + "player's turn");
@@ -216,22 +259,48 @@ public abstract class BasicInterface {
         return "<html><div style=\"text-align: center;\">" + message + "</html>";
     }
 
+    /**
+     * Gets the Restart button. Accessed via Game.
+     *
+     * @return the restart JButton.
+     */
     public JButton getRestart() {
         return restart;
     }
 
+    /**
+     * Gets the Forfeit button. Accessed via Game.
+     *
+     * @return the forfeit JButton.
+     */
     public JButton getForfeit() {
         return forfeit;
     }
 
+    /**
+     * Gets the Undo button. Accessed via Game.
+     *
+     * @return the undo JButton.
+     */
     public JButton getUndo() {
         return undo;
     }
 
+    /**
+     * Gets the Rename button. Accessed via Game.
+     *
+     * @return the rename JButton.
+     */
     public JButton getRename() {
         return rename;
     }
 
+    /**
+     * Gets the score for a player. It is not used as a setter because the score is only accessed when incremented.
+     *
+     * @param playerIsBlack the current player turn (<em>true</em> if black).
+     * @return a string with the correct formatting for each player's score.
+     */
     private String getScoreForPlayer(boolean playerIsBlack) {
         if (playerIsBlack)
             return centerWrapMessage(blackPlayerName + " (Black) - " + blackScore + " point(s)");
@@ -239,13 +308,18 @@ public abstract class BasicInterface {
             return centerWrapMessage(whitePlayerName + " (Black) - " + whiteScore + " point(s)");
     }
 
+    /**
+     * Increments the score for a player.
+     *
+     * @param playerIsBlack color of the player that won a point (<em>true</em> if black).
+     */
     public void incrementScoreForPlayer(boolean playerIsBlack) {
         if (playerIsBlack) {
             blackScore++;
-            blackPlayerScore.setText(getScoreForPlayer(playerIsBlack));
+            blackPlayerScore.setText(getScoreForPlayer(true));
         } else {
             whiteScore++;
-            whitePlayerScore.setText(getScoreForPlayer(playerIsBlack));
+            whitePlayerScore.setText(getScoreForPlayer(false));
         }
     }
 

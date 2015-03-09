@@ -187,7 +187,7 @@ public abstract class Board {
             for (final Square s : squareArray) {
                 if (selectedPiece.canMoveTo(s)) {
                     s.squareColor = Color.GREEN;
-                    System.out.println("Pintou movimento");
+                    //System.out.println("Painted move");
                 }
             }
         }

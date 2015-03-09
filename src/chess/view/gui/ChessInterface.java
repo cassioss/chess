@@ -47,6 +47,9 @@ public class ChessInterface extends BasicInterface {
         }
     }
 
+    /**
+     * Resets colors on the chessboard squares.
+     */
     protected void resetColors() {
         for (int xPos = 0; xPos < 8; xPos++) {
             for (int yPos = 0; yPos < 8; yPos++) {

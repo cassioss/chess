@@ -115,13 +115,16 @@ public class Game {
                                 cancelMove();
                             }
                         }
-                        System.out.println(xPos + "," + yPos);
+                        //System.out.println(xPos + "," + yPos);
                     }
                 });
             }
         }
     }
 
+    /**
+     * Adds a mouseListener for every button on the left side.
+     */
     private void addListenerToOtherButtons() {
         addRenameListener();
         addUndoListener();
@@ -129,6 +132,9 @@ public class Game {
         addRestartListener();
     }
 
+    /**
+     * Adds a mouseListener for the Rename JButton.
+     */
     private void addRenameListener() {
         final JButton rename = gameGUI.getRename();
         rename.addMouseListener(new MouseAdapter() {
@@ -139,6 +145,9 @@ public class Game {
         });
     }
 
+    /**
+     * Adds a mouseListener for the Undo JButton.
+     */
     private void addUndoListener() {
         final JButton undo = gameGUI.getUndo();
         undo.addMouseListener(new MouseAdapter() {
@@ -149,6 +158,10 @@ public class Game {
         });
     }
 
+
+    /**
+     * Adds a mouseListener for the Forfeit JButton.
+     */
     private void addForfeitListener() {
         final JButton forfeit = gameGUI.getForfeit();
         forfeit.addMouseListener(new MouseAdapter() {
@@ -162,6 +175,10 @@ public class Game {
         });
     }
 
+
+    /**
+     * Adds a mouseListener for the Restart JButton.
+     */
     private void addRestartListener() {
         final JButton restart = gameGUI.getRestart();
         restart.addMouseListener(new MouseAdapter() {
@@ -181,6 +198,10 @@ public class Game {
         aPieceWasSelected = false;
     }
 
+
+    /**
+     * Sets a message on the board corresponding to having selected a piece.
+     */
     private void foundPieceIn(JButton button, int xPos, int yPos) {
         aPieceWasSelected = true;
         chosenSquare = gameGUI.getSquareAt(xPos, yPos);
@@ -189,6 +210,9 @@ public class Game {
         gameGUI.setMessage("One of your pieces was selected.");
     }
 
+    /**
+     * Sets a message on the board corresponding to having selected a new piece.
+     */
     private void choseNewPieceIn(JButton button, Square newSquare) {
         chosenSquare = newSquare;
         gameGUI.originalPainting();
@@ -196,6 +220,9 @@ public class Game {
         button.setBackground(Color.CYAN);
     }
 
+    /**
+     * Sets a message on the board corresponding to having moved a piece.
+     */
     private void movePieceTo(int xPos, int yPos) {
         final Piece movingPiece = chosenSquare.getSquarePiece();
         movingPiece.moveTo(xPos, yPos);
@@ -204,29 +231,47 @@ public class Game {
         gameGUI.changeTurn(blackTurn);
     }
 
+    /**
+     * Sets a message on the board corresponding to having cancelled a piece's selection.
+     */
     private void cancelMove() {
-        gameGUI.setMessage(playerColorUppercase() + "player has cancelled his selection. Try another one.");
+        gameGUI.setMessage(playerColorCapitalized() + "player has cancelled his selection. Try another one.");
     }
 
+    /**
+     * Sets a message on the board corresponding to having selected an opponent's piece.
+     */
     private void wrongPieceColor() {
         gameGUI.setMessage("You tried to move an opponent's piece. You can only move " + playerColorLowercase() +
                 "pieces.");
     }
 
+    /**
+     * Sets a message on the board corresponding to not having selected a piece.
+     */
     private void noPiece() {
         gameGUI.setMessage("You did not select one of your pieces yet.");
     }
 
+    /**
+     * Sets a message on the board corresponding to having selected a square that a piece cannot move to.
+     */
     private void cannotMoveThere() {
         gameGUI.setMessage("Your piece cannot move to the selected square.");
     }
 
-    private String playerColorUppercase() {
+    /**
+     * Gets the current player's name with a capital letter.
+     */
+    private String playerColorCapitalized() {
         return blackTurn ? "Black " : "White ";
     }
 
+    /**
+     * Gets the current player's name in lowercase letters.
+     */
     private String playerColorLowercase() {
-        return playerColorUppercase().toLowerCase();
+        return playerColorCapitalized().toLowerCase();
     }
 
 }
