@@ -154,7 +154,10 @@ public class Game {
         forfeit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                int choice = JOptionPane.showConfirmDialog(null, "Do you really want to forfeit?", "Confirm forfeit",
+                        JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION)
+                    gameGUI.incrementScoreForPlayer(!blackTurn);
             }
         });
     }

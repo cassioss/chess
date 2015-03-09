@@ -27,11 +27,17 @@ public abstract class BasicInterface {
     protected JButton[][] buttons;
     protected JSplitPane split;
     protected JLabel gameMessages;
-    protected JLabel whitePlayerScore;
-    protected JLabel blackPlayerScore;
     protected JPanel scoreBoard;
     protected JLabel currentTurn;
-    protected JLabel myName;
+    protected JLabel authorName;
+
+
+    protected JLabel whitePlayerScore;
+    protected JLabel blackPlayerScore;
+    protected String whitePlayerName;
+    protected String blackPlayerName;
+    protected int whiteScore;
+    protected int blackScore;
 
     /**
      * Creates a basic interface for a chessboard.
@@ -39,6 +45,9 @@ public abstract class BasicInterface {
      * @param chessModel a chessboard used as reference for square creation and piece positioning.
      */
     public BasicInterface(Board chessModel) {
+        whitePlayerName = "Player1";
+        blackPlayerName = "Player2";
+        whiteScore = blackScore = 0;
         createLateralButtons();
         createLabels();
         setScoreBoard();
@@ -63,9 +72,9 @@ public abstract class BasicInterface {
     private void createLabels() {
         currentTurn = blackBoardLabel(Color.ORANGE, "White player's turn");
         gameMessages = blackBoardLabel(Color.YELLOW, "Welcome to Chess!");
-        whitePlayerScore = blackBoardLabel(Color.CYAN, "Player 1 (White) -  0 points");
-        blackPlayerScore = blackBoardLabel(Color.CYAN, "Player 2 (Black) -  0 points");
-        myName = blackBoardLabel(Color.GREEN, "Created by Cassio Sousa (dssntss2@illinois.edu)");
+        whitePlayerScore = blackBoardLabel(Color.CYAN, getScoreForPlayer(false));
+        blackPlayerScore = blackBoardLabel(Color.CYAN, getScoreForPlayer(true));
+        authorName = blackBoardLabel(Color.GREEN, "Created by Cassio Sousa (dssntss2@illinois.edu)");
     }
 
     /**
@@ -96,7 +105,7 @@ public abstract class BasicInterface {
         scoreBoard.add(rename);
         scoreBoard.add(whitePlayerScore);
         scoreBoard.add(blackPlayerScore);
-        scoreBoard.add(myName);
+        scoreBoard.add(authorName);
     }
 
     /**
@@ -221,6 +230,23 @@ public abstract class BasicInterface {
 
     public JButton getRename() {
         return rename;
+    }
+
+    private String getScoreForPlayer(boolean playerIsBlack) {
+        if (playerIsBlack)
+            return centerWrapMessage(blackPlayerName + " (Black) - " + blackScore + " point(s)");
+        else
+            return centerWrapMessage(whitePlayerName + " (Black) - " + whiteScore + " point(s)");
+    }
+
+    public void incrementScoreForPlayer(boolean playerIsBlack) {
+        if (playerIsBlack) {
+            blackScore++;
+            blackPlayerScore.setText(getScoreForPlayer(playerIsBlack));
+        } else {
+            whiteScore++;
+            whitePlayerScore.setText(getScoreForPlayer(playerIsBlack));
+        }
     }
 
 }
